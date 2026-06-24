@@ -1,4 +1,4 @@
-import heroBg from '../../assets/hero-bg.png'
+import heroBg from '../../assets/Hero section Bg.png'
 import '../../styles/HeroSection.css'
 
 export function HeroSection() {
