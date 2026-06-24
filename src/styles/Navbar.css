@@ -1,6 +1,6 @@
 /* Navbar Header Wrapper */
 .navbar-header {
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -91,6 +91,25 @@
 }
 
 /* Action CTA Button Styling */
+.navbar-desktop-cta {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.nav-link-waitlist {
+  color: #1f2937;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.5rem 0;
+  transition: color 0.2s ease;
+}
+
+.nav-link-waitlist:hover {
+  color: #2e5bfa;
+}
+
 .cta-button {
   background-color: #000000;
   color: #ffffff;

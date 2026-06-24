@@ -1,0 +1,218 @@
+/* ============================================================
+   Testimonial Section — Infinite Marquee
+   ============================================================ */
+
+.ts-section {
+  width: 100%;
+  padding: 72px 0 80px;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+/* ── Header ── */
+.ts-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 48px;
+  padding: 0 24px;
+}
+
+.ts-pill {
+  display: inline-block;
+  background: #f1f5f9;
+  color: #64748b;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 18px;
+  border-radius: 9999px;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 20px;
+}
+
+.ts-heading {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+/* ── Rows ── */
+.ts-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Marquee Wrapper (masks the overflow) ── */
+.ts-marquee-wrap {
+  width: 100%;
+  overflow: hidden;
+  /* Fade edges */
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+}
+
+/* Pause on hover */
+.ts-marquee-wrap:hover .ts-track {
+  animation-play-state: paused;
+}
+
+/* ── Scrolling Track ── */
+.ts-track {
+  display: flex;
+  gap: 14px;
+  width: max-content;
+  will-change: transform;
+}
+
+.ts-track--forward {
+  animation: marqueeLeft 38s linear infinite;
+}
+
+.ts-track--reverse {
+  animation: marqueeRight 42s linear infinite;
+}
+
+@keyframes marqueeLeft {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
+
+@keyframes marqueeRight {
+  0%   { transform: translateX(-33.333%); }
+  100% { transform: translateX(0); }
+}
+
+/* ── Card ── */
+.ts-card {
+  flex-shrink: 0;
+  width: 280px;
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+  cursor: default;
+}
+
+.ts-card:hover {
+  border-color: #1e3a8a;
+  transform: translateY(-3px);
+}
+
+/* ── Card Top (avatar + author + stars) ── */
+.ts-card-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ts-avatar {
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+}
+
+.ts-author {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+  min-width: 0;
+}
+
+.ts-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #0f172a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ts-role {
+  font-size: 0.7rem;
+  color: #94a3b8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Stars ── */
+.ts-stars {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+/* ── Quote ── */
+.ts-quote {
+  font-size: 0.78rem;
+  color: #475569;
+  line-height: 1.55;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Route ── */
+.ts-route {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #94a3b8;
+  margin-top: 2px;
+}
+
+.ts-route svg {
+  color: #1e3a8a;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .ts-section {
+    padding: 48px 0 56px;
+  }
+
+  .ts-card {
+    width: 240px;
+    padding: 14px 16px;
+  }
+}

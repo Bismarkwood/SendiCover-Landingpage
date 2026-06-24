@@ -4,7 +4,7 @@ import '../../styles/ProblemSection.css';
 
 export function ProblemSection() {
   return (
-    <section className="problem-section">
+    <section className="problem-section" id="problem">
       <div className="problem-container">
         
         {/* Section Header */}

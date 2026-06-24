@@ -136,7 +136,7 @@ export function ProductSection() {
   const activeProduct = products[activeIdx];
 
   return (
-    <section className="product-section">
+    <section className="product-section" id="products">
       <div className="product-container">
 
         {/* Header */}

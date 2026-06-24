@@ -1,0 +1,449 @@
+/* ============================================================
+   How It Works Section — Interactive Steps + iPhone Mockup
+   ============================================================ */
+
+.hiw-section {
+  position: relative;
+  width: 100%;
+  padding: 100px 24px;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* ── Background ── */
+.hiw-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: -2;
+}
+
+.hiw-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(15, 23, 70, 0.92) 0%,
+    rgba(30, 58, 138, 0.88) 50%,
+    rgba(15, 23, 70, 0.94) 100%
+  );
+  z-index: -1;
+}
+
+/* ── Container ── */
+.hiw-container {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Header ── */
+.hiw-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.hiw-pill {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 9px 22px;
+  border-radius: 99px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.hiw-heading {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+/* ── Two-column content ── */
+.hiw-content {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0;
+  align-items: center;
+  width: 100%;
+}
+
+/* ============================================================
+   iPhone Mockup
+   ============================================================ */
+
+.hiw-phone-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hiw-phone {
+  position: relative;
+  width: 380px;
+}
+
+.hiw-phone-frame {
+  position: relative;
+  background: #000000;
+  border-radius: 48px;
+  padding: 12px;
+  box-shadow:
+    0 0 0 2px #2a2a2a,
+    0 0 0 4px #1a1a1a,
+    0 30px 80px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+}
+
+/* Notch */
+.hiw-phone-notch {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 28px;
+  background: #000000;
+  border-radius: 0 0 18px 18px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hiw-phone-notch-inner {
+  width: 60px;
+  height: 5px;
+  background: #1a1a1a;
+  border-radius: 99px;
+}
+
+/* Status bar */
+.hiw-phone-status {
+  display: none;
+}
+
+.hiw-status-time {
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.hiw-status-icons {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.hiw-status-icons svg {
+  opacity: 0.8;
+}
+
+/* Screen area — covers entire frame */
+.hiw-phone-screen {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 19;
+  border-radius: 36px;
+  overflow: hidden;
+  background: #1e3a8a;
+}
+
+.hiw-screen-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.hiw-screen-slide--active {
+  opacity: 1;
+}
+
+.hiw-screen-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Home bar */
+.hiw-phone-home-bar {
+  width: 100px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 99px;
+  margin: 8px auto 4px;
+}
+
+/* ── Placeholder screens ── */
+.hiw-screen-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #1e3a8a 0%, #1e3a8a 40%, #ffffff 40%);
+}
+
+.hiw-sp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+}
+
+.hiw-sp-logo {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.hiw-sp-header-btns {
+  display: flex;
+  gap: 6px;
+}
+
+.hiw-sp-btn-small {
+  font-size: 0.55rem;
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  padding: 3px 8px;
+  border-radius: 99px;
+}
+
+.hiw-sp-hero {
+  padding: 16px 16px 24px;
+}
+
+.hiw-sp-hero-text {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.3;
+}
+
+.hiw-sp-card {
+  flex: 1;
+  background: #ffffff;
+  border-radius: 20px 20px 0 0;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.hiw-sp-field {
+  height: 36px;
+  background: #f1f5f9;
+  border-radius: 8px;
+}
+
+.hiw-sp-field--short {
+  width: 60%;
+}
+
+.hiw-sp-cta {
+  margin-top: auto;
+  height: 40px;
+  background: #1e3a8a;
+  color: #ffffff;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+/* ============================================================
+   Divider Line between phone and steps
+   ============================================================ */
+
+.hiw-divider {
+  width: 1px;
+  height: 80%;
+  background: rgba(255, 255, 255, 0.12);
+  margin: 0 40px;
+  align-self: center;
+}
+
+/* ============================================================
+   Steps (Right Column)
+   ============================================================ */
+
+.hiw-steps-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-left: 20px;
+}
+
+.hiw-step-card {
+  display: flex;
+  gap: 20px;
+  padding: 36px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+}
+
+.hiw-step-card:first-child {
+  padding-top: 0;
+}
+
+.hiw-step-card:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.hiw-step-card:hover,
+.hiw-step-card--active {
+  transform: translateX(6px);
+}
+
+.hiw-step-card--active {
+  border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Step icon */
+.hiw-step-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.6);
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.hiw-step-card--active .hiw-step-icon {
+  background: rgba(99, 102, 241, 0.2);
+  color: #ffffff;
+}
+
+/* Step content */
+.hiw-step-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hiw-step-number {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.05em;
+}
+
+.hiw-step-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.hiw-step-desc {
+  font-size: 0.84rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 992px) {
+  .hiw-content {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .hiw-phone-col {
+    order: -1;
+  }
+
+  .hiw-divider {
+    display: none;
+  }
+
+  .hiw-steps-col {
+    padding-left: 0;
+  }
+
+  .hiw-phone {
+    width: 290px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hiw-section {
+    padding: 72px 20px;
+  }
+
+  .hiw-container {
+    gap: 40px;
+  }
+
+  .hiw-step-card {
+    padding: 20px 0;
+    gap: 16px;
+  }
+
+  .hiw-step-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+  }
+
+  .hiw-phone {
+    width: 260px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hiw-section {
+    padding: 56px 16px;
+  }
+
+  .hiw-heading {
+    font-size: 1.6rem;
+  }
+
+  .hiw-step-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 20px 16px;
+  }
+}

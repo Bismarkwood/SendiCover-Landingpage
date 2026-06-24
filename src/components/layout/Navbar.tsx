@@ -1,25 +1,19 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import logoImg from '../../assets/logo.jpg'
 import '../../styles/Navbar.css'
 
-export function Navbar() {
+export function Navbar({ onOpenWaitlist }: { onOpenWaitlist: () => void }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
-  // Track scroll position to add class for premium scroll styling (e.g. shadow, border)
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setIsScrolled(true)
-      } else {
-        setIsScrolled(false)
-      }
+      setIsScrolled(window.scrollY > 20)
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Close mobile menu on resize to desktop view
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
@@ -30,17 +24,21 @@ export function Navbar() {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  // Toggle body scroll lock when mobile menu is open
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
-    return () => {
-      document.body.style.overflow = ''
-    }
+    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
   }, [isMobileMenuOpen])
+
+  const scrollToSection = useCallback((e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+    e.preventDefault()
+    setIsMobileMenuOpen(false)
+    const element = document.getElementById(sectionId)
+    if (element) {
+      const offset = 80 // navbar height
+      const top = element.getBoundingClientRect().top + window.scrollY - offset
+      window.scrollTo({ top, behavior: 'smooth' })
+    }
+  }, [])
 
   return (
     <header className={`navbar-header ${isScrolled ? 'scrolled' : ''} ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
@@ -52,15 +50,23 @@ export function Navbar() {
 
         {/* Center: Desktop Navigation Links */}
         <nav className="navbar-desktop-nav">
-          <a href="#home" className="nav-link active">Home</a>
-          <a href="#problem" className="nav-link">The Problem</a>
-          <a href="#how-it-works" className="nav-link">How It works</a>
-          <a href="#faq" className="nav-link">FAQ</a>
+          <a href="#home" className="nav-link active" onClick={(e) => scrollToSection(e, 'home')}>Home</a>
+          <a href="#problem" className="nav-link" onClick={(e) => scrollToSection(e, 'problem')}>The Problem</a>
+          <a href="#products" className="nav-link" onClick={(e) => scrollToSection(e, 'products')}>Product</a>
+          <a href="#how-it-works" className="nav-link" onClick={(e) => scrollToSection(e, 'how-it-works')}>How It Works</a>
+          <a href="#faq" className="nav-link" onClick={(e) => scrollToSection(e, 'faq')}>FAQ</a>
         </nav>
 
-        {/* Right Side: Desktop CTA */}
+        {/* Right Side: Desktop CTAs */}
         <div className="navbar-desktop-cta">
-          <button className="cta-button">Get Quote</button>
+          <a href="#waitlist" className="nav-link-waitlist" onClick={(e) => { e.preventDefault(); onOpenWaitlist(); }}>Join Waitlist</a>
+          <button className="cta-button" onClick={() => {
+            const el = document.getElementById('quote')
+            if (el) {
+              const top = el.getBoundingClientRect().top + window.scrollY - 80
+              window.scrollTo({ top, behavior: 'smooth' })
+            }
+          }}>Get Quote</button>
         </div>
 
         {/* Mobile Hamburger Menu Trigger */}
@@ -81,36 +87,21 @@ export function Navbar() {
       {/* Mobile Drawer Navigation overlay */}
       <div className={`navbar-mobile-drawer ${isMobileMenuOpen ? 'open' : ''}`}>
         <nav className="navbar-mobile-nav">
-          <a 
-            href="#home" 
-            className="mobile-nav-link" 
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Home
-          </a>
-          <a 
-            href="#problem" 
-            className="mobile-nav-link" 
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            The Problem
-          </a>
-          <a 
-            href="#how-it-works" 
-            className="mobile-nav-link" 
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            How It works
-          </a>
-          <a 
-            href="#faq" 
-            className="mobile-nav-link" 
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            FAQ
-          </a>
+          <a href="#home" className="mobile-nav-link" onClick={(e) => scrollToSection(e, 'home')}>Home</a>
+          <a href="#problem" className="mobile-nav-link" onClick={(e) => scrollToSection(e, 'problem')}>The Problem</a>
+          <a href="#products" className="mobile-nav-link" onClick={(e) => scrollToSection(e, 'products')}>Product</a>
+          <a href="#how-it-works" className="mobile-nav-link" onClick={(e) => scrollToSection(e, 'how-it-works')}>How It Works</a>
+          <a href="#faq" className="mobile-nav-link" onClick={(e) => scrollToSection(e, 'faq')}>FAQ</a>
+          <a href="#waitlist" className="mobile-nav-link" onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); onOpenWaitlist(); }}>Join Waitlist</a>
           <div className="mobile-cta-container">
-            <button className="cta-button mobile-cta">Get Quote</button>
+            <button className="cta-button mobile-cta" onClick={() => {
+              setIsMobileMenuOpen(false)
+              const el = document.getElementById('quote')
+              if (el) {
+                const top = el.getBoundingClientRect().top + window.scrollY - 80
+                window.scrollTo({ top, behavior: 'smooth' })
+              }
+            }}>Get Quote</button>
           </div>
         </nav>
       </div>

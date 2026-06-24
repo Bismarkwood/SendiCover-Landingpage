@@ -1,0 +1,104 @@
+/* ============================================================
+   Features Strip Section
+   ============================================================ */
+
+.features-section {
+  width: 100%;
+  padding: 0 24px;
+  display: flex;
+  justify-content: center;
+  background-color: #ffffff;
+  border-top: 1px solid #f1f5f9;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.features-container {
+  max-width: 1320px;
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+}
+
+/* ── Each Feature Item ── */
+.feature-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 28px 32px;
+}
+
+.feature-icon-wrap {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background-color: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1e3a8a;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.feature-item:hover .feature-icon-wrap {
+  background-color: #1e3a8a;
+  color: #ffffff;
+}
+
+.feature-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.feature-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.feature-desc {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ── Dividers ── */
+.feature-divider {
+  width: 1px;
+  background-color: #e2e8f0;
+  align-self: stretch;
+  margin: 16px 0;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1024px) {
+  .feature-item {
+    padding: 24px 20px;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .features-container {
+    flex-direction: column;
+  }
+
+  .feature-divider {
+    width: auto;
+    height: 1px;
+    margin: 0 24px;
+    align-self: auto;
+  }
+
+  .feature-item {
+    padding: 20px 24px;
+  }
+}
