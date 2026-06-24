@@ -4,7 +4,7 @@ import '../../styles/HeroSection.css'
 export function HeroSection() {
   return (
     <section id="home" className="hero-section">
-      {/* Full-bleed background image */}
+      {/* Full-bleed background image — shield glow is part of the photo */}
       <img
         src={heroBg}
         alt=""
@@ -13,41 +13,8 @@ export function HeroSection() {
         loading="eager"
       />
 
-      {/* Dark gradient overlay for text contrast */}
+      {/* Dark gradient overlay — lighter since image is already bright */}
       <div className="hero-overlay" aria-hidden="true" />
-
-      {/* Glowing shield outline — centered behind content */}
-      <div className="hero-shield-wrap" aria-hidden="true">
-        <svg
-          className="hero-shield-svg"
-          viewBox="0 0 420 500"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-        >
-          <path
-            d="M210 20 L390 90 L390 250 C390 370 300 450 210 480 C120 450 30 370 30 250 L30 90 Z"
-            stroke="url(#shieldGradient)"
-            strokeWidth="2.5"
-            fill="none"
-            filter="url(#shieldGlow)"
-          />
-          <defs>
-            <linearGradient id="shieldGradient" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#60c8f5" stopOpacity="0.9" />
-              <stop offset="50%" stopColor="#4fa8e8" stopOpacity="0.7" />
-              <stop offset="100%" stopColor="#3d7bd4" stopOpacity="0.6" />
-            </linearGradient>
-            <filter id="shieldGlow" x="-20%" y="-20%" width="140%" height="140%">
-              <feGaussianBlur stdDeviation="6" result="blur" />
-              <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
-        </svg>
-      </div>
 
       {/* Hero Content — centered */}
       <div className="hero-content">
@@ -70,7 +37,6 @@ export function HeroSection() {
             className="hero-badge-btn"
             aria-label="Download on the App Store"
           >
-            {/* Apple Logo */}
             <svg
               className="hero-badge-icon"
               viewBox="0 0 24 24"
@@ -92,7 +58,6 @@ export function HeroSection() {
             className="hero-badge-btn"
             aria-label="Get it on Google Play"
           >
-            {/* Google Play Logo */}
             <svg
               className="hero-badge-icon"
               viewBox="0 0 24 24"

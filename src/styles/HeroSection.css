@@ -27,47 +27,17 @@
 }
 
 /* ── Dark Gradient Overlay ── */
-/* Matches the reference: darker toward center-bottom, lighter at edges */
+/* Lighter overlay — the image is bright so we only darken the bottom for text */
 .hero-overlay {
   position: absolute;
   inset: 0;
   z-index: 1;
   background: linear-gradient(
     to bottom,
-    rgba(5, 15, 35, 0.35) 0%,
-    rgba(5, 15, 35, 0.52) 40%,
-    rgba(5, 15, 35, 0.68) 100%
+    rgba(5, 15, 35, 0.18) 0%,
+    rgba(5, 15, 35, 0.40) 50%,
+    rgba(5, 15, 35, 0.62) 100%
   );
-}
-
-/* ── Shield SVG Wrapper ── */
-.hero-shield-wrap {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-}
-
-.hero-shield-svg {
-  width: min(56vw, 600px);
-  height: auto;
-  opacity: 0.85;
-  /* Subtle breathe animation */
-  animation: shield-breathe 4s ease-in-out infinite;
-}
-
-@keyframes shield-breathe {
-  0%, 100% {
-    opacity: 0.75;
-    filter: drop-shadow(0 0 12px rgba(96, 200, 245, 0.4));
-  }
-  50% {
-    opacity: 1;
-    filter: drop-shadow(0 0 28px rgba(96, 200, 245, 0.7));
-  }
 }
 
 /* ── Hero Content — Centered ── */

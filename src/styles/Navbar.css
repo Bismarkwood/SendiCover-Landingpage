@@ -20,13 +20,13 @@
 
 /* Container limits width and centers */
 .navbar-container {
-  max-width: 1200px;
+  max-width: 1320px;
   margin: 0 auto;
-  padding: 0.8rem 1.5rem;
+  padding: 0 2.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 52px;
+  height: 72px;
 }
 
 /* Logo Alignment */
@@ -160,10 +160,10 @@
 /* Mobile Drawer Overlay styles */
 .navbar-mobile-drawer {
   position: fixed;
-  top: 52px; /* Height of the navbar container */
+  top: 72px; /* Height of the navbar container */
   left: 0;
   width: 100%;
-  height: calc(100vh - 52px);
+  height: calc(100vh - 72px);
   background-color: #ffffff;
   z-index: 999;
   transform: translateY(-100%);
