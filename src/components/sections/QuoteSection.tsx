@@ -15,7 +15,7 @@ export function QuoteSection() {
 
         {/* Heading */}
         <h2 className="quote-heading">
-          Affordable cover starting from £X per month.
+          Get a personalised quote in seconds.
         </h2>
 
         {/* Trust badges */}

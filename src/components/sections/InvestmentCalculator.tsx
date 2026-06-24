@@ -1,61 +1,63 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import '../../styles/InvestmentCalculator.css';
 
-/* ── Types ── */
-type FreqKey = 'annually' | 'semi-annually' | 'quarterly' | 'monthly' | 'weekly' | 'daily';
+/* ── Types & Data ── */
+type CategoryKey = 'category-1' | 'category-2' | 'category-3';
 
-const FREQ_OPTIONS: { value: FreqKey; label: string; sub: string }[] = [
-  { value: 'annually',      label: 'Annually',      sub: '1× per year' },
-  { value: 'semi-annually', label: 'Semi-annually',  sub: '2× per year' },
-  { value: 'quarterly',     label: 'Quarterly',      sub: '4× per year' },
-  { value: 'monthly',       label: 'Monthly',        sub: '12× per year' },
-  { value: 'weekly',        label: 'Weekly',         sub: '52× per year' },
-  { value: 'daily',         label: 'Daily',          sub: '365× per year' },
+interface Product {
+  id: string;
+  label: string;
+  category: CategoryKey;
+}
+
+const PRODUCTS: Product[] = [
+  { id: 'farewell-dignity', label: 'Dignity Farewell Plan', category: 'category-1' },
+  { id: 'farewell-premier', label: 'Ultimate Premier Farewell Plan', category: 'category-1' },
+  { id: 'life-standard', label: 'Standard Life Plan', category: 'category-2' },
+  { id: 'life-premium', label: 'Premium Life Plan', category: 'category-2' },
+  { id: 'critical-essential', label: 'Essential Health Plan', category: 'category-3' },
+  { id: 'critical-comprehensive', label: 'Comprehensive Health Plan', category: 'category-3' },
 ];
 
-const FREQ_MAP: Record<FreqKey, number> = {
-  annually: 1, 'semi-annually': 2, quarterly: 4, monthly: 12, weekly: 52, daily: 365,
-};
+const COUNTRIES = [
+  'Ghana', 'Nigeria', 'United Kingdom', 'United States', 'Canada', 'South Africa',
+];
+
+/* Category 1: fixed annual premium based on age */
+function getCategory1Premium(age: number): number {
+  if (age < 25) return 120;
+  if (age < 35) return 180;
+  if (age < 45) return 280;
+  if (age < 55) return 420;
+  return 600;
+}
+
+/* Category 2 & 3: premium is percentage of sum assured, adjusted by age */
+function getCategoryPremium(sumAssured: number, age: number): number {
+  let rate = 0.025; // base 2.5%
+  if (age >= 35) rate = 0.032;
+  if (age >= 45) rate = 0.042;
+  if (age >= 55) rate = 0.055;
+  return sumAssured * rate;
+}
 
 function formatGHC(value: number): string {
   return 'GHC ' + value.toLocaleString('en-GH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
-/* ── Count-up hook (smooth animated number) ── */
-function useCountUp(target: number, active: boolean, duration = 700): number {
-  const [display, setDisplay] = useState(target);
-  const fromRef = useRef(0);
-  const rafRef = useRef<number>(0);
-
-  useEffect(() => {
-    if (!active) { setDisplay(0); fromRef.current = 0; return; }
-    const from = fromRef.current;
-    const start = performance.now();
-    const tick = (now: number) => {
-      const t = Math.min(1, (now - start) / duration);
-      const eased = 1 - Math.pow(1 - t, 3); // easeOutCubic
-      setDisplay(from + (target - from) * eased);
-      if (t < 1) rafRef.current = requestAnimationFrame(tick);
-      else fromRef.current = target;
-    };
-    rafRef.current = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafRef.current);
-  }, [target, active, duration]);
-
-  return active ? display : 0;
-}
-
 /* ── Custom Dropdown ── */
-function FreqDropdown({
-  value, onChange, error,
+function Dropdown({
+  value, onChange, options, placeholder, error,
 }: {
-  value: FreqKey | '';
-  onChange: (v: FreqKey) => void;
+  value: string;
+  onChange: (v: string) => void;
+  options: { value: string; label: string }[];
+  placeholder: string;
   error?: string;
 }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-  const selected = FREQ_OPTIONS.find(o => o.value === value);
+  const selected = options.find(o => o.value === value);
 
   useEffect(() => {
     function handleClick(e: MouseEvent) {
@@ -74,14 +76,9 @@ function FreqDropdown({
         aria-haspopup="listbox"
         aria-expanded={open}
       >
-        {selected ? (
-          <span className="fd-selected">
-            <strong>{selected.label}</strong>
-            <span className="fd-selected-sub">{selected.sub}</span>
-          </span>
-        ) : (
-          <span className="fd-placeholder">Select frequency</span>
-        )}
+        <span className={selected ? 'fd-selected-text' : 'fd-placeholder'}>
+          {selected ? selected.label : placeholder}
+        </span>
         <svg className={`fd-chevron ${open ? 'fd-chevron--up' : ''}`} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
           <polyline points="6 9 12 15 18 9"/>
         </svg>
@@ -89,7 +86,7 @@ function FreqDropdown({
 
       {open && (
         <ul className="fd-menu" role="listbox">
-          {FREQ_OPTIONS.map(opt => (
+          {options.map(opt => (
             <li
               key={opt.value}
               role="option"
@@ -97,10 +94,7 @@ function FreqDropdown({
               className={`fd-option ${value === opt.value ? 'fd-option--active' : ''}`}
               onClick={() => { onChange(opt.value); setOpen(false); }}
             >
-              <span className="fd-option-text">
-                <span className="fd-option-label">{opt.label}</span>
-                <span className="fd-option-sub">{opt.sub}</span>
-              </span>
+              {opt.label}
               {value === opt.value && (
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="20 6 9 17 4 12"/>
@@ -115,141 +109,74 @@ function FreqDropdown({
   );
 }
 
-/* ── Slider Input ── */
-function SliderField({
-  id, label, min, max, step, value, suffix, onChange,
-}: {
-  id: string; label: string; min: number; max: number; step: number;
-  value: string; suffix: string; onChange: (v: string) => void;
-}) {
-  const num = parseFloat(value) || 0;
-  const pct = Math.min(100, Math.max(0, ((num - min) / (max - min)) * 100));
-
-  return (
-    <div className="sf-field">
-      <div className="sf-top">
-        <label htmlFor={id} className="ic-label">{label}</label>
-        <div className="sf-value-pill">
-          <input
-            id={`${id}-num`}
-            type="number"
-            min={min}
-            max={max}
-            step={step}
-            value={value}
-            onChange={e => onChange(e.target.value)}
-            className="sf-number"
-          />
-          <span className="sf-suffix">{suffix.trim()}</span>
-        </div>
-      </div>
-      <div className="sf-track-wrap">
-        <input
-          id={id}
-          type="range"
-          min={min}
-          max={max}
-          step={step}
-          value={num}
-          onChange={e => onChange(e.target.value)}
-          className="sf-range"
-          style={{ '--pct': `${pct}%` } as React.CSSProperties}
-        />
-      </div>
-      <div className="sf-labels">
-        <span>{min}{suffix}</span>
-        <span>{max}{suffix}</span>
-      </div>
-    </div>
-  );
-}
-
 /* ── Main Calculator ── */
 interface FormState {
-  startingAmount: string;
-  additionalContrib: string;
-  contribPerYear: string;
-  investmentLength: string;
-  annualRate: string;
-  compoundFreq: FreqKey | '';
+  email: string;
+  product: string;
+  country: string;
+  age: string;
+  sumAssured: string;
 }
 
 interface Errors { [k: string]: string | undefined }
-interface Results { finalValue: number; totalContributions: number; interestEarned: number }
 
 const initialForm: FormState = {
-  startingAmount: '', additionalContrib: '0',
-  contribPerYear: '', investmentLength: '10',
-  annualRate: '10', compoundFreq: '',
+  email: '', product: '', country: '', age: '', sumAssured: '50000',
 };
-const initialResults: Results = { finalValue: 0, totalContributions: 0, interestEarned: 0 };
 
 export function InvestmentCalculator() {
   const [form, setForm] = useState<FormState>(initialForm);
   const [errors, setErrors] = useState<Errors>({});
-  const [results, setResults] = useState<Results>(initialResults);
+  const [premium, setPremium] = useState<number | null>(null);
   const [calculated, setCalculated] = useState(false);
-
-  const finalDisplay = useCountUp(results.finalValue, calculated);
-  const contribDisplay = useCountUp(results.totalContributions, calculated);
-  const interestDisplay = useCountUp(results.interestEarned, calculated);
 
   const set = (name: keyof FormState, value: string) => {
     setForm(prev => ({ ...prev, [name]: value }));
     setErrors(prev => ({ ...prev, [name]: undefined }));
   };
 
-  const validate = useCallback((): Errors => {
+  const selectedProduct = PRODUCTS.find(p => p.id === form.product);
+  const isCategory1 = selectedProduct?.category === 'category-1';
+  const needsSlider = selectedProduct && !isCategory1;
+
+  const sumAssuredNum = parseFloat(form.sumAssured) || 50000;
+  const sumAssuredPct = Math.min(100, Math.max(0, ((sumAssuredNum - 10000) / (500000 - 10000)) * 100));
+
+  const validate = (): Errors => {
     const e: Errors = {};
-    const start = parseFloat(form.startingAmount);
-    const contrib = parseFloat(form.additionalContrib);
-    const perYear = parseFloat(form.contribPerYear);
-    const length = parseFloat(form.investmentLength);
-    const rate = parseFloat(form.annualRate);
-    if (!form.startingAmount) e.startingAmount = 'Starting amount is required.';
-    else if (isNaN(start) || start <= 0) e.startingAmount = 'Must be greater than 0.';
-    if (!isNaN(contrib) && contrib > 0 && (!form.contribPerYear || isNaN(perYear) || perYear <= 0))
-      e.contribPerYear = 'Required when additional contribution > 0.';
-    if (!form.investmentLength || isNaN(length) || length <= 0) e.investmentLength = 'Investment length required.';
-    if (form.annualRate === '' || isNaN(rate) || rate < 0) e.annualRate = 'Rate cannot be negative.';
-    if (!form.compoundFreq) e.compoundFreq = 'Please select a compounding frequency.';
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!form.email.trim()) e.email = 'Email address is required.';
+    else if (!emailRegex.test(form.email)) e.email = 'Please enter a valid email.';
+    if (!form.product) e.product = 'Please select a product.';
+    if (!form.country) e.country = 'Please select a country.';
+    if (!form.age || isNaN(Number(form.age)) || Number(form.age) < 18 || Number(form.age) > 75)
+      e.age = 'Age must be between 18 and 75.';
     return e;
-  }, [form]);
+  };
 
   const calculate = () => {
     const errs = validate();
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
-    const P = parseFloat(form.startingAmount);
-    const pmt = parseFloat(form.additionalContrib) || 0;
-    const pmtPerYear = parseFloat(form.contribPerYear) || 0;
-    const years = parseFloat(form.investmentLength);
-    const annualRate = parseFloat(form.annualRate) / 100;
-    const n = FREQ_MAP[form.compoundFreq as FreqKey];
-    let finalValue: number;
-    if (annualRate === 0) {
-      finalValue = P + pmt * pmtPerYear * years;
+
+    const age = parseInt(form.age);
+    let result: number;
+
+    if (isCategory1) {
+      result = getCategory1Premium(age);
     } else {
-      const ratePerPeriod = annualRate / n;
-      const grownPrincipal = P * Math.pow(1 + ratePerPeriod, n * years);
-      let grownContributions = 0;
-      if (pmt > 0 && pmtPerYear > 0) {
-        const r = annualRate / pmtPerYear;
-        grownContributions = pmt * ((Math.pow(1 + r, pmtPerYear * years) - 1) / r);
-      }
-      finalValue = grownPrincipal + grownContributions;
+      result = getCategoryPremium(sumAssuredNum, age);
     }
-    const totalContributions = P + pmt * pmtPerYear * years;
-    setResults({ finalValue, totalContributions, interestEarned: finalValue - totalContributions });
+
+    setPremium(result);
     setCalculated(true);
   };
 
-  const reset = () => { setForm(initialForm); setErrors({}); setResults(initialResults); setCalculated(false); };
-  const showContribPerYear = parseFloat(form.additionalContrib) > 0;
-
-  const contribPct = calculated && results.finalValue > 0
-    ? Math.round((results.totalContributions / results.finalValue) * 100) : 0;
-  const growthPct = calculated && results.finalValue > 0
-    ? Math.round(Math.max(0, results.interestEarned / results.finalValue) * 100) : 0;
+  const reset = () => {
+    setForm(initialForm);
+    setErrors({});
+    setPremium(null);
+    setCalculated(false);
+  };
 
   return (
     <div className="ic-card">
@@ -257,79 +184,103 @@ export function InvestmentCalculator() {
 
         {/* ── Left: Inputs ── */}
         <div className="ic-left">
-          <div className="ic-panel-label">Investment Details</div>
+          <div className="ic-panel-label">Quote Details</div>
 
-          {/* Starting Amount */}
+          {/* Email */}
           <div className="ic-field">
-            <label className="ic-label" htmlFor="startingAmount">Starting Amount</label>
+            <label className="ic-label" htmlFor="ic-email">Email Address</label>
             <div className="ic-input-wrap">
-              <span className="ic-prefix">GHC</span>
-              <input id="startingAmount" type="number" min="0" placeholder="1,000"
-                value={form.startingAmount}
-                onChange={e => set('startingAmount', e.target.value)}
-                className={`ic-input ic-input--prefixed ${errors.startingAmount ? 'ic-input--error' : ''}`} />
+              <span className="ic-prefix-icon">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </span>
+              <input
+                id="ic-email"
+                type="email"
+                placeholder="you@example.com"
+                value={form.email}
+                onChange={e => set('email', e.target.value)}
+                className={`ic-input ic-input--icon ${errors.email ? 'ic-input--error' : ''}`}
+              />
             </div>
-            {errors.startingAmount && <span className="ic-error">{errors.startingAmount}</span>}
+            {errors.email && <span className="ic-error">{errors.email}</span>}
           </div>
 
-          {/* Additional Contribution */}
+          {/* Product */}
           <div className="ic-field">
-            <label className="ic-label" htmlFor="additionalContrib">
-              Additional Contribution <span className="ic-optional">optional</span>
-            </label>
-            <div className="ic-input-wrap">
-              <span className="ic-prefix">GHC</span>
-              <input id="additionalContrib" type="number" min="0" placeholder="100"
-                value={form.additionalContrib}
-                onChange={e => set('additionalContrib', e.target.value)}
-                className="ic-input ic-input--prefixed" />
-            </div>
-          </div>
-
-          {/* Contributions per year */}
-          {showContribPerYear && (
-            <div className="ic-field ic-field--slide">
-              <label className="ic-label" htmlFor="contribPerYear">
-                Contributions per Year <span className="ic-hint-inline">12 = monthly</span>
-              </label>
-              <input id="contribPerYear" type="number" min="1" placeholder="12"
-                value={form.contribPerYear}
-                onChange={e => set('contribPerYear', e.target.value)}
-                className={`ic-input ${errors.contribPerYear ? 'ic-input--error' : ''}`} />
-              {errors.contribPerYear && <span className="ic-error">{errors.contribPerYear}</span>}
-            </div>
-          )}
-
-          {/* Sliders */}
-          <SliderField
-            id="investmentLength" label="Investment Length" min={1} max={50} step={1}
-            value={form.investmentLength} suffix=" yrs"
-            onChange={v => set('investmentLength', v)}
-          />
-          {errors.investmentLength && <span className="ic-error" style={{ marginTop: -8 }}>{errors.investmentLength}</span>}
-
-          <SliderField
-            id="annualRate" label="Annual Rate of Return" min={0} max={50} step={0.5}
-            value={form.annualRate} suffix="%"
-            onChange={v => set('annualRate', v)}
-          />
-          {errors.annualRate && <span className="ic-error" style={{ marginTop: -8 }}>{errors.annualRate}</span>}
-
-          {/* Custom Dropdown */}
-          <div className="ic-field">
-            <label className="ic-label">Compounding Frequency</label>
-            <FreqDropdown
-              value={form.compoundFreq}
-              onChange={v => set('compoundFreq', v)}
-              error={errors.compoundFreq}
+            <label className="ic-label">Product</label>
+            <Dropdown
+              value={form.product}
+              onChange={v => set('product', v)}
+              options={PRODUCTS.map(p => ({ value: p.id, label: p.label }))}
+              placeholder="Select a product"
+              error={errors.product}
             />
           </div>
+
+          {/* Country */}
+          <div className="ic-field">
+            <label className="ic-label">Where does the beneficiary live?</label>
+            <Dropdown
+              value={form.country}
+              onChange={v => set('country', v)}
+              options={COUNTRIES.map(c => ({ value: c, label: c }))}
+              placeholder="Select country"
+              error={errors.country}
+            />
+          </div>
+
+          {/* Age */}
+          <div className="ic-field">
+            <label className="ic-label" htmlFor="ic-age">Person's Age</label>
+            <input
+              id="ic-age"
+              type="number"
+              min="18"
+              max="75"
+              placeholder="e.g. 35"
+              value={form.age}
+              onChange={e => set('age', e.target.value)}
+              className={`ic-input ${errors.age ? 'ic-input--error' : ''}`}
+            />
+            {errors.age && <span className="ic-error">{errors.age}</span>}
+          </div>
+
+          {/* Sum Assured Slider (Category 2 & 3 only) */}
+          {needsSlider && (
+            <div className="ic-field ic-field--slide">
+              <div className="sf-top">
+                <label className="ic-label" htmlFor="ic-sum">Sum Assured</label>
+                <div className="sf-value-pill">
+                  <span className="sf-value-display">{formatGHC(sumAssuredNum)}</span>
+                </div>
+              </div>
+              <div className="sf-track-wrap">
+                <input
+                  id="ic-sum"
+                  type="range"
+                  min={10000}
+                  max={500000}
+                  step={5000}
+                  value={sumAssuredNum}
+                  onChange={e => set('sumAssured', e.target.value)}
+                  className="sf-range"
+                  style={{ '--pct': `${sumAssuredPct}%` } as React.CSSProperties}
+                />
+              </div>
+              <div className="sf-labels">
+                <span>GHC 10,000</span>
+                <span>GHC 500,000</span>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* ── Right: Results ── */}
         <div className="ic-right">
           <div className="ic-results-header">
-            <span className="ic-results-pill">Estimated Growth</span>
+            <span className="ic-results-pill">Your Quote</span>
           </div>
 
           <div className={`ic-result-card ${calculated ? 'ic-result-card--active' : ''}`}>
@@ -337,20 +288,20 @@ export function InvestmentCalculator() {
             {/* Icon bubble */}
             <div className="ic-result-icon-bubble">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
-                <polyline points="16 7 22 7 22 13"/>
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <polyline points="9 12 11 14 15 10"/>
               </svg>
             </div>
 
             {/* Title */}
-            <span className="ic-result-title">Estimated Investment Value</span>
+            <span className="ic-result-title">Annual Premium</span>
 
             {/* Main value */}
             <span className={`ic-result-amount ${calculated ? 'ic-result-amount--glow' : ''}`}>
-              {formatGHC(finalDisplay)}
+              {premium !== null ? formatGHC(premium) : 'GHC 0.00'}
             </span>
 
-            {calculated ? (
+            {calculated && premium !== null ? (
               <>
                 <div className="ic-result-divider" />
 
@@ -358,53 +309,52 @@ export function InvestmentCalculator() {
                 <div className="ic-metrics">
                   <div className="ic-metric-item">
                     <span className="ic-metric-label">
-                      <span className="ic-metric-dot ic-metric-dot--grey" />
-                      Total Contributions
+                      <span className="ic-metric-dot ic-metric-dot--blue" />
+                      Product
                     </span>
-                    <span className="ic-metric-value">{formatGHC(contribDisplay)}</span>
+                    <span className="ic-metric-value">{selectedProduct?.label}</span>
                   </div>
                   <div className="ic-metric-item">
                     <span className="ic-metric-label">
-                      <span className="ic-metric-dot ic-metric-dot--blue" />
-                      Interest Earned
+                      <span className="ic-metric-dot ic-metric-dot--grey" />
+                      Beneficiary Location
                     </span>
-                    <span className="ic-metric-value ic-metric-value--accent">{formatGHC(interestDisplay)}</span>
+                    <span className="ic-metric-value">{form.country}</span>
                   </div>
+                  <div className="ic-metric-item">
+                    <span className="ic-metric-label">
+                      <span className="ic-metric-dot ic-metric-dot--grey" />
+                      Age
+                    </span>
+                    <span className="ic-metric-value">{form.age} years</span>
+                  </div>
+                  {needsSlider && (
+                    <div className="ic-metric-item">
+                      <span className="ic-metric-label">
+                        <span className="ic-metric-dot ic-metric-dot--blue" />
+                        Sum Assured
+                      </span>
+                      <span className="ic-metric-value ic-metric-value--accent">{formatGHC(sumAssuredNum)}</span>
+                    </div>
+                  )}
                 </div>
 
-                {/* Breakdown bar */}
-                {results.finalValue > 0 && (
-                  <div className="ic-breakdown">
-                    <div className="ic-breakdown-bar">
-                      <div className="ic-bar-seg ic-bar-seg--contrib" style={{ width: `${contribPct}%` }} />
-                      <div className="ic-bar-seg ic-bar-seg--interest" style={{ width: `${growthPct}%` }} />
-                    </div>
-                    <div className="ic-breakdown-legend">
-                      <span className="ic-legend-chip">
-                        <span className="ic-legend-dot ic-legend-dot--grey" />
-                        Contributions {contribPct}%
-                      </span>
-                      <span className="ic-legend-chip">
-                        <span className="ic-legend-dot ic-legend-dot--blue" />
-                        Growth {growthPct}%
-                      </span>
-                    </div>
-                  </div>
-                )}
+                {/* Monthly equivalent */}
+                <div className="ic-monthly-note">
+                  <span>≈ {formatGHC(premium / 12)} / month</span>
+                </div>
               </>
             ) : (
               /* Empty state */
               <div className="ic-empty-state">
                 <div className="ic-empty-illustration">
                   <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M3 3v18h18"/>
-                    <path d="M7 14l3-3 3 3 5-6"/>
-                    <path d="M18 8h3v3"/>
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                   </svg>
                 </div>
                 <p className="ic-empty-message">
-                  Fill in your investment details and click <strong>"Calculate Growth"</strong> to view your
-                  projected investment value, total contributions, and interest earned.
+                  Fill in your details and click <strong>"Get My Quote"</strong> to see your
+                  estimated annual premium.
                 </p>
               </div>
             )}
@@ -414,17 +364,17 @@ export function InvestmentCalculator() {
           <div className="ic-actions">
             <button className="ic-btn-primary" onClick={calculate}>
               <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
-                <polyline points="16 7 22 7 22 13"/>
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <polyline points="9 12 11 14 15 10"/>
               </svg>
-              Calculate Growth
+              Get My Quote
             </button>
             <button className="ic-btn-secondary" onClick={reset}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
                 <path d="M3 3v5h5"/>
               </svg>
-              Reset Calculator
+              Reset
             </button>
           </div>
         </div>

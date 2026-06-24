@@ -144,8 +144,46 @@
   box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.04);
 }
 
-.ic-input--prefixed {
-  padding-left: 50px;
+.ic-input--icon {
+  padding-left: 42px;
+}
+
+.ic-prefix-icon {
+  position: absolute;
+  left: 14px;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Monthly note ── */
+.ic-monthly-note {
+  width: 100%;
+  text-align: center;
+  padding: 10px 14px;
+  background: #eff6ff;
+  border-radius: 10px;
+  border: 1px solid #dbeafe;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #1e3a8a;
+}
+
+/* ── Slider value display ── */
+.sf-value-display {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #1e3a8a;
+  padding: 6px 12px;
+}
+
+/* ── Dropdown selected text ── */
+.fd-selected-text {
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: #0f172a;
 }
 
 .ic-input:focus {
