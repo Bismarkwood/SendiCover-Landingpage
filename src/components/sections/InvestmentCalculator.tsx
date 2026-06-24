@@ -8,19 +8,42 @@ interface Product {
   id: string;
   label: string;
   category: CategoryKey;
+  categoryLabel: string;
 }
 
 const PRODUCTS: Product[] = [
-  { id: 'farewell-dignity', label: 'Dignity Farewell Plan', category: 'category-1' },
-  { id: 'farewell-premier', label: 'Ultimate Premier Farewell Plan', category: 'category-1' },
-  { id: 'life-standard', label: 'Standard Life Plan', category: 'category-2' },
-  { id: 'life-premium', label: 'Premium Life Plan', category: 'category-2' },
-  { id: 'critical-essential', label: 'Essential Health Plan', category: 'category-3' },
-  { id: 'critical-comprehensive', label: 'Comprehensive Health Plan', category: 'category-3' },
+  { id: 'farewell-dignity', label: 'Dignity Farewell Plan', category: 'category-1', categoryLabel: 'Farewell Cover' },
+  { id: 'farewell-premier', label: 'Ultimate Premier Farewell Plan', category: 'category-1', categoryLabel: 'Farewell Cover' },
+  { id: 'life-standard', label: 'Standard Life Plan', category: 'category-2', categoryLabel: 'Life Insurance' },
+  { id: 'life-premium', label: 'Premium Life Plan', category: 'category-2', categoryLabel: 'Life Insurance' },
+  { id: 'critical-essential', label: 'Essential Critical Illness Plan', category: 'category-3', categoryLabel: 'Critical Illness' },
+  { id: 'critical-comprehensive', label: 'Comprehensive Critical Illness Plan', category: 'category-3', categoryLabel: 'Critical Illness' },
 ];
 
 const COUNTRIES = [
-  'Ghana', 'Nigeria', 'United Kingdom', 'United States', 'Canada', 'South Africa',
+  'Afghanistan','Albania','Algeria','Andorra','Angola','Antigua and Barbuda','Argentina','Armenia',
+  'Australia','Austria','Azerbaijan','Bahamas','Bahrain','Bangladesh','Barbados','Belarus','Belgium',
+  'Belize','Benin','Bhutan','Bolivia','Bosnia and Herzegovina','Botswana','Brazil','Brunei','Bulgaria',
+  'Burkina Faso','Burundi','Cabo Verde','Cambodia','Cameroon','Canada','Central African Republic','Chad',
+  'Chile','China','Colombia','Comoros','Congo','Costa Rica','Croatia','Cuba','Cyprus','Czech Republic',
+  'DR Congo','Denmark','Djibouti','Dominica','Dominican Republic','Ecuador','Egypt','El Salvador',
+  'Equatorial Guinea','Eritrea','Estonia','Eswatini','Ethiopia','Fiji','Finland','France','Gabon',
+  'Gambia','Georgia','Germany','Ghana','Greece','Grenada','Guatemala','Guinea','Guinea-Bissau','Guyana',
+  'Haiti','Honduras','Hungary','Iceland','India','Indonesia','Iran','Iraq','Ireland','Israel','Italy',
+  'Ivory Coast','Jamaica','Japan','Jordan','Kazakhstan','Kenya','Kiribati','Kosovo','Kuwait','Kyrgyzstan',
+  'Laos','Latvia','Lebanon','Lesotho','Liberia','Libya','Liechtenstein','Lithuania','Luxembourg',
+  'Madagascar','Malawi','Malaysia','Maldives','Mali','Malta','Marshall Islands','Mauritania','Mauritius',
+  'Mexico','Micronesia','Moldova','Monaco','Mongolia','Montenegro','Morocco','Mozambique','Myanmar',
+  'Namibia','Nauru','Nepal','Netherlands','New Zealand','Nicaragua','Niger','Nigeria','North Korea',
+  'North Macedonia','Norway','Oman','Pakistan','Palau','Palestine','Panama','Papua New Guinea','Paraguay',
+  'Peru','Philippines','Poland','Portugal','Qatar','Romania','Russia','Rwanda','Saint Kitts and Nevis',
+  'Saint Lucia','Saint Vincent and the Grenadines','Samoa','San Marino','Sao Tome and Principe',
+  'Saudi Arabia','Senegal','Serbia','Seychelles','Sierra Leone','Singapore','Slovakia','Slovenia',
+  'Solomon Islands','Somalia','South Africa','South Korea','South Sudan','Spain','Sri Lanka','Sudan',
+  'Suriname','Sweden','Switzerland','Syria','Taiwan','Tajikistan','Tanzania','Thailand','Timor-Leste',
+  'Togo','Tonga','Trinidad and Tobago','Tunisia','Turkey','Turkmenistan','Tuvalu','Uganda','Ukraine',
+  'United Arab Emirates','United Kingdom','United States','Uruguay','Uzbekistan','Vanuatu','Vatican City',
+  'Venezuela','Vietnam','Yemen','Zambia','Zimbabwe',
 ];
 
 /* Category 1: fixed annual premium based on age */
@@ -43,6 +66,91 @@ function getCategoryPremium(sumAssured: number, age: number): number {
 
 function formatGHC(value: number): string {
   return 'GHC ' + value.toLocaleString('en-GH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+/* ── Searchable Country Dropdown ── */
+function SearchableDropdown({
+  value, onChange, options, placeholder, error,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  options: string[];
+  placeholder: string;
+  error?: string;
+}) {
+  const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState('');
+  const ref = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const filtered = options.filter(o =>
+    o.toLowerCase().includes(search.toLowerCase())
+  );
+
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    }
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, []);
+
+  useEffect(() => {
+    if (open && inputRef.current) inputRef.current.focus();
+  }, [open]);
+
+  return (
+    <div className="fd-root" ref={ref}>
+      <button
+        type="button"
+        className={`fd-trigger ${error ? 'fd-trigger--error' : ''} ${open ? 'fd-trigger--open' : ''}`}
+        onClick={() => setOpen(o => !o)}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+      >
+        <span className={value ? 'fd-selected-text' : 'fd-placeholder'}>
+          {value || placeholder}
+        </span>
+        <svg className={`fd-chevron ${open ? 'fd-chevron--up' : ''}`} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </button>
+
+      {open && (
+        <div className="fd-menu fd-menu--searchable">
+          <input
+            ref={inputRef}
+            type="text"
+            className="fd-search"
+            placeholder="Search country..."
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+          />
+          <ul className="fd-list" role="listbox">
+            {filtered.length > 0 ? filtered.map(opt => (
+              <li
+                key={opt}
+                role="option"
+                aria-selected={value === opt}
+                className={`fd-option ${value === opt ? 'fd-option--active' : ''}`}
+                onClick={() => { onChange(opt); setOpen(false); setSearch(''); }}
+              >
+                {opt}
+                {value === opt && (
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                )}
+              </li>
+            )) : (
+              <li className="fd-option fd-option--empty">No countries found</li>
+            )}
+          </ul>
+        </div>
+      )}
+      {error && <span className="ic-error">{error}</span>}
+    </div>
+  );
 }
 
 /* ── Custom Dropdown ── */
@@ -213,7 +321,7 @@ export function InvestmentCalculator() {
             <Dropdown
               value={form.product}
               onChange={v => set('product', v)}
-              options={PRODUCTS.map(p => ({ value: p.id, label: p.label }))}
+              options={PRODUCTS.map(p => ({ value: p.id, label: `${p.label} (${p.categoryLabel})` }))}
               placeholder="Select a product"
               error={errors.product}
             />
@@ -222,11 +330,11 @@ export function InvestmentCalculator() {
           {/* Country */}
           <div className="ic-field">
             <label className="ic-label">Where does the beneficiary live?</label>
-            <Dropdown
+            <SearchableDropdown
               value={form.country}
               onChange={v => set('country', v)}
-              options={COUNTRIES.map(c => ({ value: c, label: c }))}
-              placeholder="Select country"
+              options={COUNTRIES}
+              placeholder="Search and select country"
               error={errors.country}
             />
           </div>

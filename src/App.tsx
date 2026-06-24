@@ -12,7 +12,6 @@ import { HowItWorksSection } from './components/sections/HowItWorksSection'
 import { QuoteSection } from './components/sections/QuoteSection'
 import { FAQSection } from './components/sections/FAQSection'
 import { CTABannerSection } from './components/sections/CTABannerSection'
-import { PartnershipSection } from './components/sections/PartnershipSection'
 import { TestimonialSection } from './components/sections/TestimonialSection'
 import './styles/App.css'
 
@@ -47,10 +46,6 @@ function App() {
 
         <RevealSection>
           <TestimonialSection />
-        </RevealSection>
-
-        <RevealSection>
-          <PartnershipSection />
         </RevealSection>
 
         <RevealSection>
