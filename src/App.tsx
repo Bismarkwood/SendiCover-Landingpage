@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Navbar } from './components/layout/Navbar'
 import { Footer } from './components/layout/Footer'
 import { WaitlistModal } from './components/common/WaitlistModal'
+import { RevealSection } from './components/common/RevealSection'
 import { HeroSection } from './components/sections/HeroSection'
 import { TrustSection } from './components/sections/TrustSection'
 import { ProblemSection } from './components/sections/ProblemSection'
@@ -23,18 +24,50 @@ function App() {
       <Navbar onOpenWaitlist={() => setIsWaitlistOpen(true)} />
       <main>
         <HeroSection />
-        <TrustSection />
-        <ProblemSection />
-        <ProductSection />
-        <FeaturesSection />
-        <QuoteSection />
-        <TestimonialSection />
-        <PartnershipSection />
-        <HowItWorksSection />
-        <FAQSection />
-        <CTABannerSection />
+
+        <RevealSection>
+          <TrustSection />
+        </RevealSection>
+
+        <RevealSection>
+          <ProblemSection />
+        </RevealSection>
+
+        <RevealSection>
+          <ProductSection />
+        </RevealSection>
+
+        <RevealSection>
+          <FeaturesSection />
+        </RevealSection>
+
+        <RevealSection direction="scale">
+          <QuoteSection />
+        </RevealSection>
+
+        <RevealSection>
+          <TestimonialSection />
+        </RevealSection>
+
+        <RevealSection>
+          <PartnershipSection />
+        </RevealSection>
+
+        <RevealSection>
+          <HowItWorksSection />
+        </RevealSection>
+
+        <RevealSection>
+          <FAQSection />
+        </RevealSection>
+
+        <RevealSection direction="scale">
+          <CTABannerSection />
+        </RevealSection>
       </main>
-      <Footer />
+      <RevealSection>
+        <Footer />
+      </RevealSection>
       <WaitlistModal isOpen={isWaitlistOpen} onClose={() => setIsWaitlistOpen(false)} />
     </>
   )

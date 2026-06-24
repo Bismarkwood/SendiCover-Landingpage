@@ -8,7 +8,7 @@ export function HeroSection() {
       <img
         src={heroBg}
         alt=""
-        className="hero-bg-image"
+        className="hero-bg-image hero-animate-bg"
         aria-hidden="true"
         loading="eager"
       />
@@ -18,19 +18,19 @@ export function HeroSection() {
 
       {/* Hero Content — centered */}
       <div className="hero-content">
-        <h1 className="hero-heading">
+        <h1 className="hero-heading hero-animate-heading">
           Protect the people you love,<br />
           wherever they are.
         </h1>
 
-        <p className="hero-subtext">
+        <p className="hero-subtext hero-animate-text">
           With Protect, you can look after the people who matter most, with life, health and funeral cover that
           reaches loved ones across borders, no matter how far away they are. Simple to set up. Affordable
           premiums. Paid directly from your phone
         </p>
 
         {/* App Store Badges */}
-        <div className="hero-badges">
+        <div className="hero-badges hero-animate-badges">
           {/* Apple App Store */}
           <a href="#" className="hero-store-btn" aria-label="Download on the App Store">
             <svg width="20" height="24" viewBox="0 0 24 24" fill="currentColor">
