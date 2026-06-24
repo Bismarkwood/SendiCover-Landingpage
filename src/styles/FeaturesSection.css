@@ -102,3 +102,26 @@
     padding: 20px 24px;
   }
 }
+
+@media (max-width: 480px) {
+  .features-section {
+    padding: 40px 16px;
+  }
+
+  .feature-item {
+    padding: 16px 20px;
+  }
+
+  .feature-title {
+    font-size: 0.9rem;
+  }
+
+  .feature-desc {
+    font-size: 0.78rem;
+  }
+
+  .feature-icon-wrap {
+    width: 36px;
+    height: 36px;
+  }
+}

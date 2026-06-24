@@ -105,3 +105,22 @@
     height: 220px;
   }
 }
+
+@media (max-width: 480px) {
+  .problem-section {
+    padding: 32px 16px;
+  }
+
+  .problem-heading {
+    font-size: 1.3rem;
+  }
+
+  .problem-description {
+    font-size: 0.82rem;
+  }
+
+  .problem-img {
+    height: 180px;
+    border-radius: 12px;
+  }
+}
