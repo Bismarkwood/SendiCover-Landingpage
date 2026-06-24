@@ -14,7 +14,7 @@
 }
 
 html {
-  font-size: 18px;
+  font-size: 16px;
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
 }
@@ -133,7 +133,7 @@ code {
 
 @media (max-width: 1024px) {
   html {
-    font-size: 16px;
+    font-size: 15px;
   }
 
   h1 {
