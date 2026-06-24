@@ -1,0 +1,235 @@
+/* Navbar Header Wrapper */
+.navbar-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #ffffff;
+  border-bottom: 1px solid #f0f0f0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+/* Subtle scroll effect for premium feel */
+.navbar-header.scrolled {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border-bottom-color: rgba(0, 0, 0, 0.05);
+  padding: 0.5rem 0;
+}
+
+/* Container limits width and centers */
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.8rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 52px;
+}
+
+/* Logo Alignment */
+.navbar-logo-link {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  text-decoration: none;
+}
+
+.navbar-logo-image {
+  height: 38px;
+  width: auto;
+  object-contain: fit;
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.navbar-logo-link:hover .navbar-logo-image {
+  transform: scale(1.02);
+}
+
+/* Desktop Navigation Menu */
+.navbar-desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 2.2rem;
+}
+
+/* Navigation Links */
+.nav-link {
+  color: #1f2937; /* Neutral grey-dark */
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  position: relative;
+  padding: 0.5rem 0;
+  transition: color 0.2s ease;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: #2e5bfa; /* Brand Blue */
+}
+
+/* Desktop Navigation sliding line underline effect */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #2e5bfa;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-link:hover::after, .nav-link.active::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Action CTA Button Styling */
+.cta-button {
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  padding: 0.65rem 1.6rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 9999px; /* Pill shape */
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.cta-button:hover {
+  background-color: #1a1a1a;
+  transform: translateY(-1.5px) scale(1.02);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.cta-button:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Mobile Hamburger Toggle Button */
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 1001;
+}
+
+/* Hamburger Icon Lines */
+.hamburger-icon {
+  width: 24px;
+  height: 18px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hamburger-icon span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background-color: #000000;
+  border-radius: 9999px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hamburger transition to "X" Close state */
+.hamburger-icon.open span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger-icon.open span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+.hamburger-icon.open span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Mobile Drawer Overlay styles */
+.navbar-mobile-drawer {
+  position: fixed;
+  top: 52px; /* Height of the navbar container */
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 52px);
+  background-color: #ffffff;
+  z-index: 999;
+  transform: translateY(-100%);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+}
+
+.navbar-mobile-drawer.open {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Mobile Navigation Links Stack */
+.navbar-mobile-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem 2rem;
+  gap: 1.8rem;
+}
+
+.mobile-nav-link {
+  color: #1f2937;
+  text-decoration: none;
+  font-size: 1.25rem;
+  font-weight: 500;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f3f4f6;
+  transition: all 0.2s ease;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.mobile-nav-link:hover {
+  color: #2e5bfa;
+  padding-left: 0.5rem;
+}
+
+.mobile-cta-container {
+  margin-top: 1.5rem;
+  display: flex;
+  width: 100%;
+}
+
+.mobile-cta {
+  width: 100%;
+  text-align: center;
+  padding: 0.9rem 0;
+  font-size: 1.1rem;
+}
+
+/* Responsive Breakpoint (Tablet/Mobile Layout) */
+@media (max-width: 768px) {
+  .navbar-desktop-nav,
+  .navbar-desktop-cta {
+    display: none;
+  }
+  
+  .mobile-menu-toggle {
+    display: block;
+  }
+  
+  .navbar-header.scrolled {
+    padding: 0;
+  }
+}
