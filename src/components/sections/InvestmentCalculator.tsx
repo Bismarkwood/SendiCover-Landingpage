@@ -2,22 +2,21 @@ import { useState, useRef, useEffect } from 'react';
 import '../../styles/InvestmentCalculator.css';
 
 /* ── Types & Data ── */
-type CategoryKey = 'category-1' | 'category-2' | 'category-3';
+type CategoryKey = 'farewell' | 'life' | 'critical-illness';
 
 interface Product {
   id: string;
   label: string;
   category: CategoryKey;
-  categoryLabel: string;
 }
 
 const PRODUCTS: Product[] = [
-  { id: 'farewell-dignity', label: 'Dignity Farewell Plan', category: 'category-1', categoryLabel: 'Farewell Cover' },
-  { id: 'farewell-premier', label: 'Ultimate Premier Farewell Plan', category: 'category-1', categoryLabel: 'Farewell Cover' },
-  { id: 'life-standard', label: 'Standard Life Plan', category: 'category-2', categoryLabel: 'Life Insurance' },
-  { id: 'life-premium', label: 'Premium Life Plan', category: 'category-2', categoryLabel: 'Life Insurance' },
-  { id: 'critical-essential', label: 'Essential Critical Illness Plan', category: 'category-3', categoryLabel: 'Critical Illness' },
-  { id: 'critical-comprehensive', label: 'Comprehensive Critical Illness Plan', category: 'category-3', categoryLabel: 'Critical Illness' },
+  { id: 'farewell-dignity', label: 'Dignity Farewell Plan', category: 'farewell' },
+  { id: 'farewell-premier', label: 'Ultimate Premier Farewell Plan', category: 'farewell' },
+  { id: 'life-standard', label: 'Standard Life Plan', category: 'life' },
+  { id: 'life-premium', label: 'Premium Life Plan', category: 'life' },
+  { id: 'critical-essential', label: 'Essential Critical Illness Plan', category: 'critical-illness' },
+  { id: 'critical-comprehensive', label: 'Comprehensive Critical Illness Plan', category: 'critical-illness' },
 ];
 
 const COUNTRIES = [
@@ -46,26 +45,22 @@ const COUNTRIES = [
   'Venezuela','Vietnam','Yemen','Zambia','Zimbabwe',
 ];
 
-/* Category 1: fixed annual premium based on age */
-function getCategory1Premium(age: number): number {
-  if (age < 25) return 120;
-  if (age < 35) return 180;
-  if (age < 45) return 280;
-  if (age < 55) return 420;
-  return 600;
-}
-
-/* Category 2 & 3: premium is percentage of sum assured, adjusted by age */
-function getCategoryPremium(sumAssured: number, age: number): number {
-  let rate = 0.025; // base 2.5%
-  if (age >= 35) rate = 0.032;
-  if (age >= 45) rate = 0.042;
-  if (age >= 55) rate = 0.055;
-  return sumAssured * rate;
-}
-
 function formatGHC(value: number): string {
   return 'GHC ' + value.toLocaleString('en-GH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+/* Premium calculation */
+function calculatePremium(product: Product, payoutAmount: number): number {
+  // Farewell cover: rate based on payout
+  if (product.category === 'farewell') {
+    return payoutAmount * 0.028;
+  }
+  // Life insurance: rate based on payout
+  if (product.category === 'life') {
+    return payoutAmount * 0.035;
+  }
+  // Critical illness: fixed annual premium
+  return 480;
 }
 
 /* ── Searchable Country Dropdown ── */
@@ -155,13 +150,14 @@ function SearchableDropdown({
 
 /* ── Custom Dropdown ── */
 function Dropdown({
-  value, onChange, options, placeholder, error,
+  value, onChange, options, placeholder, error, dropUp = false,
 }: {
   value: string;
   onChange: (v: string) => void;
   options: { value: string; label: string }[];
   placeholder: string;
   error?: string;
+  dropUp?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -193,7 +189,7 @@ function Dropdown({
       </button>
 
       {open && (
-        <ul className="fd-menu" role="listbox">
+        <ul className={`fd-menu ${dropUp ? 'fd-menu--up' : ''}`} role="listbox">
           {options.map(opt => (
             <li
               key={opt.value}
@@ -220,16 +216,17 @@ function Dropdown({
 /* ── Main Calculator ── */
 interface FormState {
   email: string;
+  phone: string;
+  userCountry: string;
+  beneficiaryCountry: string;
   product: string;
-  country: string;
-  age: string;
-  sumAssured: string;
+  payoutAmount: string;
 }
 
 interface Errors { [k: string]: string | undefined }
 
 const initialForm: FormState = {
-  email: '', product: '', country: '', age: '', sumAssured: '50000',
+  email: '', phone: '', userCountry: '', beneficiaryCountry: '', product: '', payoutAmount: '50000',
 };
 
 export function InvestmentCalculator() {
@@ -244,21 +241,26 @@ export function InvestmentCalculator() {
   };
 
   const selectedProduct = PRODUCTS.find(p => p.id === form.product);
-  const isCategory1 = selectedProduct?.category === 'category-1';
-  const needsSlider = selectedProduct && !isCategory1;
+  const showSlider = selectedProduct && selectedProduct.category !== 'critical-illness';
 
-  const sumAssuredNum = parseFloat(form.sumAssured) || 50000;
-  const sumAssuredPct = Math.min(100, Math.max(0, ((sumAssuredNum - 10000) / (500000 - 10000)) * 100));
+  const payoutNum = parseFloat(form.payoutAmount) || 50000;
+  const payoutPct = Math.min(100, Math.max(0, ((payoutNum - 10000) / (1000000 - 10000)) * 100));
 
   const validate = (): Errors => {
     const e: Errors = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^[+\d\s-]{7,}$/;
+
     if (!form.email.trim()) e.email = 'Email address is required.';
     else if (!emailRegex.test(form.email)) e.email = 'Please enter a valid email.';
+
+    if (!form.phone.trim()) e.phone = 'Phone number is required.';
+    else if (!phoneRegex.test(form.phone)) e.phone = 'Please enter a valid phone number.';
+
+    if (!form.userCountry) e.userCountry = 'Please select your country.';
+    if (!form.beneficiaryCountry) e.beneficiaryCountry = 'Please select beneficiary country.';
     if (!form.product) e.product = 'Please select a product.';
-    if (!form.country) e.country = 'Please select a country.';
-    if (!form.age || isNaN(Number(form.age)) || Number(form.age) < 18 || Number(form.age) > 75)
-      e.age = 'Age must be between 18 and 75.';
+
     return e;
   };
 
@@ -266,15 +268,9 @@ export function InvestmentCalculator() {
     const errs = validate();
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
 
-    const age = parseInt(form.age);
-    let result: number;
+    if (!selectedProduct) return;
 
-    if (isCategory1) {
-      result = getCategory1Premium(age);
-    } else {
-      result = getCategoryPremium(sumAssuredNum, age);
-    }
-
+    const result = calculatePremium(selectedProduct, payoutNum);
     setPremium(result);
     setCalculated(true);
   };
@@ -296,7 +292,7 @@ export function InvestmentCalculator() {
 
           {/* Email */}
           <div className="ic-field">
-            <label className="ic-label" htmlFor="ic-email">Email Address</label>
+            <label className="ic-label" htmlFor="ic-email">Email Address <span className="ic-required">*</span></label>
             <div className="ic-input-wrap">
               <span className="ic-prefix-icon">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -315,71 +311,89 @@ export function InvestmentCalculator() {
             {errors.email && <span className="ic-error">{errors.email}</span>}
           </div>
 
+          {/* Phone */}
+          <div className="ic-field">
+            <label className="ic-label" htmlFor="ic-phone">Phone Number <span className="ic-required">*</span></label>
+            <div className="ic-input-wrap">
+              <span className="ic-prefix-icon">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+              </span>
+              <input
+                id="ic-phone"
+                type="tel"
+                placeholder="+233 000 000 0000"
+                value={form.phone}
+                onChange={e => set('phone', e.target.value)}
+                className={`ic-input ic-input--icon ${errors.phone ? 'ic-input--error' : ''}`}
+              />
+            </div>
+            {errors.phone && <span className="ic-error">{errors.phone}</span>}
+          </div>
+
+          {/* Country you live in */}
+          <div className="ic-field">
+            <label className="ic-label">Country you live in <span className="ic-required">*</span></label>
+            <SearchableDropdown
+              value={form.userCountry}
+              onChange={v => set('userCountry', v)}
+              options={COUNTRIES}
+              placeholder="Search and select country"
+              error={errors.userCountry}
+            />
+          </div>
+
+          {/* Where does the beneficiary live */}
+          <div className="ic-field">
+            <label className="ic-label">Where does the beneficiary live? <span className="ic-required">*</span></label>
+            <SearchableDropdown
+              value={form.beneficiaryCountry}
+              onChange={v => set('beneficiaryCountry', v)}
+              options={COUNTRIES}
+              placeholder="Search and select country"
+              error={errors.beneficiaryCountry}
+            />
+          </div>
+
           {/* Product */}
           <div className="ic-field">
-            <label className="ic-label">Product</label>
+            <label className="ic-label">Product <span className="ic-required">*</span></label>
             <Dropdown
               value={form.product}
               onChange={v => set('product', v)}
-              options={PRODUCTS.map(p => ({ value: p.id, label: `${p.label} (${p.categoryLabel})` }))}
+              options={PRODUCTS.map(p => ({ value: p.id, label: p.label }))}
               placeholder="Select a product"
               error={errors.product}
+              dropUp
             />
           </div>
 
-          {/* Country */}
-          <div className="ic-field">
-            <label className="ic-label">Where does the beneficiary live?</label>
-            <SearchableDropdown
-              value={form.country}
-              onChange={v => set('country', v)}
-              options={COUNTRIES}
-              placeholder="Search and select country"
-              error={errors.country}
-            />
-          </div>
-
-          {/* Age */}
-          <div className="ic-field">
-            <label className="ic-label" htmlFor="ic-age">Person's Age</label>
-            <input
-              id="ic-age"
-              type="number"
-              min="18"
-              max="75"
-              placeholder="e.g. 35"
-              value={form.age}
-              onChange={e => set('age', e.target.value)}
-              className={`ic-input ${errors.age ? 'ic-input--error' : ''}`}
-            />
-            {errors.age && <span className="ic-error">{errors.age}</span>}
-          </div>
-
-          {/* Sum Assured Slider (Category 2 & 3 only) */}
-          {needsSlider && (
+          {/* Payout Amount Slider (Farewell & Life Insurance only) */}
+          {showSlider && (
             <div className="ic-field ic-field--slide">
               <div className="sf-top">
-                <label className="ic-label" htmlFor="ic-sum">Sum Assured</label>
+                <label className="ic-label" htmlFor="ic-payout">Payout Amount</label>
                 <div className="sf-value-pill">
-                  <span className="sf-value-display">{formatGHC(sumAssuredNum)}</span>
+                  <span className="sf-value-display">{formatGHC(payoutNum)}</span>
                 </div>
               </div>
               <div className="sf-track-wrap">
                 <input
-                  id="ic-sum"
+                  id="ic-payout"
                   type="range"
                   min={10000}
-                  max={500000}
-                  step={5000}
-                  value={sumAssuredNum}
-                  onChange={e => set('sumAssured', e.target.value)}
+                  max={1000000}
+                  step={10000}
+                  value={payoutNum}
+                  onChange={e => set('payoutAmount', e.target.value)}
                   className="sf-range"
-                  style={{ '--pct': `${sumAssuredPct}%` } as React.CSSProperties}
+                  style={{ '--pct': `${payoutPct}%` } as React.CSSProperties}
                 />
               </div>
               <div className="sf-labels">
                 <span>GHC 10,000</span>
-                <span>GHC 500,000</span>
+                <span>GHC 1,000,000</span>
               </div>
             </div>
           )}
@@ -409,7 +423,7 @@ export function InvestmentCalculator() {
               {premium !== null ? formatGHC(premium) : 'GHC 0.00'}
             </span>
 
-            {calculated && premium !== null ? (
+            {calculated && premium !== null && selectedProduct ? (
               <>
                 <div className="ic-result-divider" />
 
@@ -420,29 +434,22 @@ export function InvestmentCalculator() {
                       <span className="ic-metric-dot ic-metric-dot--blue" />
                       Product
                     </span>
-                    <span className="ic-metric-value">{selectedProduct?.label}</span>
+                    <span className="ic-metric-value">{selectedProduct.label}</span>
                   </div>
                   <div className="ic-metric-item">
                     <span className="ic-metric-label">
                       <span className="ic-metric-dot ic-metric-dot--grey" />
                       Beneficiary Location
                     </span>
-                    <span className="ic-metric-value">{form.country}</span>
+                    <span className="ic-metric-value">{form.beneficiaryCountry}</span>
                   </div>
-                  <div className="ic-metric-item">
-                    <span className="ic-metric-label">
-                      <span className="ic-metric-dot ic-metric-dot--grey" />
-                      Age
-                    </span>
-                    <span className="ic-metric-value">{form.age} years</span>
-                  </div>
-                  {needsSlider && (
+                  {showSlider && (
                     <div className="ic-metric-item">
                       <span className="ic-metric-label">
                         <span className="ic-metric-dot ic-metric-dot--blue" />
-                        Sum Assured
+                        Payout Amount
                       </span>
-                      <span className="ic-metric-value ic-metric-value--accent">{formatGHC(sumAssuredNum)}</span>
+                      <span className="ic-metric-value ic-metric-value--accent">{formatGHC(payoutNum)}</span>
                     </div>
                   )}
                 </div>
