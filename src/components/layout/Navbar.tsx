@@ -1,10 +1,12 @@
 import { useState, useEffect, useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
 import logoImg from '../../assets/logo.jpg'
 import '../../styles/Navbar.css'
 
-export function Navbar({ onOpenWaitlist }: { onOpenWaitlist: () => void }) {
+export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -59,7 +61,7 @@ export function Navbar({ onOpenWaitlist }: { onOpenWaitlist: () => void }) {
 
         {/* Right Side: Desktop CTAs */}
         <div className="navbar-desktop-cta">
-          <a href="#waitlist" className="nav-link-waitlist" onClick={(e) => { e.preventDefault(); onOpenWaitlist(); }}>Join Waitlist</a>
+          <a href="/waitlist" className="nav-link-waitlist" onClick={(e) => { e.preventDefault(); navigate('/waitlist'); }}>Join Waitlist</a>
           <button className="cta-button" onClick={() => {
             const el = document.getElementById('quote')
             if (el) {
@@ -92,7 +94,7 @@ export function Navbar({ onOpenWaitlist }: { onOpenWaitlist: () => void }) {
           <a href="#products" className="mobile-nav-link" onClick={(e) => scrollToSection(e, 'products')}>Product</a>
           <a href="#how-it-works" className="mobile-nav-link" onClick={(e) => scrollToSection(e, 'how-it-works')}>How It Works</a>
           <a href="#faq" className="mobile-nav-link" onClick={(e) => scrollToSection(e, 'faq')}>FAQ</a>
-          <a href="#waitlist" className="mobile-nav-link" onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); onOpenWaitlist(); }}>Join Waitlist</a>
+          <a href="/waitlist" className="mobile-nav-link" onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); navigate('/waitlist'); }}>Join Waitlist</a>
           <div className="mobile-cta-container">
             <button className="cta-button mobile-cta" onClick={() => {
               setIsMobileMenuOpen(false)
