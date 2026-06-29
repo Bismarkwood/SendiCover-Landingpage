@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import waitlistImg from '../assets/waitlist.png';
-import waitlistLogo from '../assets/New logo.png';
 import { Navbar } from '../components/layout/Navbar';
 import { FAQSection } from '../components/sections/FAQSection';
 import { Footer } from '../components/layout/Footer';
@@ -245,50 +244,45 @@ export function WaitlistPage() {
             </div>
           ) : (
             <>
-              {/* Logo */}
-              <div className="wlp-logo">
-                <img src={waitlistLogo} alt="Sendi" className="wlp-logo-img" />
-              </div>
-
               <h1 className="wlp-heading">We're not in your country yet. But we're on our way.</h1>
-              <p className="wlp-subtext">
-                Sendi Protect is live for Ghana, with more countries coming soon. Join the waitlist
-                and we'll let you know the moment we can protect your loved ones where they are.
-              </p>
 
               <form className="wlp-form" onSubmit={handleSubmit} noValidate>
-                {/* Full Name */}
-                <div className="wlp-field">
-                  <label className="wlp-label">Your name <span className="wlp-req">*</span></label>
-                  <input type="text" placeholder="Enter your full name" value={formData.fullName}
-                    onChange={e => set('fullName', e.target.value)}
-                    className={`wlp-input ${errors.fullName ? 'wlp-input--error' : ''}`} />
-                  {errors.fullName && <span className="wlp-error">{errors.fullName}</span>}
+                <div className="wlp-fields-row">
+                  {/* Full Name */}
+                  <div className="wlp-field">
+                    <label className="wlp-label">Your name <span className="wlp-req">*</span></label>
+                    <input type="text" placeholder="Enter your full name" value={formData.fullName}
+                      onChange={e => set('fullName', e.target.value)}
+                      className={`wlp-input ${errors.fullName ? 'wlp-input--error' : ''}`} />
+                    {errors.fullName && <span className="wlp-error">{errors.fullName}</span>}
+                  </div>
+
+                  {/* Phone */}
+                  <div className="wlp-field">
+                    <label className="wlp-label">Phone number <span className="wlp-req">*</span></label>
+                    <input type="tel" placeholder="Enter your phone number" value={formData.phone}
+                      onChange={e => set('phone', e.target.value)}
+                      className={`wlp-input ${errors.phone ? 'wlp-input--error' : ''}`} />
+                    {errors.phone && <span className="wlp-error">{errors.phone}</span>}
+                  </div>
                 </div>
 
-                {/* Phone */}
-                <div className="wlp-field">
-                  <label className="wlp-label">Phone number <span className="wlp-req">*</span></label>
-                  <input type="tel" placeholder="Enter your phone number" value={formData.phone}
-                    onChange={e => set('phone', e.target.value)}
-                    className={`wlp-input ${errors.phone ? 'wlp-input--error' : ''}`} />
-                  {errors.phone && <span className="wlp-error">{errors.phone}</span>}
-                </div>
+                <div className="wlp-fields-row">
+                  {/* Email */}
+                  <div className="wlp-field">
+                    <label className="wlp-label">Email address <span className="wlp-req">*</span></label>
+                    <input type="email" placeholder="you@example.com" value={formData.email}
+                      onChange={e => set('email', e.target.value)}
+                      className={`wlp-input ${errors.email ? 'wlp-input--error' : ''}`} />
+                    {errors.email && <span className="wlp-error">{errors.email}</span>}
+                  </div>
 
-                {/* Email */}
-                <div className="wlp-field">
-                  <label className="wlp-label">Email address <span className="wlp-req">*</span></label>
-                  <input type="email" placeholder="you@example.com" value={formData.email}
-                    onChange={e => set('email', e.target.value)}
-                    className={`wlp-input ${errors.email ? 'wlp-input--error' : ''}`} />
-                  {errors.email && <span className="wlp-error">{errors.email}</span>}
-                </div>
-
-                {/* User Country */}
-                <div className="wlp-field">
-                  <label className="wlp-label">Where do you live? <span className="wlp-req">*</span></label>
-                  <CountryDropdown value={formData.userCountry} onChange={v => set('userCountry', v)}
+                  {/* User Country */}
+                  <div className="wlp-field">
+                    <label className="wlp-label">Where do you live? <span className="wlp-req">*</span></label>
+                    <CountryDropdown value={formData.userCountry} onChange={v => set('userCountry', v)}
                     placeholder="Select your country" error={errors.userCountry} />
+                  </div>
                 </div>
 
                 {/* Protect Country */}

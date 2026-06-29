@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import logoImg from '../../assets/New logo.png'
 import '../../styles/Navbar.css'
 
-export function Navbar() {
+export function Navbar({ onCheckAvailability }: { onCheckAvailability?: () => void } = {}) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const navigate = useNavigate()
@@ -55,7 +55,7 @@ export function Navbar() {
           <a href="#home" className="nav-link active" onClick={(e) => scrollToSection(e, 'home')}>Home</a>
           <a href="#how-it-works" className="nav-link" onClick={(e) => scrollToSection(e, 'how-it-works')}>How It Works</a>
           <a href="#products" className="nav-link" onClick={(e) => scrollToSection(e, 'products')}>Cover Options</a>
-          <a href="#countries" className="nav-link" onClick={(e) => scrollToSection(e, 'countries')}>Countries</a>
+          <a href="#quote" className="nav-link" onClick={(e) => scrollToSection(e, 'quote')}>Countries</a>
           <a href="#faq" className="nav-link" onClick={(e) => scrollToSection(e, 'faq')}>FAQ</a>
         </nav>
 
@@ -63,10 +63,14 @@ export function Navbar() {
         <div className="navbar-desktop-cta">
           <a href="/waitlist" className="nav-link-waitlist" onClick={(e) => { e.preventDefault(); navigate('/waitlist'); }}>Join Waitlist</a>
           <button className="cta-button" onClick={() => {
-            const el = document.getElementById('quote')
-            if (el) {
-              const top = el.getBoundingClientRect().top + window.scrollY - 80
-              window.scrollTo({ top, behavior: 'smooth' })
+            if (onCheckAvailability) {
+              onCheckAvailability();
+            } else {
+              const el = document.getElementById('quote')
+              if (el) {
+                const top = el.getBoundingClientRect().top + window.scrollY - 80
+                window.scrollTo({ top, behavior: 'smooth' })
+              }
             }
           }}>Check Availability</button>
         </div>
@@ -92,16 +96,20 @@ export function Navbar() {
           <a href="#home" className="mobile-nav-link" onClick={(e) => scrollToSection(e, 'home')}>Home</a>
           <a href="#how-it-works" className="mobile-nav-link" onClick={(e) => scrollToSection(e, 'how-it-works')}>How It Works</a>
           <a href="#products" className="mobile-nav-link" onClick={(e) => scrollToSection(e, 'products')}>Cover Options</a>
-          <a href="#countries" className="mobile-nav-link" onClick={(e) => scrollToSection(e, 'countries')}>Countries</a>
+          <a href="#quote" className="mobile-nav-link" onClick={(e) => scrollToSection(e, 'quote')}>Countries</a>
           <a href="#faq" className="mobile-nav-link" onClick={(e) => scrollToSection(e, 'faq')}>FAQ</a>
           <a href="/waitlist" className="mobile-nav-link" onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); navigate('/waitlist'); }}>Join Waitlist</a>
           <div className="mobile-cta-container">
             <button className="cta-button mobile-cta" onClick={() => {
               setIsMobileMenuOpen(false)
-              const el = document.getElementById('quote')
-              if (el) {
-                const top = el.getBoundingClientRect().top + window.scrollY - 80
-                window.scrollTo({ top, behavior: 'smooth' })
+              if (onCheckAvailability) {
+                onCheckAvailability();
+              } else {
+                const el = document.getElementById('quote')
+                if (el) {
+                  const top = el.getBoundingClientRect().top + window.scrollY - 80
+                  window.scrollTo({ top, behavior: 'smooth' })
+                }
               }
             }}>Check Availability</button>
           </div>

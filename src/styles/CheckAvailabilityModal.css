@@ -1,0 +1,206 @@
+/* ============================================================
+   Check Availability Modal
+   ============================================================ */
+
+.cam-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+  animation: camFadeIn 0.25s ease forwards;
+}
+
+@keyframes camFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.cam-modal {
+  width: 100%;
+  max-width: 580px;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 40px 36px;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.2);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: camSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+@keyframes camSlideUp {
+  from { opacity: 0; transform: translateY(16px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.cam-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  transition: all 0.2s ease;
+}
+
+.cam-close:hover { background: #e2e8f0; color: #1e293b; }
+
+.cam-heading {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+}
+
+.cam-subtext {
+  font-size: 0.92rem;
+  color: #64748b;
+  margin: 0;
+}
+
+/* Fields */
+.cam-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cam-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.cam-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cam-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* Dropdown */
+.cam-dropdown { position: relative; }
+
+.cam-trigger {
+  width: 100%; height: 48px; padding: 0 38px 0 14px;
+  border: 1.5px solid #e2e8f0; border-radius: 12px; background: #fff;
+  display: flex; align-items: center; cursor: pointer; font-family: inherit;
+  font-size: 0.88rem; text-align: left; transition: border-color 0.2s ease;
+  position: relative;
+}
+
+.cam-trigger:hover { border-color: #94a3b8; }
+.cam-trigger--open { border-color: #1e3a8a; box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.08); }
+.cam-trigger--error { border-color: #ef4444; }
+.cam-value { color: #0f172a; font-weight: 500; }
+.cam-placeholder { color: #94a3b8; }
+.cam-chevron { position: absolute; right: 14px; color: #64748b; transition: transform 0.2s ease; }
+.cam-chevron--up { transform: rotate(180deg); }
+
+.cam-menu {
+  position: absolute; top: calc(100% + 6px); left: 0; right: 0;
+  background: #fff; border: 1px solid #e2e8f0; border-radius: 14px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.14); z-index: 300; overflow: hidden;
+  animation: camDropIn 0.18s ease;
+}
+
+@keyframes camDropIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.cam-search {
+  width: 100%; height: 40px; padding: 0 14px; border: none;
+  border-bottom: 1px solid #f1f5f9; font-size: 0.86rem; outline: none; font-family: inherit;
+}
+.cam-search::placeholder { color: #94a3b8; }
+
+.cam-list { list-style: none; margin: 0; padding: 6px; max-height: 180px; overflow-y: auto; }
+.cam-option { padding: 10px 14px; border-radius: 8px; cursor: pointer; font-size: 0.86rem; transition: background 0.15s ease; }
+.cam-option:hover { background: #f1f5f9; }
+.cam-option--active { background: #eff6ff; color: #1e3a8a; font-weight: 600; }
+.cam-option--empty { text-align: center; color: #94a3b8; cursor: default; }
+
+.cam-error { font-size: 0.7rem; color: #ef4444; font-weight: 500; }
+
+/* CTA */
+.cam-btn {
+  width: 100%; height: 52px;
+  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+  color: #fff; border: none; border-radius: 99px;
+  font-size: 1rem; font-weight: 700; cursor: pointer; font-family: inherit;
+  transition: all 0.2s ease; box-shadow: 0 4px 16px rgba(30, 58, 138, 0.3);
+}
+
+.cam-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(30, 58, 138, 0.4); }
+
+/* Result */
+.cam-result {
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  padding: 24px; border-radius: 16px; text-align: center;
+  animation: camResultIn 0.4s ease forwards;
+}
+
+@keyframes camResultIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.cam-result--success { background: #f0fdf4; border: 1px solid #bbf7d0; }
+.cam-result--pending { background: #eff6ff; border: 1px solid #bfdbfe; }
+
+.cam-result-icon { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.cam-result--success .cam-result-icon { background: #dcfce7; color: #16a34a; }
+.cam-result--pending .cam-result-icon { background: #dbeafe; color: #1e3a8a; }
+
+.cam-result-text { display: flex; flex-direction: column; gap: 4px; }
+.cam-result-text strong { font-size: 0.95rem; color: #0f172a; }
+.cam-result-text span { font-size: 0.82rem; color: #475569; }
+
+/* App buttons */
+.cam-app-buttons { display: flex; gap: 12px; }
+
+.cam-store-btn {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 18px; background: #000; color: #fff;
+  border-radius: 10px; font-size: 0.82rem; font-weight: 700;
+  text-decoration: none; transition: all 0.2s ease;
+}
+
+.cam-store-btn:hover { background: #1a1a1a; transform: translateY(-1px); }
+
+.cam-waitlist-btn {
+  display: inline-flex; padding: 12px 28px;
+  background: #1e3a8a; color: #fff; border-radius: 99px;
+  font-size: 0.88rem; font-weight: 700; text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.cam-waitlist-btn:hover { background: #1e40af; transform: translateY(-1px); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cam-modal { padding: 28px 22px; max-width: 100%; }
+  .cam-row { grid-template-columns: 1fr; }
+  .cam-heading { font-size: 1.2rem; }
+}

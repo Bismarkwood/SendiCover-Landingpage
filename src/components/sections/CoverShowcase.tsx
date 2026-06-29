@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import problemImg1 from '../../assets/problem-1.png';
-import lifeImg from '../../assets/life insurance image.png';
+import withoutSendiImg from '../../assets/Without Sendi.png';
+import proactiveImg from '../../assets/Proactive protection.png';
 import getAQuoteBg from '../../assets/Get a Quote Bg.png';
 import '../../styles/CoverShowcase.css';
 
@@ -25,7 +25,7 @@ const SLIDES: Slide[] = [
       'Last-minute transfers',
     ],
     theme: 'problem',
-    image: problemImg1,
+    image: withoutSendiImg,
   },
   {
     id: 'with',
@@ -38,7 +38,7 @@ const SLIDES: Slide[] = [
       'One place to manage everything',
     ],
     theme: 'solution',
-    image: lifeImg,
+    image: proactiveImg,
   },
 ];
 
