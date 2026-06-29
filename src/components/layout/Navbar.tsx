@@ -53,9 +53,9 @@ export function Navbar() {
         {/* Center: Desktop Navigation Links */}
         <nav className="navbar-desktop-nav">
           <a href="#home" className="nav-link active" onClick={(e) => scrollToSection(e, 'home')}>Home</a>
-          <a href="#problem" className="nav-link" onClick={(e) => scrollToSection(e, 'problem')}>The Problem</a>
-          <a href="#products" className="nav-link" onClick={(e) => scrollToSection(e, 'products')}>Product</a>
           <a href="#how-it-works" className="nav-link" onClick={(e) => scrollToSection(e, 'how-it-works')}>How It Works</a>
+          <a href="#products" className="nav-link" onClick={(e) => scrollToSection(e, 'products')}>Cover Options</a>
+          <a href="#countries" className="nav-link" onClick={(e) => scrollToSection(e, 'countries')}>Countries</a>
           <a href="#faq" className="nav-link" onClick={(e) => scrollToSection(e, 'faq')}>FAQ</a>
         </nav>
 
@@ -68,7 +68,7 @@ export function Navbar() {
               const top = el.getBoundingClientRect().top + window.scrollY - 80
               window.scrollTo({ top, behavior: 'smooth' })
             }
-          }}>Get Quote</button>
+          }}>Check Availability</button>
         </div>
 
         {/* Mobile Hamburger Menu Trigger */}
@@ -90,9 +90,9 @@ export function Navbar() {
       <div className={`navbar-mobile-drawer ${isMobileMenuOpen ? 'open' : ''}`}>
         <nav className="navbar-mobile-nav">
           <a href="#home" className="mobile-nav-link" onClick={(e) => scrollToSection(e, 'home')}>Home</a>
-          <a href="#problem" className="mobile-nav-link" onClick={(e) => scrollToSection(e, 'problem')}>The Problem</a>
-          <a href="#products" className="mobile-nav-link" onClick={(e) => scrollToSection(e, 'products')}>Product</a>
           <a href="#how-it-works" className="mobile-nav-link" onClick={(e) => scrollToSection(e, 'how-it-works')}>How It Works</a>
+          <a href="#products" className="mobile-nav-link" onClick={(e) => scrollToSection(e, 'products')}>Cover Options</a>
+          <a href="#countries" className="mobile-nav-link" onClick={(e) => scrollToSection(e, 'countries')}>Countries</a>
           <a href="#faq" className="mobile-nav-link" onClick={(e) => scrollToSection(e, 'faq')}>FAQ</a>
           <a href="/waitlist" className="mobile-nav-link" onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); navigate('/waitlist'); }}>Join Waitlist</a>
           <div className="mobile-cta-container">
@@ -103,7 +103,7 @@ export function Navbar() {
                 const top = el.getBoundingClientRect().top + window.scrollY - 80
                 window.scrollTo({ top, behavior: 'smooth' })
               }
-            }}>Get Quote</button>
+            }}>Check Availability</button>
           </div>
         </nav>
       </div>
