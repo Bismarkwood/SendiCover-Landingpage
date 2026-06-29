@@ -1,7 +1,8 @@
-import { useState, useRef, useEffect, Suspense } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Sphere, Html, Line } from '@react-three/drei';
+import { OrbitControls, Sphere } from '@react-three/drei';
 import * as THREE from 'three';
+import earthTextureUrl from '../../assets/earth-texture.jpg';
 import '../../styles/InvestmentCalculator.css';
 
 /* ── Data ── */
@@ -48,72 +49,40 @@ const SUPPORT_OPTIONS = [
 ];
 
 /* ── Globe helpers ── */
-function latLngToVector3(lat: number, lng: number, radius: number): THREE.Vector3 {
-  const phi = (90 - lat) * (Math.PI / 180);
-  const theta = (lng + 180) * (Math.PI / 180);
-  const x = -(radius * Math.sin(phi) * Math.cos(theta));
-  const z = radius * Math.sin(phi) * Math.sin(theta);
-  const y = radius * Math.cos(phi);
-  return new THREE.Vector3(x, y, z);
-}
-
 const GLOBE_COUNTRIES = [
-  { name: 'Ghana', flag: '🇬🇭', lat: 7.9465, lng: -1.0232, available: true },
-  { name: 'Nigeria', flag: '🇳🇬', lat: 9.0820, lng: 8.6753, available: true },
-  { name: 'Kenya', flag: '🇰🇪', lat: -0.0236, lng: 37.9062, available: true },
-  { name: 'South Africa', flag: '🇿🇦', lat: -30.5595, lng: 22.9375, available: false },
-  { name: 'Rwanda', flag: '🇷🇼', lat: -1.9403, lng: 29.8739, available: false },
-  { name: 'Uganda', flag: '🇺🇬', lat: 1.3733, lng: 32.2903, available: false },
-  { name: 'Tanzania', flag: '🇹🇿', lat: -6.3690, lng: 34.8888, available: false },
-  { name: 'Senegal', flag: '🇸🇳', lat: 14.4974, lng: -14.4524, available: false },
-  { name: 'Ethiopia', flag: '🇪🇹', lat: 9.1450, lng: 40.4897, available: false },
-  { name: 'Cameroon', flag: '🇨🇲', lat: 7.3697, lng: 12.3547, available: false },
-  { name: 'Egypt', flag: '🇪🇬', lat: 26.8206, lng: 30.8025, available: false },
-  { name: 'Morocco', flag: '🇲🇦', lat: 31.7917, lng: -7.0926, available: false },
+  { name: 'Ghana', code: 'gh', available: true },
+  { name: 'Nigeria', code: 'ng', available: true },
+  { name: 'Kenya', code: 'ke', available: true },
+  { name: 'South Africa', code: 'za', available: false },
+  { name: 'Rwanda', code: 'rw', available: false },
+  { name: 'Uganda', code: 'ug', available: false },
+  { name: 'Tanzania', code: 'tz', available: false },
+  { name: 'Senegal', code: 'sn', available: false },
+  { name: 'Ethiopia', code: 'et', available: false },
+  { name: 'Cameroon', code: 'cm', available: false },
+  { name: 'Egypt', code: 'eg', available: false },
+  { name: 'Morocco', code: 'ma', available: false },
 ];
 
-function GlobeMesh() {
+/* 3D Globe Mesh */
+function Globe3D({ texture }: { texture: THREE.Texture }) {
   const meshRef = useRef<THREE.Mesh>(null);
-  const ghanaPos = latLngToVector3(7.9465, -1.0232, 2);
 
   useFrame((_state, delta) => {
-    if (meshRef.current) meshRef.current.rotation.y += delta * 0.08;
-  });
-
-  const arcs = GLOBE_COUNTRIES.filter(c => c.name !== 'Ghana').map((country) => {
-    const endPos = latLngToVector3(country.lat, country.lng, 2);
-    const midPoint = new THREE.Vector3().addVectors(ghanaPos, endPos).multiplyScalar(0.5).normalize().multiplyScalar(2.8);
-    const curve = new THREE.QuadraticBezierCurve3(ghanaPos, midPoint, endPos);
-    return curve.getPoints(32).map(p => [p.x, p.y, p.z] as [number, number, number]);
+    if (meshRef.current) {
+      meshRef.current.rotation.y += delta * 0.15;
+    }
   });
 
   return (
-    <group ref={meshRef}>
-      <Sphere args={[2, 64, 64]}>
-        <meshPhongMaterial color="#1a2a6c" emissive="#0a1440" emissiveIntensity={0.3} specular="#4a6cf7" shininess={20} transparent opacity={0.92} />
+    <group>
+      <mesh ref={meshRef} rotation={[0.1, -0.5, 0]}>
+        <sphereGeometry args={[2, 64, 64]} />
+        <meshStandardMaterial map={texture} roughness={1} metalness={0} />
+      </mesh>
+      <Sphere args={[2.08, 32, 32]}>
+        <meshBasicMaterial color="#60a5fa" transparent opacity={0.06} side={THREE.BackSide} />
       </Sphere>
-      <Sphere args={[2.01, 32, 32]}>
-        <meshBasicMaterial color="#3b82f6" wireframe transparent opacity={0.06} />
-      </Sphere>
-      <Sphere args={[2.15, 32, 32]}>
-        <meshBasicMaterial color="#60a5fa" transparent opacity={0.04} side={THREE.BackSide} />
-      </Sphere>
-      {GLOBE_COUNTRIES.map((country) => {
-        const pos = latLngToVector3(country.lat, country.lng, 2.1);
-        return (
-          <group key={country.name} position={pos}>
-            <Html center distanceFactor={6} style={{ pointerEvents: 'none' }}>
-              <div className={`ca-globe-flag ${country.available ? 'ca-globe-flag--live' : ''}`}>
-                {country.flag}
-              </div>
-            </Html>
-            <mesh><sphereGeometry args={[0.03, 8, 8]} /><meshBasicMaterial color={country.available ? '#22c55e' : '#60a5fa'} /></mesh>
-          </group>
-        );
-      })}
-      {arcs.map((points, i) => (
-        <Line key={i} points={points} color="#60a5fa" lineWidth={0.5} transparent opacity={0.25} />
-      ))}
     </group>
   );
 }
@@ -211,6 +180,15 @@ export function InvestmentCalculator() {
   const [form, setForm] = useState<FormState>({ userCountry: '', lovedOneCountry: '', supportNeed: '' });
   const [errors, setErrors] = useState<{ [k: string]: string | undefined }>({});
   const [showResult, setShowResult] = useState(false);
+  const [globeTexture, setGlobeTexture] = useState<THREE.Texture | null>(null);
+
+  // Load texture on mount
+  useEffect(() => {
+    const loader = new THREE.TextureLoader();
+    loader.load(earthTextureUrl, (tex) => {
+      setGlobeTexture(tex);
+    });
+  }, []);
 
   const set = (field: keyof FormState, value: string) => {
     setForm(prev => ({ ...prev, [field]: value }));
@@ -325,15 +303,15 @@ export function InvestmentCalculator() {
                 <strong>
                   {isAvailable
                     ? `Cover is available in ${form.lovedOneCountry}!`
-                    : `${form.lovedOneCountry} is coming soon.`}
+                    : `Not available in ${form.lovedOneCountry} yet.`}
                 </strong>
                 <span>
                   {isAvailable
                     ? 'You can proceed to arrange protection for your loved one.'
-                    : 'Join the waitlist and we\'ll notify you when available.'}
+                    : 'Join the waitlist and we\'ll notify you when cover becomes available in this country.'}
                 </span>
               </div>
-              <a href="/waitlist" className="ca-result-inline-btn">
+              <a href={isAvailable ? '#products' : '/waitlist'} className="ca-result-inline-btn">
                 {isAvailable ? 'Get Started' : 'Join Waitlist'}
               </a>
             </div>
@@ -345,26 +323,48 @@ export function InvestmentCalculator() {
           <h3 className="ca-countries-title">Countries we cover</h3>
           <p className="ca-countries-subtitle">Available and coming soon</p>
           <div className="ca-globe-wrap">
-            <Suspense fallback={<div className="ca-globe-fallback">Loading...</div>}>
+            {globeTexture ? (
               <Canvas
                 camera={{ position: [0, 0, 5.5], fov: 45 }}
                 style={{ width: '100%', height: '100%' }}
                 dpr={[1, 1.5]}
+                gl={{ alpha: true, antialias: true }}
               >
-                <ambientLight intensity={0.4} />
-                <directionalLight position={[5, 3, 5]} intensity={0.8} />
-                <pointLight position={[-5, -3, -5]} intensity={0.3} color="#60a5fa" />
-                <GlobeMesh />
+                <ambientLight intensity={1.2} />
+                <directionalLight position={[3, 2, 5]} intensity={1.5} />
+                <directionalLight position={[-3, 1, -2]} intensity={0.6} />
+                <pointLight position={[0, 5, 0]} intensity={0.4} />
+                <Globe3D texture={globeTexture} />
                 <OrbitControls
                   enableZoom={false}
                   enablePan={false}
-                  autoRotate
-                  autoRotateSpeed={0.3}
+                  autoRotate={false}
                   minPolarAngle={Math.PI * 0.3}
                   maxPolarAngle={Math.PI * 0.7}
                 />
               </Canvas>
-            </Suspense>
+            ) : (
+              <div className="ca-globe-fallback">Loading globe...</div>
+            )}
+          </div>
+          <div className="ca-globe-flags">
+            {GLOBE_COUNTRIES.map((c, i) => (
+              <div
+                key={c.name}
+                className={`ca-globe-flag-chip ${c.available ? 'ca-globe-flag-chip--live' : ''}`}
+                style={{ animationDelay: `${i * 0.08}s` }}
+              >
+                <img
+                  src={`https://flagcdn.com/w40/${c.code}.png`}
+                  alt={c.name}
+                  className="ca-globe-flag-img"
+                  width="20"
+                  height="15"
+                />
+                <span className="ca-globe-flag-name">{c.name}</span>
+                {c.available && <span className="ca-globe-flag-badge">Live</span>}
+              </div>
+            ))}
           </div>
         </div>
 

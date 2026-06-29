@@ -1,48 +1,53 @@
 import { useState } from 'react';
-import heroBg from '../../assets/hero-section-bg.png';
+import problemImg1 from '../../assets/problem-1.png';
 import lifeImg from '../../assets/life insurance image.png';
-import criticalImg from '../../assets/Critical Illness.png';
 import getAQuoteBg from '../../assets/Get a Quote Bg.png';
 import '../../styles/CoverShowcase.css';
 
-interface CoverItem {
+interface Slide {
   id: string;
   label: string;
-  title: string;
-  description: string;
+  heading: string;
+  items: string[];
+  theme: 'problem' | 'solution';
   image: string;
 }
 
-const COVERS: CoverItem[] = [
+const SLIDES: Slide[] = [
   {
-    id: 'farewell',
-    label: 'Farewell Cover',
-    title: 'Funeral support when your family needs it most.',
-    description: 'Protect your loved ones from funeral costs with fully arranged funeral services and a cash payout for extra expenses. Affordable premiums, immediate cover for accidental death.',
-    image: heroBg,
+    id: 'without',
+    label: 'Without Sendi',
+    heading: 'Reactive support',
+    items: [
+      'Urgent requests',
+      'Unclear costs',
+      'Emotional pressure',
+      'Last-minute transfers',
+    ],
+    theme: 'problem',
+    image: problemImg1,
   },
   {
-    id: 'life',
-    label: 'Life Insurance',
-    title: 'Secure your family\'s financial future, from anywhere.',
-    description: 'Ensure your loved ones are financially protected even when you are no longer around. Life insurance designed for peace of mind with flexible payout options.',
+    id: 'with',
+    label: 'With Sendi',
+    heading: 'Proactive protection',
+    items: [
+      'Planned cover',
+      'Clear payments',
+      'Reminders and updates',
+      'One place to manage everything',
+    ],
+    theme: 'solution',
     image: lifeImg,
-  },
-  {
-    id: 'critical',
-    label: 'Critical Illness',
-    title: 'Focus on recovery, not the cost of treatment.',
-    description: 'Get a lump-sum cash payout if a loved one is diagnosed with a covered critical illness, so they can afford the best care without financial stress.',
-    image: criticalImg,
   },
 ];
 
 export function CoverShowcase() {
   const [activeIdx, setActiveIdx] = useState(0);
-  const active = COVERS[activeIdx];
+  const active = SLIDES[activeIdx];
 
-  const prev = () => setActiveIdx(i => (i === 0 ? COVERS.length - 1 : i - 1));
-  const next = () => setActiveIdx(i => (i === COVERS.length - 1 ? 0 : i + 1));
+  const prev = () => setActiveIdx(i => (i === 0 ? SLIDES.length - 1 : i - 1));
+  const next = () => setActiveIdx(i => (i === SLIDES.length - 1 ? 0 : i + 1));
 
   return (
     <section className="cs-section" id="cover-options">
@@ -55,8 +60,7 @@ export function CoverShowcase() {
         {/* Left: Image */}
         <div className="cs-image-col">
           <div className="cs-image-wrap">
-            <img key={active.id} src={active.image} alt={active.label} className="cs-image" />
-            <div className="cs-image-label">{active.label}</div>
+            <img key={active.id} src={active.image} alt={active.heading} className="cs-image" />
           </div>
         </div>
 
@@ -65,9 +69,27 @@ export function CoverShowcase() {
 
         {/* Right: Content */}
         <div className="cs-content">
-          <span className="cs-label">COVER OPTIONS</span>
-          <h2 className="cs-heading">{active.title}</h2>
-          <p className="cs-text">{active.description}</p>
+          <span className={`cs-label cs-label--${active.theme}`}>{active.label}</span>
+          <h2 className="cs-heading">{active.heading}</h2>
+
+          <div className="cs-list">
+            {active.items.map((item, i) => (
+              <div key={i} className="cs-list-item">
+                <span className={`cs-list-icon cs-list-icon--${active.theme}`}>
+                  {active.theme === 'problem' ? (
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                  ) : (
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                  )}
+                </span>
+                <span className="cs-list-text">{item}</span>
+              </div>
+            ))}
+          </div>
 
           {/* Navigation arrows */}
           <div className="cs-nav">

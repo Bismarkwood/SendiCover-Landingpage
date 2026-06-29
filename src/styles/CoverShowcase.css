@@ -47,33 +47,56 @@
 }
 
 .cs-image-wrap {
-  position: relative;
   width: 100%;
-  max-width: 520px;
-  border-radius: 16px;
+  max-width: 480px;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
 }
 
 .cs-image {
   width: 100%;
-  height: 500px;
+  height: 420px;
   object-fit: cover;
   display: block;
-  transition: opacity 0.4s ease;
 }
 
-.cs-image-label {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(8px);
+.cs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cs-list-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.cs-list-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cs-list-icon--problem {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+}
+
+.cs-list-icon--solution {
+  background: rgba(34, 197, 94, 0.15);
+  color: #16a34a;
+}
+
+.cs-list-text {
+  font-size: 1.05rem;
+  font-weight: 600;
   color: #ffffff;
-  font-size: 0.88rem;
-  font-weight: 700;
-  padding: 10px 20px;
-  border-radius: 10px;
 }
 
 /* ── Vertical Divider ── */
@@ -97,9 +120,16 @@
 .cs-label {
   font-size: 0.78rem;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.6);
   letter-spacing: 0.1em;
   text-transform: uppercase;
+}
+
+.cs-label--problem {
+  color: #fca5a5;
+}
+
+.cs-label--solution {
+  color: #86efac;
 }
 
 .cs-heading {
@@ -180,7 +210,7 @@
   }
 
   .cs-image {
-    height: 380px;
+    height: 320px;
   }
 }
 
@@ -191,10 +221,6 @@
 
   .cs-heading {
     font-size: 1.6rem;
-  }
-
-  .cs-image {
-    height: 300px;
   }
 }
 
@@ -207,8 +233,12 @@
     font-size: 1.4rem;
   }
 
-  .cs-image {
-    height: 250px;
+  .cs-list-card {
+    padding: 24px 20px;
+  }
+
+  .cs-list-text {
+    font-size: 0.9rem;
   }
 
   .cs-nav-btn {

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import waitlistImg from '../assets/waitlist.png';
-import waitlistLogo from '../assets/logo.jpg';
+import waitlistLogo from '../assets/New logo.png';
 import { Navbar } from '../components/layout/Navbar';
 import { FAQSection } from '../components/sections/FAQSection';
 import { Footer } from '../components/layout/Footer';

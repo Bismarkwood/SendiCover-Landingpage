@@ -5,11 +5,11 @@
 .quote-section {
   position: relative;
   width: 100%;
-  padding: 64px 24px 80px;
+  padding: 64px 24px 72px;
   display: flex;
   justify-content: center;
   background-color: #1a2fa0;
-  overflow: hidden;
+  overflow: visible;
 }
 
 /* Background image — right-side diagonal accent */

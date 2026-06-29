@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
-import logoImg from '../../assets/logo.jpg'
+import logoImg from '../../assets/New logo.png'
 import '../../styles/Navbar.css'
 
 export function Navbar() {

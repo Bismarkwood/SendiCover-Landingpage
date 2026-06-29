@@ -1,5 +1,5 @@
 import getAQuoteBg from '../../assets/Get a Quote Bg.png';
-import footerLogo from '../../assets/Footer Logo.png';
+import footerLogo from '../../assets/New logo.png';
 import '../../styles/Footer.css';
 
 export function Footer() {
@@ -53,9 +53,14 @@ export function Footer() {
             <h4 className="footer-col-title">Quick Links</h4>
             <nav className="footer-nav">
               <a href="#home" className="footer-link">Home</a>
-              <a href="#products" className="footer-link">What you get</a>
-              <a href="#partners" className="footer-link">Partners</a>
-              <a href="#plan" className="footer-link">Plan</a>
+              <a href="#about" className="footer-link">About Sendi</a>
+              <a href="#cover-options" className="footer-link">Cover Options</a>
+              <a href="#products" className="footer-link">Protection Plans</a>
+              <a href="#how-it-works" className="footer-link">How It Works</a>
+              <a href="#quote" className="footer-link">Check Availability</a>
+              <a href="#countries" className="footer-link">Countries</a>
+              <a href="#faq" className="footer-link">FAQ</a>
+              <a href="/waitlist" className="footer-link">Join Waitlist</a>
             </nav>
           </div>
 
