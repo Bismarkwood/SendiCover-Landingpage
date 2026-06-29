@@ -9,7 +9,6 @@ import { ProblemSection } from '../components/sections/ProblemSection'
 import { ProductSection } from '../components/sections/ProductSection'
 import { FeaturesSection } from '../components/sections/FeaturesSection'
 import { HowItWorksSection } from '../components/sections/HowItWorksSection'
-import { GlobeSection } from '../components/sections/GlobeSection'
 import { QuoteSection } from '../components/sections/QuoteSection'
 import { WhySendiSection } from '../components/sections/WhySendiSection'
 import { FAQSection } from '../components/sections/FAQSection'
@@ -49,10 +48,6 @@ export function HomePage() {
 
         <RevealSection direction="scale">
           <QuoteSection />
-        </RevealSection>
-
-        <RevealSection>
-          <GlobeSection />
         </RevealSection>
 
         <RevealSection>

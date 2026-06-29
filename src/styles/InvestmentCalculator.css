@@ -295,7 +295,7 @@
   padding: 40px 32px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
   background: #f8fafc;
   border-radius: 0 24px 24px 0;
 }
@@ -310,84 +310,49 @@
 .ca-countries-subtitle {
   font-size: 0.82rem;
   color: #64748b;
-  margin: 0 0 8px;
+  margin: 0;
 }
 
-.ca-countries-list {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  overflow-y: auto;
-  max-height: 460px;
+.ca-globe-wrap {
+  flex: 1;
+  min-height: 380px;
+  border-radius: 16px;
+  overflow: hidden;
 }
 
-.ca-country-item {
+.ca-globe-fallback {
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 14px;
-  border-radius: 12px;
-  border: 1.5px solid transparent;
-  background: #ffffff;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  animation: caCountryIn 0.35s ease forwards;
-  opacity: 0;
-}
-
-@keyframes caCountryIn {
-  from { opacity: 0; transform: translateX(10px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-.ca-country-item:hover {
-  border-color: #e2e8f0;
-  background: #ffffff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  transform: translateX(4px);
-}
-
-.ca-country-item--available {
-  border-color: #dcfce7;
-  background: #f0fdf4;
-}
-
-.ca-country-item--available:hover {
-  border-color: #86efac;
-}
-
-.ca-country-item--selected {
-  border-color: #1e3a8a;
-  background: #eff6ff;
-  box-shadow: 0 2px 12px rgba(30, 58, 138, 0.1);
-}
-
-.ca-country-flag {
-  font-size: 1.4rem;
-  line-height: 1;
-}
-
-.ca-country-name {
+  justify-content: center;
+  color: #94a3b8;
   font-size: 0.88rem;
-  font-weight: 600;
-  color: #0f172a;
-  flex: 1;
 }
 
-.ca-country-status {
-  font-size: 0.68rem;
-  font-weight: 700;
-  color: #16a34a;
-  background: #dcfce7;
-  padding: 4px 10px;
-  border-radius: 99px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+.ca-globe-flag {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  animation: caFlagFloat 3s ease-in-out infinite;
 }
 
-.ca-country-status--coming {
-  color: #64748b;
-  background: #f1f5f9;
+.ca-globe-flag--live {
+  border-color: #86efac;
+  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.2);
+}
+
+@keyframes caFlagFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
 }
 
 /* ============================================================
