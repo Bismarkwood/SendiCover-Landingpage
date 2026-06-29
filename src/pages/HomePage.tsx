@@ -2,15 +2,18 @@ import { Navbar } from '../components/layout/Navbar'
 import { Footer } from '../components/layout/Footer'
 import { RevealSection } from '../components/common/RevealSection'
 import { HeroSection } from '../components/sections/HeroSection'
-import { TrustSection } from '../components/sections/TrustSection'
+import { AboutSection } from '../components/sections/AboutSection'
+import { CoverShowcase } from '../components/sections/CoverShowcase'
+import { ImpactSection } from '../components/sections/ImpactSection'
 import { ProblemSection } from '../components/sections/ProblemSection'
 import { ProductSection } from '../components/sections/ProductSection'
 import { FeaturesSection } from '../components/sections/FeaturesSection'
 import { HowItWorksSection } from '../components/sections/HowItWorksSection'
+import { GlobeSection } from '../components/sections/GlobeSection'
 import { QuoteSection } from '../components/sections/QuoteSection'
+import { WhySendiSection } from '../components/sections/WhySendiSection'
 import { FAQSection } from '../components/sections/FAQSection'
 import { CTABannerSection } from '../components/sections/CTABannerSection'
-import { PartnershipSection } from '../components/sections/PartnershipSection'
 import { TestimonialSection } from '../components/sections/TestimonialSection'
 
 export function HomePage() {
@@ -21,11 +24,19 @@ export function HomePage() {
         <HeroSection />
 
         <RevealSection>
-          <TrustSection />
+          <AboutSection />
         </RevealSection>
 
         <RevealSection>
           <ProblemSection />
+        </RevealSection>
+
+        <RevealSection>
+          <CoverShowcase />
+        </RevealSection>
+
+        <RevealSection>
+          <ImpactSection />
         </RevealSection>
 
         <RevealSection>
@@ -41,11 +52,15 @@ export function HomePage() {
         </RevealSection>
 
         <RevealSection>
-          <TestimonialSection />
+          <GlobeSection />
         </RevealSection>
 
         <RevealSection>
-          <PartnershipSection />
+          <WhySendiSection />
+        </RevealSection>
+
+        <RevealSection>
+          <TestimonialSection />
         </RevealSection>
 
         <RevealSection>

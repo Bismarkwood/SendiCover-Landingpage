@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import heroBg from '../../assets/hero-section-bg.png';
 import lifeImg from '../../assets/life insurance image.png';
+import getAQuoteBg from '../../assets/Get a Quote Bg.png';
 import '../../styles/ProductSection.css';
 
 const products = [
@@ -32,7 +33,7 @@ const products = [
         ]
       },
       {
-        theme: "yellow",
+        theme: "dark-blue",
         title: "Ultimate Premier Farewell Plan",
         subtitle: "Provide your family with a cash payout and ongoing support when a covered family member dies.",
         features: [
@@ -71,7 +72,7 @@ const products = [
         ]
       },
       {
-        theme: "yellow",
+        theme: "dark-blue",
         title: "Premium Life Plan",
         subtitle: "Comprehensive coverage with added benefits.",
         features: [
@@ -110,7 +111,7 @@ const products = [
         ]
       },
       {
-        theme: "yellow",
+        theme: "dark-blue",
         title: "Comprehensive Health Plan",
         subtitle: "Extensive coverage for peace of mind.",
         features: [
@@ -141,10 +142,10 @@ export function ProductSection() {
 
         {/* Header */}
         <div className="product-header">
-          <div className="product-pill">PRODUCT CATEGORY</div>
-          <h2 className="product-heading">Choose the Protection That Fits Your Life</h2>
+          <div className="product-pill">COVER OPTIONS</div>
+          <h2 className="product-heading">Family protection cover for the moments people worry about most.</h2>
           <p className="product-subtext">
-            Simple insurance plans powered by Prudential Life Insurance Ghana, designed to protect your family, your health, and your future.
+            Check availability for the protection need that matters to your family. Cover options and terms may vary by country.
           </p>
         </div>
 
@@ -201,7 +202,8 @@ export function ProductSection() {
 
             <div className="product-plans-grid">
               {activeProduct.plans.map((plan, i) => (
-                <div key={i} className={`product-plan-card theme-${plan.theme}`}>
+                <div key={i} className={`product-plan-card theme-${plan.theme}`}
+                  style={plan.theme === 'dark-blue' ? { backgroundImage: `url(${getAQuoteBg})` } : undefined}>
                   <div className="plan-card-header">
                     <div className="plan-icon">
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

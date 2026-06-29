@@ -1,5 +1,3 @@
-import problemImg1 from '../../assets/problem-1.png';
-import problemImg2 from '../../assets/problem-2.png';
 import '../../styles/ProblemSection.css';
 
 export function ProblemSection() {
@@ -11,19 +9,12 @@ export function ProblemSection() {
         <div className="problem-header">
           <div className="problem-pill">THE PROBLEM</div>
           <h2 className="problem-heading">
-            Your loved ones depend on you.<br />
-            <span className="problem-heading-blue">What happens if something goes wrong?</span>
+            When something happens back home, the call often comes to you.
           </h2>
           <p className="problem-description">
-            Many friends and families have no way to protect the people and assets they care about across borders.
-            When the unexpected happens, the financial burden falls entirely on you. Protect changes that.
+            A hospital bill. A funeral cost. A family emergency. For many diaspora families, support
+            starts when the pressure is already high. Sendi helps you plan before that moment.
           </p>
-        </div>
-
-        {/* Images Grid */}
-        <div className="problem-images">
-          <img src={problemImg1} alt="Family depending on you" className="problem-img" loading="lazy" />
-          <img src={problemImg2} alt="Protecting your family" className="problem-img" loading="lazy" />
         </div>
 
       </div>

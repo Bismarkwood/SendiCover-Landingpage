@@ -51,7 +51,7 @@
 }
 
 .product-subtext {
-  font-size: 0.95rem;
+  font-size: 1.1rem;
   color: #64748b;
   line-height: 1.6;
   margin: 0 auto 32px;
@@ -253,6 +253,48 @@
 
 .theme-yellow {
   background-color: #fff7e6;
+}
+
+.theme-dark-blue {
+  background-color: #1e3a8a;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-dark-blue::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 70, 0.75);
+  z-index: 0;
+}
+
+.theme-dark-blue > * {
+  position: relative;
+  z-index: 1;
+}
+
+.theme-dark-blue .plan-icon {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+.theme-dark-blue .plan-header-text h4 {
+  color: #ffffff;
+}
+
+.theme-dark-blue .plan-header-text p {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.theme-dark-blue .plan-features li span {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.theme-dark-blue .feat-bullet {
+  color: #60a5fa;
 }
 
 .plan-card-header {

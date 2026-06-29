@@ -137,6 +137,112 @@
   line-height: 1.2;
 }
 
+/* ── Hero CTA Button ── */
+.hero-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  background: #ffffff;
+  color: #0f172a;
+  border-radius: 99px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+.hero-cta-btn:hover {
+  background: #f1f5f9;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.hero-cta-btn:active {
+  transform: translateY(0);
+}
+
+.hero-cta-btn svg {
+  flex-shrink: 0;
+}
+
+/* ── Floating Product Bar at bottom of hero ── */
+.hero-floating-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  justify-content: center;
+}
+
+.hero-floating-bar-inner {
+  width: 100%;
+  max-width: 1440px;
+  padding: 16px 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hero-float-scroll {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+}
+
+.hero-float-scroll svg {
+  animation: heroScrollBounce 1.5s ease-in-out infinite;
+}
+
+@keyframes heroScrollBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(3px); }
+}
+
+.hero-float-cards {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero-float-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 99px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.hero-float-card:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.hero-float-card svg {
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
 /* ============================================================
    RESPONSIVE
    ============================================================ */
@@ -153,7 +259,31 @@
   .hero-section {
     min-height: 75vh;
     align-items: center;
-    padding-bottom: 40px;
+    padding-bottom: 80px;
+  }
+
+  .hero-floating-bar {
+    padding: 12px 16px;
+    gap: 16px;
+  }
+
+  .hero-float-scroll {
+    display: none;
+  }
+
+  .hero-float-cards {
+    gap: 8px;
+  }
+
+  .hero-float-card {
+    padding: 8px 14px;
+    font-size: 0.74rem;
+    gap: 6px;
+  }
+
+  .hero-float-card svg {
+    width: 13px;
+    height: 13px;
   }
 
   .hero-content {

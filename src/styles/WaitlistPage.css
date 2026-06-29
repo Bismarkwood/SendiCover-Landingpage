@@ -2,50 +2,125 @@
    Waitlist Page — Dedicated Full Page
    ============================================================ */
 
+/* ── Hero Section ── */
+.wlp-hero {
+  margin-top: 72px;
+  padding: 120px 24px;
+  position: relative;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  overflow: hidden;
+}
+
+.wlp-hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+.wlp-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(15, 23, 70, 0.88) 0%, rgba(30, 58, 138, 0.85) 50%, rgba(15, 23, 70, 0.9) 100%);
+  z-index: 1;
+}
+
+.wlp-hero-content {
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  z-index: 2;
+  animation: wlpHeroIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes wlpHeroIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.wlp-hero-pill {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  border-radius: 99px;
+}
+
+.wlp-hero-heading {
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.wlp-hero-text {
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.7;
+  margin: 0;
+  max-width: 540px;
+}
+
+/* ── Main Form Page ── */
 .wlp-page {
-  min-height: 100vh;
   display: flex;
   align-items: stretch;
+  justify-content: center;
   background: #ffffff;
+  padding: 48px 24px;
 }
 
 .wlp-container {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 32px;
   width: 100%;
-  min-height: 100vh;
+  max-width: 1100px;
+  align-items: start;
 }
 
 /* ── Left image ── */
 .wlp-image-col {
-  position: relative;
+  position: sticky;
+  top: 120px;
+  border-radius: 20px;
   overflow: hidden;
+  height: fit-content;
 }
 
 .wlp-image {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   display: block;
+  border-radius: 20px;
 }
 
 /* ── Right form ── */
 .wlp-form-col {
-  padding: 48px 56px;
+  padding: 32px 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 16px;
-  overflow-y: auto;
-  max-height: 100vh;
-  scroll-behavior: smooth;
-  scrollbar-width: thin;
-  scrollbar-color: #cbd5e1 transparent;
 }
-
-.wlp-form-col::-webkit-scrollbar { width: 6px; }
-.wlp-form-col::-webkit-scrollbar-track { background: transparent; }
-.wlp-form-col::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 99px; }
 
 /* Logo */
 .wlp-logo {
@@ -240,14 +315,44 @@
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
-  .wlp-container { grid-template-columns: 1fr; }
+  .wlp-hero {
+    padding: 80px 20px;
+    min-height: 320px;
+  }
+
+  .wlp-hero-heading {
+    font-size: 1.4rem;
+  }
+
+  .wlp-hero-heading br {
+    display: none;
+  }
+
+  .wlp-page {
+    padding: 32px 16px;
+  }
+
+  .wlp-container { grid-template-columns: 1fr; gap: 24px; }
   .wlp-image-col { display: none; }
-  .wlp-form-col { padding: 36px 24px; max-height: none; }
+  .wlp-form-col { padding: 0; }
   .wlp-heading { font-size: 1.2rem; }
 }
 
 @media (max-width: 480px) {
-  .wlp-form-col { padding: 28px 18px; }
+  .wlp-hero {
+    padding: 64px 16px;
+    min-height: 280px;
+  }
+
+  .wlp-hero-heading {
+    font-size: 1.2rem;
+  }
+
+  .wlp-hero-text {
+    font-size: 0.84rem;
+  }
+
+  .wlp-form-col { padding: 0; }
   .wlp-input, .wlp-select, .wlp-country-trigger { height: 44px; }
   .wlp-submit { height: 48px; }
   .wlp-chips { gap: 6px; }

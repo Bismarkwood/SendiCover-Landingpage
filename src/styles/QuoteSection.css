@@ -28,7 +28,7 @@
 .quote-container {
   position: relative;
   z-index: 1;
-  max-width: 860px;
+  max-width: 1200px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -58,6 +58,15 @@
   line-height: 1.2;
   margin: 0;
   letter-spacing: -0.02em;
+}
+
+.quote-subtext {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.7;
+  margin: 0;
+  max-width: 600px;
+  text-align: center;
 }
 
 /* ── Trust Badges ── */

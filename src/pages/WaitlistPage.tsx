@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import waitlistImg from '../assets/waitlist.png';
 import waitlistLogo from '../assets/logo.jpg';
+import { Navbar } from '../components/layout/Navbar';
+import { FAQSection } from '../components/sections/FAQSection';
+import { Footer } from '../components/layout/Footer';
 import '../styles/WaitlistPage.css';
 
 /* ── Constants ── */
@@ -191,8 +194,28 @@ export function WaitlistPage() {
   const ghanaNote = formData.protectCountry === 'Ghana';
 
   return (
-    <div className="wlp-page">
-      <div className="wlp-container">
+    <>
+      <Navbar />
+
+      {/* Hero Section */}
+      <section className="wlp-hero">
+        <img src={waitlistImg} alt="" className="wlp-hero-bg" aria-hidden="true" />
+        <div className="wlp-hero-overlay" />
+        <div className="wlp-hero-content">
+          <span className="wlp-hero-pill">JOIN THE WAITLIST</span>
+          <h1 className="wlp-hero-heading">
+            We're expanding to more countries.<br />
+            Be the first to know.
+          </h1>
+          <p className="wlp-hero-text">
+            Sendi Protect is live in Ghana and growing fast. Join thousands of families waiting
+            to protect their loved ones across borders.
+          </p>
+        </div>
+      </section>
+
+      <div className="wlp-page">
+        <div className="wlp-container">
 
         {/* Left: Image */}
         <div className="wlp-image-col">
@@ -345,5 +368,8 @@ export function WaitlistPage() {
         </div>
       </div>
     </div>
+      <FAQSection />
+      <Footer />
+    </>
   );
 }
