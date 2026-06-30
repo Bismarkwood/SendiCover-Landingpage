@@ -55,6 +55,7 @@ export function ImpactSection() {
       <div className="impact-stats">
         {STATS.map((stat, i) => (
           <div key={i} className="impact-stat">
+            <span className="impact-stat-step">Step {i + 1}</span>
             <div className="impact-stat-icon">{stat.icon}</div>
             <h3 className="impact-stat-title">{stat.title}</h3>
             <p className="impact-stat-text">{stat.text}</p>

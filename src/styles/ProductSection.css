@@ -1,13 +1,13 @@
 /* ============================================================
-   Product Section
+   Product / Cover Options Section — Simple Card Grid
    ============================================================ */
 
 .product-section {
   width: 100%;
-  padding: 64px 2.5rem;
+  padding: 100px 2.5rem;
   display: flex;
   justify-content: center;
-  background-color: #fafafa;
+  background: #ffffff;
 }
 
 .product-container {
@@ -16,476 +16,139 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 56px;
 }
 
 /* ── Header ── */
 .product-header {
+  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  max-width: 800px;
-  margin-bottom: 40px;
+  gap: 16px;
+  max-width: 700px;
 }
 
 .product-pill {
-  background-color: #f8fafc;
-  color: #64748b;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  padding: 6px 20px;
-  border-radius: 100px;
-  border: 1px solid #e2e8f0;
+  display: inline-flex;
+  align-items: center;
+  background: #f1f5f9;
+  color: #1e3a8a;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin-bottom: 24px;
+  padding: 8px 20px;
+  border-radius: 99px;
 }
 
 .product-heading {
-  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-  font-weight: 700;
-  line-height: 1.25;
-  color: #1e293b;
-  margin: 0 0 16px;
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.2;
   letter-spacing: -0.02em;
+  margin: 0;
 }
 
 .product-subtext {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   color: #64748b;
-  line-height: 1.6;
-  margin: 0 auto 32px;
-  max-width: 650px;
-}
-
-/* ── Tabs ── */
-.product-tabs {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #e5e7eb;
-  border-radius: 9999px;
-  padding: 8px 12px;
-  margin-bottom: 60px;
-  gap: 8px;
-}
-
-.product-tab {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 28px;
-  border-radius: 9999px;
-  border: none;
-  background: transparent;
-  color: #64748b;
-  font-weight: 500;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  white-space: nowrap;
-}
-
-.product-tab:hover {
-  color: #0f172a;
-}
-
-.product-tab.active {
-  background-color: #1e3a8a;
-  color: #ffffff;
-  box-shadow: 0 2px 8px rgba(30, 58, 138, 0.15);
-}
-
-.tab-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* ── Main Content Area ── */
-.product-content-wrapper {
-  display: grid;
-  grid-template-columns: 38% 62%;
-  gap: 40px;
-  width: 100%;
-  margin-bottom: 40px;
-  opacity: 0;
-  transform: translateX(40px) scale(0.98);
-  animation: productSlideIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-@keyframes productSlideIn {
-  from {
-    opacity: 0;
-    transform: translateX(40px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0) scale(1);
-  }
-}
-
-/* ── Left Image Side ── */
-.product-image-side {
-  position: relative;
-  width: 100%;
-  border-radius: 12px;
-  overflow: hidden;
-  min-height: 400px;
-}
-
-.product-main-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  inset: 0;
-}
-
-.product-benefit-badge {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #1e3a8a;
-  color: #ffffff;
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  border-radius: 0 0 12px 12px;
-}
-
-.benefit-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(255, 255, 255, 0.15);
-  padding: 10px;
-  border-radius: 8px;
-}
-
-.benefit-text {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.benefit-label {
-  font-size: 0.75rem;
-  opacity: 0.8;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-}
-
-.benefit-value {
-  font-size: 1.25rem;
-  font-weight: 700;
-}
-
-/* ── Right Details Side ── */
-.product-details-side {
-  display: flex;
-  flex-direction: column;
-}
-
-.product-detail-header {
-  margin-bottom: 32px;
-  background-color: #f3f4f6;
-  border-radius: 12px;
-  padding: 16px;
-}
-
-.product-detail-pill {
-  display: inline-block;
-  background-color: #e0f2fe;
-  color: #1e3a8a;
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 6px 16px;
-  border-radius: 9999px;
-  margin-bottom: 20px;
-}
-
-.product-detail-title {
-  font-size: clamp(1.6rem, 3.5vw, 2rem);
-  font-weight: 800;
-  color: #1e293b;
-  line-height: 1.2;
-  margin: 0 0 20px;
-}
-
-.product-detail-desc {
-  font-size: 0.95rem;
-  color: #64748b;
-  line-height: 1.6;
+  line-height: 1.7;
   margin: 0;
-  max-width: 600px;
 }
 
-/* ── Plans Grid ── */
-.product-plans-grid {
+/* ── Cards Grid ── */
+.product-cards-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
-  align-items: start;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  width: 100%;
 }
 
-.product-plan-card {
-  padding: 24px;
-  border-radius: 12px;
+.product-cover-card {
   display: flex;
   flex-direction: column;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  height: 100%;
-  min-height: 340px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  gap: 16px;
+  padding: 32px 24px;
+  border-radius: 20px;
+  border: 1.5px solid #e8ecf2;
+  background: #ffffff;
+  transition: all 0.3s ease;
 }
 
-.product-plan-card:hover {
+.product-cover-card:hover {
+  border-color: #1e3a8a;
+  box-shadow: 0 12px 32px rgba(30, 58, 138, 0.08);
   transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
-.theme-blue {
-  background-color: #f8fafc;
-}
-
-.theme-yellow {
-  background-color: #fff7e6;
-}
-
-.theme-dark-blue {
-  background-color: #1e3a8a;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.theme-dark-blue::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(15, 23, 70, 0.75);
-  z-index: 0;
-}
-
-.theme-dark-blue > * {
-  position: relative;
-  z-index: 1;
-}
-
-.theme-dark-blue .plan-icon {
-  background-color: rgba(255, 255, 255, 0.15);
-  color: #ffffff;
-}
-
-.theme-dark-blue .plan-header-text h4 {
-  color: #ffffff;
-}
-
-.theme-dark-blue .plan-header-text p {
-  color: rgba(255, 255, 255, 0.75);
-}
-
-.theme-dark-blue .plan-features li span {
-  color: rgba(255, 255, 255, 0.85);
-}
-
-.theme-dark-blue .feat-bullet {
-  color: #60a5fa;
-}
-
-.plan-card-header {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  margin-bottom: 20px;
-}
-
-.plan-icon {
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  border-radius: 9999px;
+.product-cover-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: #eff6ff;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: #1e3a8a;
+  transition: all 0.3s ease;
 }
 
-.theme-blue .plan-icon {
-  background-color: #1e3a8a;
+.product-cover-card:hover .product-cover-icon {
+  background: #1e3a8a;
+  color: #ffffff;
 }
 
-.theme-yellow .plan-icon {
-  background-color: #d9b96b;
-}
-
-.plan-header-text h4 {
-  font-size: 1rem;
+.product-cover-title {
+  font-size: 1.1rem;
   font-weight: 700;
-  margin: 0 0 6px;
+  color: #0f172a;
+  margin: 0;
   line-height: 1.3;
 }
 
-.theme-blue .plan-header-text h4 {
-  color: #1e3a8a;
-}
-
-.theme-yellow .plan-header-text h4 {
-  color: #a16207;
-}
-
-.plan-header-text p {
-  font-size: 0.82rem;
-  color: #64748b;
-  margin: 0;
-  line-height: 1.5;
-}
-
-.plan-features {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.plan-features li {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 11px 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
-  font-size: 0.85rem;
+.product-cover-desc {
+  font-size: 0.92rem;
   color: #475569;
-  line-height: 1.5;
-}
-
-.plan-features li:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-.feat-bullet {
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.theme-blue .feat-bullet {
-  color: #1e3a8a;
-}
-
-.theme-yellow .feat-bullet {
-  color: #ca8a04;
-}
-
-/* ── Progress Dashes ── */
-.product-progress {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  margin-top: 24px;
-}
-
-.progress-dashes {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.progress-dash {
-  height: 5px;
-  background-color: #d1d5db;
-  border-radius: 99px;
-  cursor: pointer;
-  transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-              background-color 0.4s ease,
-              opacity 0.3s ease;
-  width: 32px;
-  opacity: 0.5;
-}
-
-.progress-dash.active {
-  background-color: #1e3a8a;
-  width: 64px;
-  opacity: 1;
+  line-height: 1.6;
+  margin: 0;
 }
 
 /* ============================================================
    RESPONSIVE
    ============================================================ */
 
-@media (max-width: 1024px) {
-  .product-content-wrapper {
-    grid-template-columns: 1fr;
-  }
-
-  .product-image-side {
-    min-height: 300px;
+@media (max-width: 992px) {
+  .product-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 768px) {
   .product-section {
-    padding: 60px 24px;
+    padding: 72px 24px;
   }
 
-  .product-tabs {
-    flex-direction: column;
-    width: 100%;
-    border-radius: 12px;
-    background-color: transparent;
+  .product-heading {
+    font-size: 1.6rem;
   }
 
-  .product-tab {
-    width: 100%;
-    justify-content: center;
-    border-radius: 12px;
-    background-color: transparent;
-    white-space: normal;
-  }
-
-  .product-plans-grid {
+  .product-cards-grid {
     grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 480px) {
   .product-section {
-    padding: 48px 16px;
+    padding: 56px 16px;
   }
 
   .product-heading {
     font-size: 1.3rem;
-    white-space: normal;
   }
 
-  .product-subtext {
-    font-size: 0.82rem;
-  }
-
-  .product-tab {
-    font-size: 0.8rem;
-    padding: 10px 14px;
-  }
-
-  .product-detail-title {
-    font-size: 1.1rem;
-  }
-
-  .product-plan-card {
-    padding: 20px 16px;
-  }
-
-  .plan-features li {
-    font-size: 0.78rem;
-  }
-
-  .product-image-side {
-    min-height: 220px;
+  .product-cover-card {
+    padding: 24px 20px;
   }
 }

@@ -1,0 +1,261 @@
+/* ============================================================
+   Check Availability Bar — Inline Form After Hero
+   ============================================================ */
+
+.cb-section {
+  width: 100%;
+  padding: 48px 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cb-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.cb-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(12, 20, 69, 0.95) 0%, rgba(30, 58, 138, 0.92) 100%);
+  z-index: 1;
+}
+
+.cb-container {
+  max-width: 1280px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Left prompt ── */
+.cb-prompt {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  min-width: 220px;
+  max-width: 250px;
+}
+
+.cb-prompt-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(59, 130, 246, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #60a5fa;
+  flex-shrink: 0;
+}
+
+.cb-prompt-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cb-prompt-text strong {
+  font-size: 0.88rem;
+  color: #ffffff;
+}
+
+.cb-prompt-text span {
+  font-size: 0.76rem;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.5;
+}
+
+/* ── Right: Inline form ── */
+.cb-form {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+}
+
+.cb-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.cb-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.8);
+  white-space: nowrap;
+}
+
+/* Dropdown */
+.cb-dropdown { position: relative; }
+
+.cb-trigger {
+  width: 100%;
+  height: 44px;
+  padding: 0 32px 0 14px;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.82rem;
+  color: #ffffff;
+  position: relative;
+  transition: border-color 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cb-trigger:hover { border-color: rgba(255, 255, 255, 0.3); }
+.cb-trigger--open { border-color: #60a5fa; }
+.cb-val { color: #ffffff; font-weight: 500; }
+.cb-ph { color: rgba(255, 255, 255, 0.5); }
+.cb-trigger svg { position: absolute; right: 12px; color: rgba(255, 255, 255, 0.5); }
+
+.cb-menu {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+  z-index: 300;
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+  max-height: 200px;
+  overflow-y: auto;
+  animation: cbMenuIn 0.18s ease;
+}
+
+@keyframes cbMenuIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.cb-opt {
+  padding: 9px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.84rem;
+  color: #1e293b;
+  transition: background 0.15s ease;
+}
+
+.cb-opt:hover { background: #f1f5f9; }
+.cb-opt--active { background: #eff6ff; color: #1e3a8a; font-weight: 600; }
+
+/* Email input */
+.cb-input {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 0.82rem;
+  color: #ffffff;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.cb-input::placeholder { color: rgba(255, 255, 255, 0.4); }
+.cb-input:focus { border-color: #60a5fa; }
+
+/* CTA Button */
+.cb-btn {
+  height: 44px;
+  padding: 0 28px;
+  background: #ffffff;
+  color: #1e3a8a;
+  border: none;
+  border-radius: 99px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.cb-btn:hover {
+  background: #f1f5f9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Note */
+.cb-note {
+  font-size: 0.74rem;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0;
+  position: relative;
+  z-index: 2;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 992px) {
+  .cb-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+
+  .cb-prompt {
+    max-width: 100%;
+  }
+
+  .cb-form {
+    flex-wrap: wrap;
+  }
+
+  .cb-field {
+    min-width: 45%;
+  }
+}
+
+@media (max-width: 768px) {
+  .cb-section {
+    padding: 36px 20px;
+  }
+
+  .cb-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cb-field {
+    min-width: 100%;
+  }
+
+  .cb-btn {
+    width: 100%;
+  }
+}

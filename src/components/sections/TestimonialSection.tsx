@@ -28,56 +28,10 @@ const testimonials = [
     avatar: 'KO',
     color: '#065f46',
   },
-  {
-    name: 'Fatima Al-Rashid',
-    title: 'Nurse Practitioner',
-    rating: 5,
-    quote: '"Setting up a life insurance policy for my mum was so easy. SendiPay made a stressful process completely stress-free."',
-    route: 'Canada → Nigeria',
-    avatar: 'FA',
-    color: '#7c3aed',
-  },
-  {
-    name: 'David Owusu',
-    title: 'Entrepreneur',
-    rating: 4,
-    quote: '"Affordable premiums, transparent terms and outstanding customer support. I recommend SendiPay to every diaspora family."',
-    route: 'Germany → Ghana',
-    avatar: 'DO',
-    color: '#b45309',
-  },
-  {
-    name: 'Grace Nkemelu',
-    title: 'Accountant',
-    rating: 5,
-    quote: '"The farewell cover plan brought our family together. We no longer worry about the unexpected. Truly a life-changing product."',
-    route: 'Netherlands → Nigeria',
-    avatar: 'GN',
-    color: '#be185d',
-  },
-  {
-    name: 'Samuel Asante',
-    title: 'Pastor',
-    rating: 5,
-    quote: '"Fast claim process and very human support team. When my father passed, SendiPay handled everything swiftly."',
-    route: 'USA → Ghana',
-    avatar: 'SA',
-    color: '#1e3a8a',
-  },
-  {
-    name: 'Lydia Boateng',
-    title: 'HR Manager',
-    rating: 5,
-    quote: '"I cover my whole family on one plan. The premiums are fair and the app experience is very smooth."',
-    route: 'UK → Ghana',
-    avatar: 'LB',
-    color: '#0f766e',
-  },
 ];
 
-// Split into two rows and duplicate for seamless loop
-const row1 = testimonials.slice(0, 4);
-const row2 = testimonials.slice(4);
+// Single row of 3 cards
+const row1 = testimonials;
 
 function StarRating({ rating }: { rating: number }) {
   return (
@@ -143,7 +97,6 @@ export function TestimonialSection() {
 
       <div className="ts-rows">
         <MarqueeRow items={row1} />
-        <MarqueeRow items={row2} reverse />
       </div>
     </section>
   );

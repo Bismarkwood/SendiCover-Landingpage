@@ -1,126 +1,215 @@
 /* ============================================================
-   Problem Section
+   Problem Section — Two Column with Comparison Cards
    ============================================================ */
 
 .problem-section {
   width: 100%;
-  padding: 100px 24px;
+  padding: 100px 2.5rem;
   display: flex;
   justify-content: center;
-  background-color: #ffffff;
+  background: #ffffff;
 }
 
 .problem-container {
-  max-width: 1320px;
+  max-width: 1280px;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
   gap: 56px;
+  align-items: center;
 }
 
-/* ── Header ── */
-.problem-header {
+/* ── Left: Image ── */
+.problem-image-col {
+  display: flex;
+  justify-content: center;
+}
+
+.problem-image {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+/* ── Right: Content ── */
+.problem-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  max-width: 1000px;
+  gap: 20px;
 }
 
 .problem-pill {
-  background-color: #f1f5f9;
-  color: #3b4252;
-  font-size: 0.75rem;
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  background: #f1f5f9;
+  color: #0f172a;
+  font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 0.05em;
-  padding: 6px 18px;
-  border-radius: 100px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin-bottom: 16px;
+  padding: 7px 16px;
+  border-radius: 99px;
 }
 
 .problem-heading {
-  font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
   font-weight: 800;
-  line-height: 1.15;
   color: #0f172a;
-  margin: 0 0 16px;
+  line-height: 1.15;
   letter-spacing: -0.02em;
-}
-
-.problem-heading-blue {
-  color: #1e3a8a;
-  white-space: nowrap;
+  margin: 0;
 }
 
 .problem-description {
-  font-size: 1.15rem;
-  color: #64748b;
-  line-height: 1.6;
+  font-size: 1.05rem;
+  color: #475569;
+  line-height: 1.7;
   margin: 0;
-  max-width: 900px;
+  max-width: 560px;
 }
 
-/* ── Images Grid ── */
-.problem-images {
-  max-width: 1320px;
-  margin: 0 auto;
+/* ── Comparison Cards ── */
+.problem-cards {
   display: grid;
-  grid-template-columns: 1.65fr 1fr;
-  gap: 14px;
-  width: 100%;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 8px;
 }
 
-.problem-img {
-  width: 100%;
-  height: 440px;
-  object-fit: cover;
-  object-position: center;
-  border-radius: 10px;
+.problem-card {
+  padding: 24px 20px;
+  border-radius: 16px;
+  border: 1.5px solid #e8ecf2;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.problem-card--reactive {
+  background: #fffbfb;
+  border-color: #fecaca;
+}
+
+.problem-card--proactive {
+  background: #f8faff;
+  border-color: #bfdbfe;
+}
+
+.problem-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.problem-card-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.problem-card-icon--red {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.problem-card-icon--blue {
+  background: #dbeafe;
+  color: #1e3a8a;
+}
+
+.problem-card-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.problem-card-title--red {
+  color: #dc2626;
+}
+
+.problem-card-title--blue {
+  color: #1e3a8a;
+}
+
+.problem-card-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.problem-card-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: #1e293b;
+  font-weight: 500;
+}
+
+.problem-card--reactive .problem-card-list li svg {
+  color: #dc2626;
+  flex-shrink: 0;
+}
+
+.problem-card--proactive .problem-card-list li svg {
+  color: #1e3a8a;
+  flex-shrink: 0;
 }
 
 /* ============================================================
    RESPONSIVE
    ============================================================ */
 
-@media (max-width: 768px) {
-  .problem-section {
-    padding: 40px 24px;
-  }
-  
-  .problem-heading-blue {
-    white-space: normal;
-  }
-  
+@media (max-width: 992px) {
   .problem-container {
-    gap: 32px;
+    grid-template-columns: 1fr;
+    gap: 40px;
   }
 
-  .problem-images {
-    grid-template-columns: 1fr;
+  .problem-image-col {
+    order: -1;
   }
-  
-  .problem-img {
-    height: 220px;
+
+  .problem-image {
+    max-width: 100%;
+    max-height: 360px;
+  }
+}
+
+@media (max-width: 768px) {
+  .problem-section {
+    padding: 72px 24px;
+  }
+
+  .problem-heading {
+    font-size: 1.6rem;
+  }
+
+  .problem-cards {
+    grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 480px) {
   .problem-section {
-    padding: 32px 16px;
+    padding: 56px 16px;
   }
 
   .problem-heading {
     font-size: 1.3rem;
   }
 
-  .problem-description {
-    font-size: 0.82rem;
-  }
-
-  .problem-img {
-    height: 180px;
-    border-radius: 12px;
+  .problem-card {
+    padding: 20px 16px;
   }
 }
