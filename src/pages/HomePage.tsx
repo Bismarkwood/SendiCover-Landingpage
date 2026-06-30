@@ -1,7 +1,5 @@
-import { useState } from 'react'
 import { Navbar } from '../components/layout/Navbar'
 import { Footer } from '../components/layout/Footer'
-import { CheckAvailabilityModal } from '../components/common/CheckAvailabilityModal'
 import { RevealSection } from '../components/common/RevealSection'
 import { HeroSection } from '../components/sections/HeroSection'
 import { AboutSection } from '../components/sections/AboutSection'
@@ -18,11 +16,9 @@ import { CTABannerSection } from '../components/sections/CTABannerSection'
 import { TestimonialSection } from '../components/sections/TestimonialSection'
 
 export function HomePage() {
-  const [isCheckOpen, setIsCheckOpen] = useState(false)
-
   return (
     <>
-      <Navbar onCheckAvailability={() => setIsCheckOpen(true)} />
+      <Navbar />
       <main>
         <HeroSection />
 
@@ -77,7 +73,6 @@ export function HomePage() {
       <RevealSection>
         <Footer />
       </RevealSection>
-      <CheckAvailabilityModal isOpen={isCheckOpen} onClose={() => setIsCheckOpen(false)} />
     </>
   )
 }
