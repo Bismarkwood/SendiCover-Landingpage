@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import faqImg from '../../assets/FAQ.png';
 import '../../styles/FAQSection.css';
 
 /* ── FAQ Data ── */
@@ -98,14 +97,8 @@ export function FAQSection() {
     <section className="faq-section" id="faq">
       <div className="faq-container">
 
-        {/* ── Top area: Image + Header ── */}
+        {/* ── Top area: Header ── */}
         <div className="faq-top">
-          <div className="faq-image-col">
-            <div className="faq-image-wrap">
-              <img src={faqImg} alt="Frequently asked questions" />
-            </div>
-          </div>
-
           <div className="faq-header-col">
             <span className="faq-pill">FAQ</span>
             <h2 className="faq-heading">Everything you need to know</h2>

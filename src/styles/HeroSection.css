@@ -1,372 +1,420 @@
 /* ============================================================
-   Hero Section — SendiPay Landing Page
-   Design: Full-bleed family photo + glowing shield + centered text + app badges
+   Hero Section — Compact, Bold, Animated
    ============================================================ */
 
-/* ── Section Wrapper ── */
 .hero-section {
-  position: relative;
   width: 100%;
-  min-height: calc(100vh - 72px);
+  max-height: 720px;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  background-color: #0a1628; /* fallback dark bg */
-}
-
-/* ── Background Image ── */
-.hero-bg-image {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 30%;
-  z-index: 0;
-}
-
-/* ── Dark Gradient Overlay ── */
-/* Lighter overlay — the image is bright so we only darken the bottom for text */
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(
-    to bottom,
-    rgba(5, 15, 35, 0.18) 0%,
-    rgba(5, 15, 35, 0.40) 50%,
-    rgba(5, 15, 35, 0.62) 100%
-  );
-}
-
-/* ── Hero Content — Centered ── */
-.hero-content {
+  padding: 48px 2.5rem 40px;
+  background: linear-gradient(180deg, #ffffff 0%, #f8faff 50%, #f0f4ff 100%);
   position: relative;
-  z-index: 3;
+  overflow: hidden;
+}
+
+/* Background */
+.hero-bg-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.hero-bg-glow--1 {
+  width: 420px;
+  height: 420px;
+  background: rgba(59, 130, 246, 0.06);
+  top: -80px;
+  right: 12%;
+}
+
+.hero-bg-glow--2 {
+  width: 320px;
+  height: 320px;
+  background: rgba(99, 102, 241, 0.04);
+  bottom: -60px;
+  left: 8%;
+}
+
+.hero-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(30, 58, 138, 0.025) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+}
+
+/* Container */
+.hero-container {
+  max-width: 1280px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 40px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Staggered Animations ── */
+.hero-anim {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: heroReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-anim--1 { animation-delay: 0.1s; }
+.hero-anim--2 { animation-delay: 0.25s; }
+.hero-anim--3 { animation-delay: 0.4s; }
+.hero-anim--4 { animation-delay: 0.55s; }
+.hero-anim--5 { animation-delay: 1.2s; }
+.hero-anim--img {
+  opacity: 0;
+  transform: scale(0.96);
+  animation: heroScaleIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+}
+
+@keyframes heroReveal {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heroScaleIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ── Left: Content ── */
+.hero-left {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  max-width: 1600px;
-  width: 100%;
-  padding: 0 24px;
-  box-sizing: border-box;
+  gap: 20px;
 }
 
-/* ── Heading ── */
+.hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  border: 1px solid #e8ecf2;
+  color: #1e3a8a;
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 7px 16px;
+  border-radius: 99px;
+  width: fit-content;
+}
+
+.hero-pill-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: heroPulse 2s ease-in-out infinite;
+}
+
+@keyframes heroPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.5); }
+}
+
 .hero-heading {
-  font-size: clamp(3rem, 6.5vw, 5rem);
+  font-size: clamp(2.8rem, 5.5vw, 4.2rem);
   font-weight: 800;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
-  color: #ffffff;
-  margin: 0 0 24px;
-  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
-  max-width: 1500px;
+  color: #0f172a;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  margin: 0;
 }
 
-/* ── Subtext ── */
+.hero-heading-blue {
+  background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 .hero-subtext {
-  font-size: clamp(0.82rem, 1.4vw, 0.93rem);
-  font-weight: 400;
-  line-height: 1.65;
-  color: rgba(255, 255, 255, 0.85);
-  max-width: 540px;
-  margin: 0 0 36px;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
+  font-size: 1.08rem;
+  color: #475569;
+  line-height: 1.7;
+  margin: 0;
+  max-width: 460px;
 }
 
-/* ── App Store Buttons Row ── */
-.hero-badges {
+/* Chips */
+.hero-chips {
   display: flex;
-  align-items: center;
-  gap: 14px;
   flex-wrap: wrap;
-  justify-content: center;
+  gap: 8px;
 }
 
-/* Store button — consistent with footer/CTA */
-.hero-store-btn {
+.hero-chip {
   display: flex;
   align-items: center;
-  gap: 10px;
-  background: #000000;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  padding: 12px 24px;
-  text-decoration: none;
-  color: #ffffff;
+  gap: 5px;
+  padding: 6px 12px;
+  background: #ffffff;
+  border: 1px solid #e8ecf2;
+  border-radius: 99px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #475569;
   transition: all 0.2s ease;
 }
 
-.hero-store-btn:hover {
-  background: #1a1a1a;
-  border-color: rgba(255, 255, 255, 0.4);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+.hero-chip:hover {
+  border-color: #bfdbfe;
+  background: #f8faff;
+  transform: translateY(-1px);
 }
 
-.hero-store-btn:active {
-  transform: translateY(0);
+.hero-chip svg {
+  color: #1e3a8a;
 }
 
-.hero-store-btn svg {
-  flex-shrink: 0;
-}
-
-.hero-store-text {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  text-align: left;
-}
-
-.hero-store-small {
-  font-size: 0.6rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.8);
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-}
-
-.hero-store-name {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #ffffff;
-  line-height: 1.2;
-}
-
-/* ── Hero CTA Button ── */
+/* Hero CTA */
 .hero-cta-btn {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 14px 32px;
-  background: #ffffff;
-  color: #0f172a;
+  gap: 8px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+  color: #ffffff;
   border-radius: 99px;
   font-size: 0.92rem;
   font-weight: 700;
   text-decoration: none;
+  width: fit-content;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
 }
 
 .hero-cta-btn:hover {
-  background: #f1f5f9;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 20px rgba(30, 58, 138, 0.3);
 }
 
-.hero-cta-btn:active {
-  transform: translateY(0);
-}
-
-.hero-cta-btn svg {
-  flex-shrink: 0;
-}
-
-/* ── Floating Product Bar at bottom of hero ── */
-.hero-floating-bar {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 5;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+/* ── Right: Image Area ── */
+.hero-right {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
-.hero-floating-bar-inner {
+.hero-image-area {
+  position: relative;
   width: 100%;
-  max-width: 1440px;
-  padding: 16px 2.5rem;
+  max-width: 440px;
+}
+
+/* Shield outline */
+.hero-shield-outline {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-shield-path {
+  stroke-dashoffset: 600;
+  animation: heroShieldDraw 2s ease 0.8s forwards;
+}
+
+@keyframes heroShieldDraw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* Image card */
+.hero-image-card {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  z-index: 1;
+  transition: transform 0.4s ease;
+}
+
+.hero-image-area:hover .hero-image-card {
+  transform: scale(1.02);
+}
+
+.hero-card-img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Floating badges */
+.hero-badge {
+  position: absolute;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 9px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  border-radius: 12px;
+  padding: 9px 14px;
+  z-index: 3;
+  animation: heroBadgeFloat 4s ease-in-out infinite;
 }
 
-.hero-float-scroll {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.78rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.7);
-  white-space: nowrap;
+.hero-badge--london {
+  top: 16px;
+  left: -28px;
+  animation-delay: 0s;
 }
 
-.hero-float-scroll svg {
-  animation: heroScrollBounce 1.5s ease-in-out infinite;
+.hero-badge--africa {
+  bottom: 72px;
+  right: -24px;
+  animation-delay: 1.5s;
 }
 
-@keyframes heroScrollBounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(3px); }
-}
-
-.hero-float-cards {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.hero-float-card {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 99px;
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: #ffffff;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-}
-
-.hero-float-card:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.3);
+.hero-image-area:hover .hero-badge {
   transform: translateY(-2px);
 }
 
-.hero-float-card svg {
-  flex-shrink: 0;
-  opacity: 0.85;
+@keyframes heroBadgeFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.hero-badge-flag {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.hero-badge-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.hero-badge-label {
+  font-size: 0.62rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.hero-badge-city {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* Status card */
+.hero-status-card {
+  position: absolute;
+  bottom: 16px;
+  left: -16px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(240, 253, 244, 0.92);
+  backdrop-filter: blur(6px);
+  border: 1px solid #bbf7d0;
+  border-radius: 9px;
+  padding: 8px 14px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #166534;
+  z-index: 3;
+  animation: heroBadgeFloat 4s ease-in-out infinite;
+  animation-delay: 2.2s;
+}
+
+.hero-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+}
+
+/* Dotted route */
+.hero-route {
+  position: absolute;
+  top: 0;
+  left: -10%;
+  width: 110%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-route-path {
+  stroke-dashoffset: 300;
+  animation: heroRouteDraw 3s ease 1.5s forwards;
+}
+
+@keyframes heroRouteDraw {
+  to { stroke-dashoffset: 0; }
 }
 
 /* ============================================================
    RESPONSIVE
    ============================================================ */
 
-/* Tablet */
-@media (max-width: 1024px) {
+@media (max-width: 992px) {
   .hero-section {
-    min-height: 80vh;
+    max-height: none;
+    padding: 48px 24px 36px;
   }
+
+  .hero-container {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .hero-card-img {
+    height: 320px;
+  }
+
+  .hero-badge--london { left: 0; }
+  .hero-badge--africa { right: 0; }
+  .hero-status-card { left: 0; }
 }
 
-/* Mobile */
 @media (max-width: 768px) {
-  .hero-section {
-    min-height: 75vh;
-    align-items: center;
-    padding-bottom: 80px;
-  }
-
-  .hero-floating-bar {
-    padding: 12px 16px;
-    gap: 16px;
-  }
-
-  .hero-float-scroll {
-    display: none;
-  }
-
-  .hero-float-cards {
-    gap: 8px;
-  }
-
-  .hero-float-card {
-    padding: 8px 14px;
-    font-size: 0.74rem;
-    gap: 6px;
-  }
-
-  .hero-float-card svg {
-    width: 13px;
-    height: 13px;
-  }
-
-  .hero-content {
-    padding: 0 20px;
-  }
-
   .hero-heading {
-    font-size: clamp(1.8rem, 6vw, 2.4rem);
-    margin-bottom: 16px;
-  }
-
-  .hero-heading br {
-    display: none;
+    font-size: 2.2rem;
   }
 
   .hero-subtext {
-    font-size: 0.85rem;
-    margin-bottom: 28px;
+    font-size: 0.95rem;
   }
 
-  .hero-store-btn {
-    padding: 10px 18px;
-    gap: 8px;
+  .hero-card-img {
+    height: 260px;
   }
 
-  .hero-store-name {
-    font-size: 0.92rem;
+  .hero-badge {
+    padding: 7px 10px;
   }
 
-  .hero-overlay {
-    background: linear-gradient(
-      to bottom,
-      rgba(5, 15, 35, 0.3) 0%,
-      rgba(5, 15, 35, 0.5) 30%,
-      rgba(5, 15, 35, 0.75) 100%
-    );
-  }
+  .hero-chips { gap: 6px; }
+  .hero-chip { padding: 5px 10px; font-size: 0.68rem; }
 }
 
 @media (max-width: 480px) {
   .hero-section {
-    min-height: 70vh;
-    padding-bottom: 32px;
-  }
-
-  .hero-content {
-    padding: 0 16px;
+    padding: 36px 16px 28px;
   }
 
   .hero-heading {
-    font-size: 1.6rem;
-    margin-bottom: 12px;
+    font-size: 1.8rem;
   }
 
-  .hero-subtext {
-    font-size: 0.8rem;
-    margin-bottom: 24px;
+  .hero-card-img {
+    height: 220px;
   }
 
-  .hero-badges {
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-  }
-
-  .hero-store-btn {
-    width: 100%;
-    justify-content: center;
-    padding: 9px 16px;
-    gap: 8px;
-    border-radius: 10px;
-  }
-
-  .hero-store-btn svg {
-    width: 16px;
-    height: 16px;
-  }
-
-  .hero-store-small {
-    font-size: 0.5rem;
-  }
-
-  .hero-store-name {
-    font-size: 0.85rem;
-  }
+  .hero-route { display: none; }
+  .hero-shield-outline { display: none; }
 }

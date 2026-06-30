@@ -45,8 +45,8 @@ export function HowItWorksSection() {
           <span className="hiw-pill">Popular searches</span>
           <h2 className="hiw-heading">Protection for the family corridors people search for most.</h2>
           <p className="hiw-subtext">
-            Sendi is designed for people abroad looking for funeral cover, health cover, life cover,
-            and critical illness protection for family in African countries.
+            Sendi helps people living abroad protect their loved ones back home with access to
+            funeral cover, health cover, life cover, and critical illness protection.
           </p>
         </div>
 

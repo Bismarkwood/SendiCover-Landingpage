@@ -1,5 +1,5 @@
 /* ============================================================
-   About Section — Two-column layout with image
+   About Section — Premium Storytelling Style
    ============================================================ */
 
 .about-section {
@@ -7,7 +7,21 @@
   padding: 100px 2.5rem;
   display: flex;
   justify-content: center;
-  background: #ffffff;
+  background: linear-gradient(180deg, #ffffff 0%, #f8faff 60%, #f0f4ff 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-bg-glow {
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  border-radius: 50%;
+  background: rgba(59, 130, 246, 0.06);
+  filter: blur(80px);
+  top: -100px;
+  right: 15%;
+  pointer-events: none;
 }
 
 .about-container {
@@ -15,55 +29,128 @@
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 64px;
-  align-items: center;
+  gap: 56px;
+  align-items: stretch;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Right: Image ── */
+.about-image-col {
+  display: flex;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.about-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 24px;
 }
 
 /* ── Left content ── */
 .about-content {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 24px;
 }
 
 .about-label {
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   font-weight: 600;
   color: #1e3a8a;
   letter-spacing: 0.02em;
 }
 
 .about-heading {
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
   font-weight: 800;
   color: #0f172a;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
   margin: 0;
 }
 
 .about-text {
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   color: #475569;
   line-height: 1.75;
   margin: 0;
   max-width: 520px;
 }
 
-/* Button */
+/* Benefit cards */
+.about-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.about-benefit {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 18px;
+  background: #ffffff;
+  border: 1px solid #e8ecf2;
+  border-radius: 14px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.about-benefit:hover {
+  border-color: #dbeafe;
+  box-shadow: 0 4px 16px rgba(30, 58, 138, 0.06);
+  transform: translateX(4px);
+}
+
+.about-benefit-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #eff6ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1e3a8a;
+  flex-shrink: 0;
+}
+
+.about-benefit-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.about-benefit-text strong {
+  font-size: 0.9rem;
+  color: #0f172a;
+}
+
+.about-benefit-text span {
+  font-size: 0.82rem;
+  color: #64748b;
+  line-height: 1.4;
+}
+
+/* CTA Button */
 .about-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 24px;
+  padding: 13px 28px;
   background: #0f172a;
   color: #ffffff;
   border-radius: 99px;
-  font-size: 0.84rem;
+  font-size: 0.88rem;
   font-weight: 700;
   text-decoration: none;
   transition: all 0.2s ease;
   width: fit-content;
+  margin-top: 4px;
 }
 
 .about-btn:hover {
@@ -72,74 +159,95 @@
   box-shadow: 0 6px 20px rgba(15, 23, 42, 0.2);
 }
 
-.about-btn svg {
-  flex-shrink: 0;
-}
-
-/* Social proof */
-.about-proof {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-top: 8px;
-}
-
-.about-avatars {
-  display: flex;
-  align-items: center;
-}
-
-.about-avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.65rem;
-  font-weight: 700;
-  color: #ffffff;
-  border: 2px solid #ffffff;
-  margin-left: -8px;
-}
-
-.about-avatar:first-child {
-  margin-left: 0;
-}
-
-.about-proof-text {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.about-proof-number {
-  font-size: 1rem;
-  font-weight: 800;
-  color: #0f172a;
-  line-height: 1;
-}
-
-.about-proof-label {
-  font-size: 0.72rem;
-  color: #64748b;
-  font-weight: 500;
-}
-
-/* ── Right image ── */
+/* ── Right: Image area ── */
 .about-image-col {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+}
+
+.about-image-area {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+}
+
+.about-image-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(30, 58, 138, 0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.about-image-wrap {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(30, 58, 138, 0.05);
 }
 
 .about-image {
   width: 100%;
-  max-width: 520px;
-  height: 560px;
+  height: 480px;
   object-fit: cover;
-  border-radius: 0;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+  display: block;
 }
+
+/* Floating glass cards */
+.about-float {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  border-radius: 10px;
+  padding: 9px 16px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #1e293b;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  z-index: 3;
+  animation: aboutFloat 4s ease-in-out infinite;
+}
+
+.about-float--1 {
+  top: 20px;
+  left: -24px;
+  animation-delay: 0s;
+}
+
+.about-float--2 {
+  bottom: 100px;
+  right: -20px;
+  animation-delay: 1.2s;
+}
+
+.about-float--3 {
+  bottom: 20px;
+  left: 20px;
+  animation-delay: 2.4s;
+}
+
+@keyframes aboutFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.about-float-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.about-float-dot--blue { background: #1e3a8a; }
+.about-float-dot--green { background: #22c55e; }
+.about-float-dot--coral { background: #f97316; }
 
 /* ============================================================
    RESPONSIVE
@@ -151,14 +259,8 @@
     gap: 40px;
   }
 
-  .about-image-col {
-    justify-content: center;
-    order: -1;
-  }
-
   .about-image {
-    max-width: 100%;
-    max-height: 360px;
+    height: 360px;
   }
 }
 
@@ -168,12 +270,19 @@
   }
 
   .about-heading {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
 
   .about-text {
-    font-size: 0.85rem;
+    font-size: 1rem;
   }
+
+  .about-image {
+    height: 300px;
+  }
+
+  .about-float--1 { left: 0; }
+  .about-float--2 { right: 0; }
 }
 
 @media (max-width: 480px) {
@@ -182,12 +291,14 @@
   }
 
   .about-heading {
-    font-size: 1.3rem;
+    font-size: 1.6rem;
   }
 
-  .about-avatar {
-    width: 30px;
-    height: 30px;
-    font-size: 0.58rem;
+  .about-image {
+    height: 240px;
+  }
+
+  .about-benefit {
+    padding: 12px 14px;
   }
 }

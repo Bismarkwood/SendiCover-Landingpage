@@ -11,7 +11,7 @@ export function QuoteSection() {
       <div className="quote-container">
 
         {/* Pill */}
-        <div className="quote-pill">CHECK AVAILABILITY</div>
+        <div className="quote-pill">CHECK COVERAGE</div>
 
         {/* Heading */}
         <h2 className="quote-heading">

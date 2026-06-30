@@ -4,7 +4,6 @@ import { RevealSection } from '../components/common/RevealSection'
 import { HeroSection } from '../components/sections/HeroSection'
 import { CheckBarSection } from '../components/sections/CheckBarSection'
 import { AboutSection } from '../components/sections/AboutSection'
-import { CoverShowcase } from '../components/sections/CoverShowcase'
 import { ImpactSection } from '../components/sections/ImpactSection'
 import { ProblemSection } from '../components/sections/ProblemSection'
 import { ProductSection } from '../components/sections/ProductSection'
@@ -30,10 +29,6 @@ export function HomePage() {
 
         <RevealSection>
           <ProblemSection />
-        </RevealSection>
-
-        <RevealSection>
-          <CoverShowcase />
         </RevealSection>
 
         <RevealSection>

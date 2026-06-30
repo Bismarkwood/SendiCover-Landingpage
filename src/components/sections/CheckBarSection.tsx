@@ -4,8 +4,13 @@ import getAQuoteBg from '../../assets/Get a Quote Bg.png';
 import '../../styles/CheckBarSection.css';
 
 const COUNTRIES = [
-  'Ghana','Nigeria','Kenya','Cameroon','DR Congo','Egypt','Ethiopia',
-  'Morocco','Rwanda','Senegal','South Africa','Tanzania','Uganda','Zambia','Zimbabwe',
+  'Afghanistan','Albania','Algeria','Argentina','Australia','Austria','Bangladesh',
+  'Belgium','Brazil','Cameroon','Canada','China','Colombia','DR Congo','Egypt',
+  'Ethiopia','France','Germany','Ghana','India','Indonesia','Ireland','Italy',
+  'Japan','Kenya','Malaysia','Mexico','Morocco','Netherlands','New Zealand',
+  'Nigeria','Pakistan','Philippines','Poland','Portugal','Rwanda','Saudi Arabia',
+  'Senegal','Singapore','South Africa','South Korea','Spain','Sweden','Switzerland',
+  'Tanzania','Thailand','Turkey','UAE','Uganda','United Kingdom','United States','Vietnam','Zambia','Zimbabwe',
 ];
 
 const SUPPORT_OPTIONS = [
@@ -16,17 +21,25 @@ const SUPPORT_OPTIONS = [
   'Not sure yet',
 ];
 
-function InlineDropdown({ value, onChange, options, placeholder }: {
-  value: string; onChange: (v: string) => void; options: string[]; placeholder: string;
+function InlineDropdown({ value, onChange, options, placeholder, searchable = false }: {
+  value: string; onChange: (v: string) => void; options: string[]; placeholder: string; searchable?: boolean;
 }) {
   const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState('');
   const ref = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const filtered = options.filter(o => o.toLowerCase().includes(search.toLowerCase()));
 
   useEffect(() => {
     const handler = (e: MouseEvent) => { if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false); };
     document.addEventListener('mousedown', handler);
     return () => document.removeEventListener('mousedown', handler);
   }, []);
+
+  useEffect(() => {
+    if (open && searchable && inputRef.current) inputRef.current.focus();
+  }, [open, searchable]);
 
   return (
     <div className="cb-dropdown" ref={ref}>
@@ -36,9 +49,14 @@ function InlineDropdown({ value, onChange, options, placeholder }: {
       </button>
       {open && (
         <ul className="cb-menu">
-          {options.map(opt => (
-            <li key={opt} className={`cb-opt ${opt === value ? 'cb-opt--active' : ''}`} onClick={() => { onChange(opt); setOpen(false); }}>{opt}</li>
-          ))}
+          {searchable && (
+            <li className="cb-search-wrap">
+              <input ref={inputRef} type="text" className="cb-search-input" placeholder="Search..." value={search} onChange={e => setSearch(e.target.value)} />
+            </li>
+          )}
+          {filtered.length > 0 ? filtered.map(opt => (
+            <li key={opt} className={`cb-opt ${opt === value ? 'cb-opt--active' : ''}`} onClick={() => { onChange(opt); setOpen(false); setSearch(''); }}>{opt}</li>
+          )) : <li className="cb-opt cb-opt--empty">No results</li>}
         </ul>
       )}
     </div>
@@ -62,29 +80,18 @@ export function CheckBarSection() {
       <img src={getAQuoteBg} alt="" className="cb-bg" aria-hidden="true" />
       <div className="cb-overlay" />
 
-      <div className="cb-container">
-        {/* Left: Waitlist prompt */}
-        <div className="cb-prompt">
-          <div className="cb-prompt-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/>
-            </svg>
-          </div>
-          <div className="cb-prompt-text">
-            <strong>Not ready to check yet?</strong>
-            <span>Join the Sendi waitlist and we'll keep you updated about protection options for your family's country.</span>
-          </div>
-        </div>
+      <a href="/waitlist" className="cb-heading">Join Waitlist</a>
 
-        {/* Right: Inline form */}
+      <div className="cb-container">
+        {/* Inline form */}
         <div className="cb-form">
           <div className="cb-field">
             <label className="cb-label">Where do you live?</label>
-            <InlineDropdown value={userCountry} onChange={setUserCountry} options={COUNTRIES} placeholder="Select your country" />
+            <InlineDropdown value={userCountry} onChange={setUserCountry} options={COUNTRIES} placeholder="Select your country" searchable />
           </div>
           <div className="cb-field">
             <label className="cb-label">Where does your loved one live?</label>
-            <InlineDropdown value={lovedCountry} onChange={setLovedCountry} options={COUNTRIES} placeholder="Select your country" />
+            <InlineDropdown value={lovedCountry} onChange={setLovedCountry} options={COUNTRIES} placeholder="Select your country" searchable />
           </div>
           <div className="cb-field">
             <label className="cb-label">What support are you interested in?</label>

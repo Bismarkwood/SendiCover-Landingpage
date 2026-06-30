@@ -1,4 +1,5 @@
 import problemImg1 from '../../assets/problem-1.png';
+import getAQuoteBg from '../../assets/Get a Quote Bg.png';
 import '../../styles/ProblemSection.css';
 
 const REACTIVE = [
@@ -18,6 +19,10 @@ const PROACTIVE = [
 export function ProblemSection() {
   return (
     <section className="problem-section" id="problem">
+      {/* Background */}
+      <img src={getAQuoteBg} alt="" className="problem-bg" aria-hidden="true" />
+      <div className="problem-bg-overlay" />
+
       <div className="problem-container">
 
         {/* Left: Image */}

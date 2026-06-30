@@ -71,14 +71,12 @@ export function WhySendiSection() {
         <div className="wss-header">
           <span className="wss-label">WHY SENDI WORKS</span>
           <h2 className="wss-heading">
-            Protection Isn't<br />
-            The Future, It's<br />
-            The Now.
+            Why diaspora families use Sendi
           </h2>
         </div>
         <p className="wss-desc">
-          Sendi makes it simple for people in the diaspora to arrange real, meaningful protection
-          for their families back home — without complexity, delays, or confusion.
+          Families abroad trust Sendi to arrange real protection for parents, spouses, children, and
+          loved ones back home — without complexity, delays, or confusion.
         </p>
       </div>
 

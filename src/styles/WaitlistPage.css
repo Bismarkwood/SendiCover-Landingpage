@@ -99,8 +99,6 @@
 
 /* ── Left image ── */
 .wlp-image-col {
-  position: sticky;
-  top: 100px;
   border-radius: 20px;
   overflow: hidden;
   height: fit-content;
@@ -108,7 +106,8 @@
 
 .wlp-image {
   width: 100%;
-  height: 600px;
+  height: auto;
+  max-height: 680px;
   object-fit: cover;
   display: block;
   border-radius: 20px;
