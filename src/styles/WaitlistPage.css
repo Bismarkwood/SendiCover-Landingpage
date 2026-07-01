@@ -5,13 +5,13 @@
 /* ── Hero Section ── */
 .wlp-hero {
   margin-top: 72px;
-  padding: 120px 24px;
+  padding: 60px 4rem;
   position: relative;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 400px;
+  min-height: 320px;
   overflow: hidden;
 }
 
@@ -63,7 +63,7 @@
 }
 
 .wlp-hero-heading {
-  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  font-size: clamp(2.8rem, 5vw, 4.2rem);
   font-weight: 800;
   color: #ffffff;
   line-height: 1.2;
@@ -72,7 +72,7 @@
 }
 
 .wlp-hero-text {
-  font-size: 0.92rem;
+  font-size: 1.1rem;
   color: rgba(255, 255, 255, 0.75);
   line-height: 1.7;
   margin: 0;
@@ -148,7 +148,7 @@
 
 /* Heading */
 .wlp-heading {
-  font-size: 1.4rem;
+  font-size: 1.7rem;
   font-weight: 800;
   color: #0f172a;
   text-align: center;
@@ -182,7 +182,7 @@
 }
 
 .wlp-label {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: #1e293b;
   text-align: left;
@@ -209,7 +209,7 @@
 
 .wlp-input {
   width: 100%;
-  height: 46px;
+  height: 52px;
   padding: 0 14px;
   border: 1.5px solid #e2e8f0;
   border-radius: 12px;
