@@ -2,13 +2,11 @@ import { Navbar } from '../components/layout/Navbar'
 import { Footer } from '../components/layout/Footer'
 import { RevealSection } from '../components/common/RevealSection'
 import { HeroSection } from '../components/sections/HeroSection'
-import { CheckBarSection } from '../components/sections/CheckBarSection'
 import { AboutSection } from '../components/sections/AboutSection'
 import { ImpactSection } from '../components/sections/ImpactSection'
 import { ProblemSection } from '../components/sections/ProblemSection'
 import { ProductSection } from '../components/sections/ProductSection'
 import { HowItWorksSection } from '../components/sections/HowItWorksSection'
-import { QuoteSection } from '../components/sections/QuoteSection'
 import { WhySendiSection } from '../components/sections/WhySendiSection'
 import { FAQSection } from '../components/sections/FAQSection'
 import { CTABannerSection } from '../components/sections/CTABannerSection'
@@ -20,8 +18,6 @@ export function HomePage() {
       <Navbar />
       <main>
         <HeroSection />
-
-        <CheckBarSection />
 
         <RevealSection>
           <AboutSection />
@@ -37,10 +33,6 @@ export function HomePage() {
 
         <RevealSection>
           <ProductSection />
-        </RevealSection>
-
-        <RevealSection direction="scale">
-          <QuoteSection />
         </RevealSection>
 
         <RevealSection>

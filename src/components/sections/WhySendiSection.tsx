@@ -1,4 +1,5 @@
 import { useScrollReveal } from '../../hooks/useScrollReveal';
+import getAQuoteBg from '../../assets/Get a Quote Bg.png';
 import '../../styles/WhySendiSection.css';
 
 const FEATURES = [
@@ -66,10 +67,13 @@ export function WhySendiSection() {
 
   return (
     <section className="wss-section">
+      <img src={getAQuoteBg} alt="" className="wss-bg" aria-hidden="true" />
+      <div className="wss-bg-overlay" />
+
       {/* Top header area */}
       <div className="wss-top">
         <div className="wss-header">
-          <span className="wss-label">WHY SENDI WORKS</span>
+          <span className="wss-label">HOW SENDI WORKS</span>
           <h2 className="wss-heading">
             Why diaspora families use Sendi
           </h2>

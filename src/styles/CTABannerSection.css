@@ -70,58 +70,25 @@
   max-width: 540px;
 }
 
-/* Store buttons */
-.cta-banner-buttons {
-  display: flex;
+/* CTA Button */
+.cta-banner-btn {
+  display: inline-flex;
   align-items: center;
-  gap: 16px;
+  padding: 16px 36px;
+  background: #ffffff;
+  color: #1e3a8a;
+  border-radius: 99px;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
   margin-top: 8px;
 }
 
-.cta-store-btn {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: #000000;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  padding: 12px 24px;
-  text-decoration: none;
-  color: #ffffff;
-  transition: all 0.2s ease;
-}
-
-.cta-store-btn:hover {
-  background: #1a1a1a;
-  border-color: rgba(255, 255, 255, 0.4);
+.cta-banner-btn:hover {
+  background: #f1f5f9;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-}
-
-.cta-store-btn svg {
-  flex-shrink: 0;
-}
-
-.cta-store-text {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  text-align: left;
-}
-
-.cta-store-small {
-  font-size: 0.6rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.8);
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-}
-
-.cta-store-name {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #ffffff;
-  line-height: 1.2;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 /* ============================================================

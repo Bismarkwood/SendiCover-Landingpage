@@ -1,12 +1,10 @@
 import { useState, useEffect, useCallback } from 'react'
-import { useNavigate } from 'react-router-dom'
 import logoImg from '../../assets/New logo.png'
 import '../../styles/Navbar.css'
 
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
-  const navigate = useNavigate()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -52,16 +50,16 @@ export function Navbar() {
 
         {/* Center: Desktop Navigation Links */}
         <nav className="navbar-desktop-nav">
-          <a href="#home" className="nav-link active" onClick={(e) => scrollToSection(e, 'home')}>Home</a>
-          <a href="#how-it-works" className="nav-link" onClick={(e) => scrollToSection(e, 'how-it-works')}>How It Works</a>
+          <a href="#home" className="nav-link" onClick={(e) => scrollToSection(e, 'home')}>Home</a>
+          <a href="#about" className="nav-link" onClick={(e) => scrollToSection(e, 'about')}>About</a>
           <a href="#products" className="nav-link" onClick={(e) => scrollToSection(e, 'products')}>Cover Options</a>
-          <a href="#quote" className="nav-link" onClick={(e) => scrollToSection(e, 'quote')}>Countries</a>
+          <a href="#how-it-works" className="nav-link" onClick={(e) => scrollToSection(e, 'how-it-works')}>Popular Searches</a>
           <a href="#faq" className="nav-link" onClick={(e) => scrollToSection(e, 'faq')}>FAQ</a>
         </nav>
 
         {/* Right Side: Desktop CTA */}
         <div className="navbar-desktop-cta">
-          <button className="cta-button" onClick={() => { navigate('/waitlist'); }}>Join Waitlist</button>
+          <button className="cta-button" onClick={() => { window.open('/waitlist', '_blank'); }}>Join Waitlist</button>
         </div>
 
         {/* Mobile Hamburger Menu Trigger */}
@@ -83,14 +81,14 @@ export function Navbar() {
       <div className={`navbar-mobile-drawer ${isMobileMenuOpen ? 'open' : ''}`}>
         <nav className="navbar-mobile-nav">
           <a href="#home" className="mobile-nav-link" onClick={(e) => scrollToSection(e, 'home')}>Home</a>
-          <a href="#how-it-works" className="mobile-nav-link" onClick={(e) => scrollToSection(e, 'how-it-works')}>How It Works</a>
+          <a href="#about" className="mobile-nav-link" onClick={(e) => scrollToSection(e, 'about')}>About</a>
           <a href="#products" className="mobile-nav-link" onClick={(e) => scrollToSection(e, 'products')}>Cover Options</a>
-          <a href="#quote" className="mobile-nav-link" onClick={(e) => scrollToSection(e, 'quote')}>Countries</a>
+          <a href="#how-it-works" className="mobile-nav-link" onClick={(e) => scrollToSection(e, 'how-it-works')}>Popular Searches</a>
           <a href="#faq" className="mobile-nav-link" onClick={(e) => scrollToSection(e, 'faq')}>FAQ</a>
           <div className="mobile-cta-container">
             <button className="cta-button mobile-cta" onClick={() => {
               setIsMobileMenuOpen(false)
-              navigate('/waitlist')
+              window.open('/waitlist', '_blank')
             }}>Join Waitlist</button>
           </div>
         </nav>

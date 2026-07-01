@@ -2,42 +2,63 @@ import '../../styles/TestimonialSection.css';
 
 const testimonials = [
   {
-    name: 'Mark Linberg',
-    title: 'CEO of Artana',
+    name: 'David Kim',
+    title: 'Software Engineer',
     rating: 5,
-    quote: '"Working with SendiPay has transformed the way we protect our family. Their reliable service has given us total peace of mind."',
-    route: 'Canada → Ghana',
-    avatar: 'ML',
+    quote: '"Super simple to use. I love that I can see exactly what my family will receive. No hidden fees."',
+    route: 'US → Kenya',
     color: '#1e3a8a',
   },
   {
-    name: 'Abena Mensah',
-    title: 'Teacher, Accra',
+    name: 'Priya Rao',
+    title: 'Architect',
     rating: 5,
-    quote: '"I can now support my parents back home knowing there is a safety net. The funeral cover plan is incredibly affordable."',
-    route: 'UK → Ghana',
-    avatar: 'AM',
+    quote: '"Fast, reliable, and secure. Customer support was helpful when I had a question. Highly recommend!"',
+    route: 'Canada → India',
     color: '#0369a1',
   },
   {
-    name: 'Kwame Osei',
-    title: 'Software Engineer',
-    rating: 5,
-    quote: '"The critical illness cover gave my family security when we needed it most. Simple, fast and genuinely helpful."',
-    route: 'USA → Ghana',
-    avatar: 'KO',
+    name: 'Sarah Jenkins',
+    title: 'Freelance Designer',
+    rating: 4,
+    quote: '"Honestly the best app I\'ve used. Money arrives instantly and the rates are better than my bank."',
+    route: 'UK → Ghana',
     color: '#065f46',
+  },
+  {
+    name: 'Amy Lee',
+    title: 'Marketing Manager',
+    rating: 5,
+    quote: '"Payments are always on time. The app gives me total peace of mind."',
+    route: 'US → Nigeria',
+    color: '#7c3aed',
+  },
+  {
+    name: 'Michael T.',
+    title: 'Business Consultant',
+    rating: 5,
+    quote: '"The speed is incredible. I sent money to Lagos and it was there before I could even text my mom."',
+    route: 'UK → Nigeria',
+    color: '#b45309',
+  },
+  {
+    name: 'Elena Garcia',
+    title: 'Digital Nomad',
+    rating: 5,
+    quote: '"I\'ve tried Wise, Remitly, all of them. Sendi is by far the cleanest experience. I love the design."',
+    route: 'Spain → Colombia',
+    color: '#be185d',
   },
 ];
 
-// Single row of 3 cards
-const row1 = testimonials;
+const row1 = testimonials.slice(0, 3);
+const row2 = testimonials.slice(3, 6);
 
 function StarRating({ rating }: { rating: number }) {
   return (
     <div className="ts-stars">
       {Array.from({ length: 5 }).map((_, i) => (
-        <svg key={i} width="13" height="13" viewBox="0 0 24 24"
+        <svg key={i} width="12" height="12" viewBox="0 0 24 24"
           fill={i < rating ? '#1e3a8a' : 'none'}
           stroke={i < rating ? '#1e3a8a' : '#cbd5e1'}
           strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -53,7 +74,7 @@ function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
     <div className="ts-card">
       <div className="ts-card-top">
         <div className="ts-avatar" style={{ background: t.color }}>
-          {t.avatar}
+          {t.name.charAt(0)}
         </div>
         <div className="ts-author">
           <span className="ts-name">{t.name}</span>
@@ -62,19 +83,12 @@ function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
         <StarRating rating={t.rating} />
       </div>
       <p className="ts-quote">{t.quote}</p>
-      <div className="ts-route">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <line x1="5" y1="12" x2="19" y2="12"/>
-          <polyline points="12 5 19 12 12 19"/>
-        </svg>
-        {t.route}
-      </div>
+      <span className="ts-route">{t.route}</span>
     </div>
   );
 }
 
 function MarqueeRow({ items, reverse = false }: { items: typeof testimonials; reverse?: boolean }) {
-  // Triplicate for truly seamless loop
   const track = [...items, ...items, ...items];
   return (
     <div className={`ts-marquee-wrap ${reverse ? 'ts-marquee-wrap--reverse' : ''}`}>
@@ -97,6 +111,7 @@ export function TestimonialSection() {
 
       <div className="ts-rows">
         <MarqueeRow items={row1} />
+        <MarqueeRow items={row2} reverse />
       </div>
     </section>
   );

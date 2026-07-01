@@ -8,6 +8,9 @@ export function HeroSection() {
       <div className="hero-bg-glow hero-bg-glow--1" />
       <div className="hero-bg-glow hero-bg-glow--2" />
       <div className="hero-bg-grid" />
+      <div className="hero-bg-circle hero-bg-circle--1" />
+      <div className="hero-bg-circle hero-bg-circle--2" />
+      <div className="hero-bg-circle hero-bg-circle--3" />
 
       <div className="hero-container">
 
