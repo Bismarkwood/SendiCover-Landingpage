@@ -1,4 +1,4 @@
-import problemImg1 from '../../assets/problem-1.png';
+import theProblemImg from '../../assets/THE PROBLEM.png';
 import getAQuoteBg from '../../assets/Get a Quote Bg.png';
 import '../../styles/ProblemSection.css';
 
@@ -27,7 +27,7 @@ export function ProblemSection() {
 
         {/* Left: Image */}
         <div className="problem-image-col">
-          <img src={problemImg1} alt="Family support" className="problem-image" />
+          <img src={theProblemImg} alt="The Problem" className="problem-image" />
         </div>
 
         {/* Right: Content */}

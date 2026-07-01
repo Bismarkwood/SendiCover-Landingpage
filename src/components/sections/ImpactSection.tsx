@@ -1,4 +1,4 @@
-import problemImg2 from '../../assets/problem-2.png';
+import howSendiHelpsImg from '../../assets/HOW SENDI HELPS.png';
 import '../../styles/ImpactSection.css';
 
 const STATS = [
@@ -65,7 +65,7 @@ export function ImpactSection() {
 
       {/* Full-width image */}
       <div className="impact-image-wrap">
-        <img src={problemImg2} alt="Sendi impact" className="impact-image" loading="lazy" />
+        <img src={howSendiHelpsImg} alt="How Sendi helps" className="impact-image" loading="lazy" />
       </div>
     </section>
   );

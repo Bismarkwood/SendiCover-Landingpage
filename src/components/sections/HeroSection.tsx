@@ -1,4 +1,4 @@
-import heroBg from '../../assets/hero-section-bg.png'
+import heroSectionImg from '../../assets/Hero section.png'
 import '../../styles/HeroSection.css'
 
 export function HeroSection() {
@@ -69,7 +69,7 @@ export function HeroSection() {
 
             {/* Image card */}
             <div className="hero-image-card">
-              <img src={heroBg} alt="Family protection" className="hero-card-img" />
+              <img src={heroSectionImg} alt="Family protection" className="hero-card-img" />
             </div>
 
             {/* Location cards */}

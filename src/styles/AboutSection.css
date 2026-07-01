@@ -37,10 +37,9 @@
 
 /* ── Right: Image ── */
 .about-image-col {
-  display: flex;
   border-radius: 24px;
   overflow: hidden;
-  min-height: 560px;
+  display: grid;
 }
 
 .about-image {
