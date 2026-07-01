@@ -188,6 +188,22 @@
   text-align: left;
 }
 
+.wlp-helper {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  margin-top: 3px;
+}
+
+.wlp-link {
+  color: #1e3a8a;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.wlp-input--other {
+  margin-top: 8px;
+}
+
 .wlp-req { color: #ef4444; font-weight: 700; }
 .wlp-optional { color: #94a3b8; font-weight: 400; font-style: italic; font-size: 0.72rem; }
 
@@ -297,7 +313,7 @@
 .wlp-checkbox-custom svg { opacity: 0; transition: opacity 0.15s ease; }
 .wlp-checkbox-input:checked + .wlp-checkbox-custom { background: #1e3a8a; border-color: #1e3a8a; }
 .wlp-checkbox-input:checked + .wlp-checkbox-custom svg { opacity: 1; color: #ffffff; }
-.wlp-checkbox-label { font-size: 0.76rem; color: #64748b; line-height: 1.5; }
+.wlp-checkbox-label { font-size: 0.62rem; color: #64748b; line-height: 1.5; }
 
 /* Submit */
 .wlp-submit {

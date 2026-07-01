@@ -18,7 +18,7 @@ export function HeroSection() {
         <div className="hero-left">
           <span className="hero-pill hero-anim hero-anim--1">
             <span className="hero-pill-dot" />
-            Diaspora family protection across Africa
+            Diaspora family protection across the world
           </span>
 
           <h1 className="hero-heading hero-anim hero-anim--2">
