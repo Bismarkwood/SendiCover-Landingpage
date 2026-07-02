@@ -24,9 +24,26 @@ const PROTECTION_OPTIONS = [
 ];
 
 const PHONE_CODES = [
-  '+44', '+1', '+61', '+33', '+49', '+353', '+39',
-  '+31', '+351', '+34', '+46', '+971', '+233', '+234',
-  '+254', '+27', '+91', '+86', '+63', '+221',
+  { code: '+44', country: 'UK' },
+  { code: '+1', country: 'US/Canada' },
+  { code: '+61', country: 'Australia' },
+  { code: '+33', country: 'France' },
+  { code: '+49', country: 'Germany' },
+  { code: '+353', country: 'Ireland' },
+  { code: '+39', country: 'Italy' },
+  { code: '+31', country: 'Netherlands' },
+  { code: '+351', country: 'Portugal' },
+  { code: '+34', country: 'Spain' },
+  { code: '+46', country: 'Sweden' },
+  { code: '+971', country: 'UAE' },
+  { code: '+233', country: 'Ghana' },
+  { code: '+234', country: 'Nigeria' },
+  { code: '+254', country: 'Kenya' },
+  { code: '+27', country: 'South Africa' },
+  { code: '+91', country: 'India' },
+  { code: '+86', country: 'China' },
+  { code: '+63', country: 'Philippines' },
+  { code: '+221', country: 'Senegal' },
 ];
 
 /* ── Types ── */
@@ -92,7 +109,11 @@ function PhoneCodeDropdown({ value, onChange }: { value: string; onChange: (v: s
   const ref = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const filtered = PHONE_CODES.filter(c => c.includes(search));
+  const filtered = PHONE_CODES.filter(c =>
+    c.code.includes(search) || c.country.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const selectedItem = PHONE_CODES.find(c => c.code === value);
 
   useEffect(() => {
     const handler = (e: MouseEvent) => { if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false); };
@@ -105,14 +126,16 @@ function PhoneCodeDropdown({ value, onChange }: { value: string; onChange: (v: s
   return (
     <div className="wlp-phone-dd" ref={ref}>
       <button type="button" className={`wlp-phone-code ${open ? 'wlp-phone-code--open' : ''}`} onClick={() => setOpen(!open)}>
-        {value}
+        {selectedItem ? `${selectedItem.code} ${selectedItem.country}` : value}
       </button>
       {open && (
         <div className="wlp-phone-menu">
           <input ref={inputRef} type="text" className="wlp-phone-search" placeholder="Search..." value={search} onChange={e => setSearch(e.target.value)} />
           <ul className="wlp-phone-list">
-            {filtered.map(code => (
-              <li key={code} className={`wlp-phone-opt ${code === value ? 'wlp-phone-opt--active' : ''}`} onClick={() => { onChange(code); setOpen(false); setSearch(''); }}>{code}</li>
+            {filtered.map(item => (
+              <li key={item.code} className={`wlp-phone-opt ${item.code === value ? 'wlp-phone-opt--active' : ''}`} onClick={() => { onChange(item.code); setOpen(false); setSearch(''); }}>
+                {item.code} {item.country}
+              </li>
             ))}
           </ul>
         </div>

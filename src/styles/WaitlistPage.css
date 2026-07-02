@@ -255,12 +255,12 @@
 }
 
 .wlp-phone-code {
-  width: 100px;
+  width: 160px;
   height: 44px;
-  padding: 0 8px;
+  padding: 0 10px;
   border: 1.5px solid #e2e8f0;
   border-radius: 12px;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   color: #0f172a;
   background: #ffffff;
   outline: none;
@@ -269,6 +269,9 @@
   text-align: center;
   font-weight: 600;
   transition: border-color 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .wlp-phone-code--open { border-color: #1e3a8a; }
@@ -279,7 +282,7 @@
   position: absolute;
   top: calc(100% + 6px);
   left: 0;
-  width: 120px;
+  width: 200px;
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 12px;
