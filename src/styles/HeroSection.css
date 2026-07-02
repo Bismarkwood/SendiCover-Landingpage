@@ -424,6 +424,10 @@
     gap: 36px;
   }
 
+  .hero-right {
+    order: -1;
+  }
+
   .hero-card-img {
     height: 320px;
   }
