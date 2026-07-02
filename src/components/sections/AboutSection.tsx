@@ -1,4 +1,4 @@
-import problemImg1 from '../../assets/problem-1.png';
+import aboutImg from '../../assets/About Sendi.png';
 import '../../styles/AboutSection.css';
 
 export function AboutSection() {
@@ -23,7 +23,7 @@ export function AboutSection() {
 
         {/* Right: Image */}
         <div className="about-image-col">
-          <img src={problemImg1} alt="Diaspora family protection" className="about-image" />
+          <img src={aboutImg} alt="Diaspora family protection" className="about-image" />
         </div>
 
       </div>
