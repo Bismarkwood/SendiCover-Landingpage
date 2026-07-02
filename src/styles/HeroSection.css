@@ -457,9 +457,23 @@
     max-width: 100%;
   }
 
+  .hero-right {
+    padding: 0;
+  }
+
+  .hero-image-area {
+    max-width: 100%;
+  }
+
+  .hero-image-card {
+    border-radius: 16px;
+    width: 100%;
+  }
+
   .hero-card-img {
     height: 240px;
     max-height: 240px;
+    width: 100%;
   }
 
   .hero-badge {
@@ -483,10 +497,6 @@
     justify-content: center;
     padding: 14px 24px;
     font-size: 0.9rem;
-  }
-
-  .hero-image-card {
-    border-radius: 20px;
   }
 }
 
