@@ -46,7 +46,7 @@ export function ImpactSection() {
           <h2 className="impact-heading">A simpler way to protect loved ones across borders.</h2>
         </div>
         <p className="impact-desc">
-          Every policy underwritten by Prudential.
+          Every policy is underwritten by our insurance partners, global leaders in insurance. We handle the technology, so your family gets protected – simply and reliably.
         </p>
       </div>
 
