@@ -14,7 +14,7 @@
 }
 
 html {
-  font-size: 18px;
+  font-size: 15px;
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
 }
@@ -31,7 +31,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 0.94rem;
+  font-size: 0.88rem;
 }
 
 /* Hide scrollbars globally */
