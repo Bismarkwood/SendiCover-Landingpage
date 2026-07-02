@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import waitlistImg from '../assets/waitlist.png';
+import waitlistImg from '../assets/join waitlist.png';
 import { Navbar } from '../components/layout/Navbar';
 import { Footer } from '../components/layout/Footer';
 import '../styles/WaitlistPage.css';
@@ -23,9 +23,16 @@ const PROTECTION_OPTIONS = [
   'Property and Home Cover',
 ];
 
+const PHONE_CODES = [
+  '+44', '+1', '+61', '+33', '+49', '+353', '+39',
+  '+31', '+351', '+34', '+46', '+971', '+233', '+234',
+  '+254', '+27', '+91', '+86', '+63', '+221',
+];
+
 /* ── Types ── */
 interface FormData {
   fullName: string;
+  phoneCode: string;
   phone: string;
   email: string;
   userCountry: string;
@@ -78,10 +85,46 @@ function SelectDropdown({
   );
 }
 
+/* ── Phone Code Searchable Dropdown ── */
+function PhoneCodeDropdown({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+  const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState('');
+  const ref = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const filtered = PHONE_CODES.filter(c => c.includes(search));
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => { if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false); };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
+
+  useEffect(() => { if (open && inputRef.current) inputRef.current.focus(); }, [open]);
+
+  return (
+    <div className="wlp-phone-dd" ref={ref}>
+      <button type="button" className={`wlp-phone-code ${open ? 'wlp-phone-code--open' : ''}`} onClick={() => setOpen(!open)}>
+        {value}
+      </button>
+      {open && (
+        <div className="wlp-phone-menu">
+          <input ref={inputRef} type="text" className="wlp-phone-search" placeholder="Search..." value={search} onChange={e => setSearch(e.target.value)} />
+          <ul className="wlp-phone-list">
+            {filtered.map(code => (
+              <li key={code} className={`wlp-phone-opt ${code === value ? 'wlp-phone-opt--active' : ''}`} onClick={() => { onChange(code); setOpen(false); setSearch(''); }}>{code}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
+
 /* ── Main Waitlist Page ── */
 export function WaitlistPage() {
   const [formData, setFormData] = useState<FormData>({
-    fullName: '', phone: '', email: '',
+    fullName: '', phoneCode: '+44', phone: '', email: '',
     userCountry: '', userCountryOther: '',
     protectCountry: '', protectCountryOther: '',
     protectionTypes: [], emailConsent: false,
@@ -108,10 +151,9 @@ export function WaitlistPage() {
   const validate = (): FormErrors => {
     const e: FormErrors = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const phoneRegex = /^[+\d\s-]{7,}$/;
     if (!formData.fullName.trim()) e.fullName = 'Please enter your full name.';
     if (!formData.phone.trim()) e.phone = 'Please enter your phone number.';
-    else if (!phoneRegex.test(formData.phone.trim())) e.phone = 'Please include a country code (e.g. +44).';
+    else if (formData.phone.trim().length < 6) e.phone = 'Please enter a valid phone number.';
     if (!formData.email.trim()) e.email = 'Please enter your email address.';
     else if (!emailRegex.test(formData.email.trim())) e.email = 'Please enter a valid email address.';
     if (!formData.userCountry) e.userCountry = 'Please select the country you live in.';
@@ -134,7 +176,7 @@ export function WaitlistPage() {
   };
 
   const resetForm = () => {
-    setFormData({ fullName: '', phone: '', email: '', userCountry: '', userCountryOther: '', protectCountry: '', protectCountryOther: '', protectionTypes: [], emailConsent: false });
+    setFormData({ fullName: '', phoneCode: '+44', phone: '', email: '', userCountry: '', userCountryOther: '', protectCountry: '', protectCountryOther: '', protectionTypes: [], emailConsent: false });
     setErrors({});
     setStatus('idle');
     setTouched(false);
@@ -144,22 +186,8 @@ export function WaitlistPage() {
     <>
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="wlp-hero">
-        <img src={waitlistImg} alt="" className="wlp-hero-bg" aria-hidden="true" />
-        <div className="wlp-hero-overlay" />
-        <div className="wlp-hero-content">
-          <span className="wlp-hero-pill">JOIN THE WAITLIST</span>
-          <h1 className="wlp-hero-heading">We are launching Sendi Cova soon.</h1>
-          <p className="wlp-hero-text">
-            Sendi Cova is growing fast. Join the thousands of families waiting to protect their loved
-            ones across borders. Fill the form below to request early access when we launch.
-          </p>
-        </div>
-      </section>
-
       <div className="wlp-page">
-        <div className="wlp-container">
+        <div className="wlp-container wlp-container--full">
 
           {/* Left: Image */}
           <div className="wlp-image-col">
@@ -210,14 +238,16 @@ export function WaitlistPage() {
                   {/* Phone */}
                   <div className="wlp-field">
                     <label className="wlp-label">Phone number <span className="wlp-req">*</span></label>
-                    <input type="tel" placeholder="+44 7700 000000" value={formData.phone}
-                      onChange={e => set('phone', e.target.value)}
-                      className={`wlp-input ${errors.phone ? 'wlp-input--error' : ''}`} />
-                    <span className="wlp-helper">Include your country code, e.g. +44, +1, +61</span>
+                    <div className="wlp-phone-row">
+                      <PhoneCodeDropdown value={formData.phoneCode} onChange={v => set('phoneCode', v)} />
+                      <input type="tel" placeholder="7700 000000" value={formData.phone}
+                        onChange={e => set('phone', e.target.value)}
+                        className={`wlp-input wlp-input--phone ${errors.phone ? 'wlp-input--error' : ''}`} />
+                    </div>
                     {errors.phone && <span className="wlp-error">{errors.phone}</span>}
                   </div>
 
-                  {/* Row 2: Countries */}
+                  {/* Row 2: Where do you live */}
                   <div className="wlp-fields-row">
                     <div className="wlp-field">
                       <label className="wlp-label">Where do you live? <span className="wlp-req">*</span></label>
@@ -245,7 +275,8 @@ export function WaitlistPage() {
 
                   {/* Protection Types */}
                   <div className="wlp-field">
-                    <label className="wlp-label">What would you like to protect them with? <span className="wlp-req">*</span> <span className="wlp-optional">Select all that may apply</span></label>
+                    <label className="wlp-label">What would you like to protect them with? <span className="wlp-req">*</span></label>
+                    <span className="wlp-helper">Select all that may apply</span>
                     <div className="wlp-chips">
                       {PROTECTION_OPTIONS.map(opt => (
                         <button key={opt} type="button"

@@ -6,7 +6,6 @@ import { AboutSection } from '../components/sections/AboutSection'
 import { ImpactSection } from '../components/sections/ImpactSection'
 import { ProblemSection } from '../components/sections/ProblemSection'
 import { ProductSection } from '../components/sections/ProductSection'
-import { HowItWorksSection } from '../components/sections/HowItWorksSection'
 import { WhySendiSection } from '../components/sections/WhySendiSection'
 import { FAQSection } from '../components/sections/FAQSection'
 import { CTABannerSection } from '../components/sections/CTABannerSection'
@@ -41,10 +40,6 @@ export function HomePage() {
 
         <RevealSection>
           <TestimonialSection />
-        </RevealSection>
-
-        <RevealSection>
-          <HowItWorksSection />
         </RevealSection>
 
         <RevealSection>

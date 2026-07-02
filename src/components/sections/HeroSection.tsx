@@ -22,7 +22,7 @@ export function HeroSection() {
           </span>
 
           <h1 className="hero-heading hero-anim hero-anim--2">
-            Protection for your family back home, <span className="hero-heading-blue">arranged from abroad.</span>
+            Protection for your loved ones, <span className="hero-heading-blue">peace of mind abroad.</span>
           </h1>
 
           <p className="hero-subtext hero-anim hero-anim--3">
