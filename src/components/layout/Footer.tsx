@@ -85,10 +85,10 @@ export function Footer() {
         {/* ── Bottom bar ── */}
         <div className="footer-bottom">
           <p className="footer-legal">
-            Registration in England and Wales Company Number 16446952 &nbsp;Authorisation in Canada as a Money Service Business Registration number C10001605
+            Sendi Cova is a product of Sendi Payments Ltd, registered in England and Wales (Company Number 16446952) and authorised in Canada as a Money Service Business (Registration Number C10001605). Registered Office: 3rd Floor, 45 Albemarle Street, Mayfair, London, W1S 4JL.
           </p>
           <p className="footer-copyright">
-            © 2026 Sendi Ltd. All rights reserved.
+            © 2026 Sendi Payments Ltd. All rights reserved.
           </p>
         </div>
       </div>

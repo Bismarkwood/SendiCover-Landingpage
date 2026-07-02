@@ -50,10 +50,9 @@ export function Navbar() {
 
         {/* Center: Desktop Navigation Links */}
         <nav className="navbar-desktop-nav">
-          <a href="#home" className="nav-link" onClick={(e) => scrollToSection(e, 'home')}>Home</a>
+          <a href="/" className="nav-link">Home</a>
           <a href="#about" className="nav-link" onClick={(e) => scrollToSection(e, 'about')}>About</a>
           <a href="#products" className="nav-link" onClick={(e) => scrollToSection(e, 'products')}>Cover Options</a>
-          <a href="#how-it-works" className="nav-link" onClick={(e) => scrollToSection(e, 'how-it-works')}>Popular Searches</a>
           <a href="#faq" className="nav-link" onClick={(e) => scrollToSection(e, 'faq')}>FAQ</a>
         </nav>
 
@@ -80,10 +79,9 @@ export function Navbar() {
       {/* Mobile Drawer Navigation overlay */}
       <div className={`navbar-mobile-drawer ${isMobileMenuOpen ? 'open' : ''}`}>
         <nav className="navbar-mobile-nav">
-          <a href="#home" className="mobile-nav-link" onClick={(e) => scrollToSection(e, 'home')}>Home</a>
+          <a href="/" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>Home</a>
           <a href="#about" className="mobile-nav-link" onClick={(e) => scrollToSection(e, 'about')}>About</a>
           <a href="#products" className="mobile-nav-link" onClick={(e) => scrollToSection(e, 'products')}>Cover Options</a>
-          <a href="#how-it-works" className="mobile-nav-link" onClick={(e) => scrollToSection(e, 'how-it-works')}>Popular Searches</a>
           <a href="#faq" className="mobile-nav-link" onClick={(e) => scrollToSection(e, 'faq')}>FAQ</a>
           <div className="mobile-cta-container">
             <button className="cta-button mobile-cta" onClick={() => {
