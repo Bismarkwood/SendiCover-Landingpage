@@ -134,7 +134,7 @@
   gap: 16px;
   justify-content: center;
   height: 100%;
-  padding: 32px 0;
+  padding: 16px 0;
 }
 
 .hero-pill {
@@ -246,7 +246,7 @@
   justify-content: center;
   align-items: stretch;
   height: 100%;
-  padding: 24px 0;
+  padding: 16px 0;
 }
 
 .hero-image-area {
@@ -296,7 +296,7 @@
 .hero-card-img {
   width: 100%;
   height: 100%;
-  max-height: calc(100vh - 200px);
+  max-height: calc(100vh - 140px);
   object-fit: cover;
   display: block;
 }
