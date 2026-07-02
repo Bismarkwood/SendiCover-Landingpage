@@ -242,54 +242,72 @@
 
 @media (max-width: 768px) {
   .footer-container {
-    padding: 56px 24px 0;
+    padding: 48px 20px 0;
   }
 
   .footer-grid {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 28px;
   }
 
   .footer-brand {
     grid-column: auto;
   }
 
-  .footer-store-buttons {
-    flex-wrap: wrap;
+  .footer-logo-img {
+    height: 60px;
+  }
+
+  .footer-brand-text {
+    font-size: 0.82rem;
+  }
+
+  .footer-col-title {
+    font-size: 0.82rem;
+    margin-bottom: 14px;
+  }
+
+  .footer-link {
+    font-size: 0.82rem;
   }
 
   .footer-socials {
     gap: 10px;
   }
+
+  .footer-social-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .footer-bottom {
+    padding: 20px 0;
+  }
+
+  .footer-legal {
+    font-size: 0.72rem;
+  }
+
+  .footer-waitlist-btn {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 @media (max-width: 480px) {
   .footer-container {
-    padding: 48px 20px 0;
+    padding: 40px 16px 0;
   }
 
-  .footer-store-buttons {
-    flex-direction: column;
-    gap: 10px;
+  .footer-grid {
+    gap: 24px;
   }
 
-  .footer-store-btn {
-    width: fit-content;
-    padding: 7px 12px;
-    gap: 7px;
-    border-radius: 9px;
+  .footer-logo-img {
+    height: 52px;
   }
 
-  .footer-store-btn svg {
-    width: 14px;
-    height: 14px;
-  }
-
-  .footer-store-small {
-    font-size: 0.48rem;
-  }
-
-  .footer-store-name {
-    font-size: 0.74rem;
+  .footer-legal {
+    font-size: 0.68rem;
   }
 }

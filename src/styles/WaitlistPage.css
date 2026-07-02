@@ -475,8 +475,9 @@
 /* ── Responsive ── */
 @media (max-width: 768px) {
   .wlp-hero {
-    padding: 80px 20px;
-    min-height: 320px;
+    padding: 60px 20px;
+    min-height: 260px;
+    margin-top: 64px;
   }
 
   .wlp-hero-heading {
@@ -487,24 +488,49 @@
     display: none;
   }
 
+  .wlp-hero-text {
+    font-size: 0.92rem;
+  }
+
   .wlp-page {
-    padding: 32px 16px;
+    padding: 100px 20px 32px;
   }
 
   .wlp-container { grid-template-columns: 1fr; }
   .wlp-image-col { display: none; }
   .wlp-form-col { padding: 0; }
-  .wlp-heading { font-size: 1.2rem; }
+  .wlp-heading { font-size: 1.3rem; }
+  .wlp-subtext { font-size: 0.8rem; }
 
   .wlp-fields-row {
     grid-template-columns: 1fr;
+  }
+
+  .wlp-label {
+    font-size: 0.78rem;
+    white-space: normal;
+  }
+
+  .wlp-chip {
+    padding: 8px 14px;
+    font-size: 0.76rem;
+  }
+
+  .wlp-submit {
+    height: 52px;
+    font-size: 15px;
+    border-radius: 12px;
+  }
+
+  .wlp-checkbox-label {
+    font-size: 0.6rem;
   }
 }
 
 @media (max-width: 480px) {
   .wlp-hero {
-    padding: 64px 16px;
-    min-height: 280px;
+    padding: 48px 16px;
+    min-height: 220px;
   }
 
   .wlp-hero-heading {
@@ -515,9 +541,23 @@
     font-size: 0.84rem;
   }
 
-  .wlp-form-col { padding: 0; }
-  .wlp-input, .wlp-select, .wlp-country-trigger { height: 44px; }
-  .wlp-submit { height: 48px; }
+  .wlp-page {
+    padding: 80px 16px 24px;
+  }
+
+  .wlp-form {
+    gap: 18px;
+  }
+
+  .wlp-form-col { padding: 0; gap: 12px; }
+  .wlp-heading { font-size: 1.15rem; }
+  .wlp-input, .wlp-select, .wlp-country-trigger { height: 46px; font-size: 0.84rem; }
+  .wlp-submit { height: 50px; font-size: 14px; }
   .wlp-chips { gap: 6px; }
-  .wlp-chip { padding: 8px 12px; font-size: 0.76rem; }
+  .wlp-chip { padding: 7px 12px; font-size: 0.72rem; }
+
+  .wlp-phone-code {
+    width: 90px;
+    height: 46px;
+  }
 }

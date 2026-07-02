@@ -163,37 +163,70 @@
 
 @media (max-width: 768px) {
   .impact-section {
-    padding: 72px 24px 0;
+    padding: 64px 20px 0;
   }
 
   .impact-top {
-    margin-bottom: 48px;
-  }
-
-  .impact-stats {
-    margin-bottom: 48px;
-  }
-
-  .impact-image {
-    height: 280px;
-  }
-}
-
-@media (max-width: 480px) {
-  .impact-section {
-    padding: 56px 16px 0;
+    margin-bottom: 40px;
   }
 
   .impact-heading {
     font-size: 1.8rem;
   }
 
+  .impact-desc {
+    font-size: 0.95rem;
+  }
+
+  .impact-stats {
+    margin-bottom: 40px;
+  }
+
+  .impact-stat-title {
+    font-size: 1rem;
+  }
+
+  .impact-stat-text {
+    font-size: 0.9rem;
+  }
+
   .impact-image {
-    height: 220px;
+    height: 240px;
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .impact-section {
+    padding: 48px 16px 0;
+  }
+
+  .impact-heading {
+    font-size: 1.5rem;
+  }
+
+  .impact-desc {
+    font-size: 0.88rem;
+  }
+
+  .impact-image {
+    height: 180px;
+  }
+
+  .impact-stat {
+    padding: 20px 0;
   }
 
   .impact-stat-icon {
     width: 40px;
     height: 40px;
+  }
+
+  .impact-stat-title {
+    font-size: 0.95rem;
+  }
+
+  .impact-stat-text {
+    font-size: 0.84rem;
   }
 }

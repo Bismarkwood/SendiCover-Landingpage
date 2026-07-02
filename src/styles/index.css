@@ -175,3 +175,23 @@ code {
     font-size: 16px;
   }
 }
+
+/* ── Safe area & touch improvements ── */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* Smooth scroll on iOS */
+* {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Better tap targets on mobile */
+@media (max-width: 768px) {
+  button, a, [role="button"] {
+    min-height: 44px;
+  }
+}

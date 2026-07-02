@@ -406,7 +406,9 @@
 
 @media (max-width: 992px) {
   .hero-section {
-    max-height: none;
+    height: auto;
+    min-height: calc(100vh - 72px);
+    min-height: calc(100svh - 72px);
     padding: 48px 24px 36px;
   }
 
@@ -425,38 +427,80 @@
 }
 
 @media (max-width: 768px) {
+  .hero-section {
+    padding: 32px 20px 28px;
+    min-height: auto;
+  }
+
+  .hero-left {
+    gap: 12px;
+  }
+
   .hero-heading {
-    font-size: 2.2rem;
+    font-size: 2rem;
+    line-height: 1.1;
   }
 
   .hero-subtext {
-    font-size: 0.95rem;
+    font-size: 0.88rem;
+    max-width: 100%;
   }
 
   .hero-card-img {
-    height: 260px;
+    height: 240px;
+    max-height: 240px;
   }
 
   .hero-badge {
     padding: 7px 10px;
+    border-radius: 10px;
+  }
+
+  .hero-badge-city {
+    font-size: 0.78rem;
+  }
+
+  .hero-badge-label {
+    font-size: 0.58rem;
   }
 
   .hero-chips { gap: 6px; }
   .hero-chip { padding: 5px 10px; font-size: 0.68rem; }
+
+  .hero-cta-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 24px;
+    font-size: 0.9rem;
+  }
+
+  .hero-image-card {
+    border-radius: 20px;
+  }
 }
 
 @media (max-width: 480px) {
   .hero-section {
-    padding: 36px 16px 28px;
+    padding: 24px 16px 20px;
   }
 
   .hero-heading {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
+  }
+
+  .hero-pill {
+    font-size: 0.68rem;
+    padding: 6px 12px;
   }
 
   .hero-card-img {
-    height: 220px;
+    height: 200px;
+    max-height: 200px;
   }
+
+  .hero-badge--london { left: 4px; top: 10px; }
+  .hero-badge--africa { right: 4px; bottom: 60px; }
+  .hero-status-card { left: 4px; bottom: 10px; }
 
   .hero-route { display: none; }
   .hero-shield-outline { display: none; }

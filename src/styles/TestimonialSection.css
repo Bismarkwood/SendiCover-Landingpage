@@ -165,21 +165,58 @@
 @media (max-width: 768px) {
   .ts-section {
     padding: 56px 0;
+    gap: 32px;
+  }
+
+  .ts-heading {
+    font-size: 1.4rem;
   }
 
   .ts-card {
-    width: 280px;
-    padding: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .ts-card {
-    width: 260px;
+    width: 270px;
     padding: 18px;
+    border-radius: 14px;
   }
 
   .ts-quote {
     font-size: 0.82rem;
+  }
+
+  .ts-name {
+    font-size: 0.82rem;
+  }
+
+  .ts-avatar {
+    width: 34px;
+    height: 34px;
+    font-size: 0.8rem;
+  }
+
+  .ts-track--forward {
+    animation-duration: 30s;
+  }
+
+  .ts-track--reverse {
+    animation-duration: 30s;
+  }
+}
+
+@media (max-width: 480px) {
+  .ts-section {
+    padding: 40px 0;
+    gap: 24px;
+  }
+
+  .ts-card {
+    width: 240px;
+    padding: 16px;
+  }
+
+  .ts-quote {
+    font-size: 0.78rem;
+  }
+
+  .ts-rows {
+    gap: 14px;
   }
 }

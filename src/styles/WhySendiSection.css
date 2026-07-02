@@ -184,32 +184,57 @@
 
 @media (max-width: 768px) {
   .wss-section {
-    padding: 72px 24px;
+    padding: 64px 20px;
   }
 
   .wss-top {
-    margin-bottom: 48px;
+    margin-bottom: 40px;
   }
 
   .wss-heading {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 
   .wss-heading br {
     display: none;
   }
+
+  .wss-desc {
+    font-size: 0.92rem;
+  }
+
+  .wss-feature-title {
+    font-size: 1rem;
+  }
+
+  .wss-feature-desc {
+    font-size: 0.86rem;
+  }
 }
 
 @media (max-width: 480px) {
   .wss-section {
-    padding: 56px 16px;
+    padding: 48px 16px;
   }
 
   .wss-heading {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
 
   .wss-feature {
-    padding: 24px 0;
+    padding: 20px 0;
+  }
+
+  .wss-feature-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .wss-feature-title {
+    font-size: 0.95rem;
+  }
+
+  .wss-feature-desc {
+    font-size: 0.82rem;
   }
 }

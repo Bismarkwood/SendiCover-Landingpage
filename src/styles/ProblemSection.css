@@ -209,28 +209,50 @@
 
 @media (max-width: 768px) {
   .problem-section {
-    padding: 72px 24px;
+    padding: 64px 20px;
   }
 
   .problem-heading {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
+  }
+
+  .problem-description {
+    font-size: 0.92rem;
   }
 
   .problem-cards {
     grid-template-columns: 1fr;
   }
+
+  .problem-image {
+    min-height: 280px;
+    border-radius: 16px;
+  }
 }
 
 @media (max-width: 480px) {
   .problem-section {
-    padding: 56px 16px;
+    padding: 48px 16px;
   }
 
   .problem-heading {
     font-size: 1.3rem;
   }
 
+  .problem-description {
+    font-size: 0.86rem;
+  }
+
   .problem-card {
     padding: 20px 16px;
+    border-radius: 14px;
+  }
+
+  .problem-card-list li {
+    font-size: 0.82rem;
+  }
+
+  .problem-image {
+    min-height: 220px;
   }
 }

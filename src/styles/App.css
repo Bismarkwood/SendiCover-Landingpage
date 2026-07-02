@@ -19,6 +19,6 @@ main > section {
 /* Responsive navbar offset */
 @media (max-width: 768px) {
   main {
-    padding-top: 72px;
+    padding-top: 64px;
   }
 }
